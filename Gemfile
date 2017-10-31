@@ -39,6 +39,9 @@ gem 'devise'
 gem 'mailgun-ruby', '~>1.1.6'
 
 group :development, :test do
+  # DotEnv
+  gem 'dotenv-rails'
+
   # Rspec Rails
   gem 'rspec-rails', '~> 3.6'
 
