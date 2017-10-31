@@ -28,8 +28,15 @@ Rails.application.configure do
   config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment.
-  config.action_controller.allow_forgery_protection = false
+  config.action_mailer.raise_delivery_errors = true # Set to true
   config.action_mailer.perform_caching = false
+  # Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # Mailgun
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV.fetch('MAILGUN_API_KEY'), domain: ENV.fetch('MAILGUN_DOMAIN')
+  }
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
