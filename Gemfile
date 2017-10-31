@@ -33,6 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Devise
+gem 'devise'
+
+# Mailgun
+gem 'mailgun-ruby', '~>1.1.6'
+
+
 group :development, :test do
   # Rspec Rails
   gem 'rspec-rails', '~> 3.6'
