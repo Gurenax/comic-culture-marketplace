@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_profile, only: %i[show edit update] #[:show, :edit, :update, :destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -25,6 +26,7 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    @profile.user = current_user
 
     respond_to do |format|
       if @profile.save
@@ -53,13 +55,13 @@ class ProfilesController < ApplicationController
 
   # DELETE /profiles/1
   # DELETE /profiles/1.json
-  def destroy
-    @profile.destroy
-    respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @profile.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
