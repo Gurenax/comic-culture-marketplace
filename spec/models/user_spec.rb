@@ -20,8 +20,26 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when creating a new user' do
+    before do
+      @new_user = User.create!(email: 'glenn@example.com', password: 'password')
+      @created_user = User.find_by(email: @new_user.email)
+    end
+
+    it 'will create a record in the Users table' do
+      expect(User.find(@new_user.id).present?).to be_truthy
+    end
+
+    it 'will create the record with the correct email address' do
+      expect(@created_user.email).to eq(@new_user.email)
+    end
+
+    it 'will ensure that the password is encrypted' do
+      expect(@created_user.encrypted_password).to_not eq(@new_user.password)
+    end
+  end
 end
