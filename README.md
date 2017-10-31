@@ -15,3 +15,4 @@ A community-oriented two-sided marketplace creates an atmosphere of expertise an
 ![](/docs/images/erd.png)
 
 ## Wireframes
+[Comic Culture Marketplace Wireframes](https://www.figma.com/file/S3GhFLh0U5SPe2e2E5AXayhU/Comic-Culture-Marketplace)
