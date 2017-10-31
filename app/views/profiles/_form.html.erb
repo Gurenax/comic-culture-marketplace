@@ -1,0 +1,57 @@
+<%= form_with(model: profile, local: true) do |form| %>
+  <% if profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, id: :profile_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, id: :profile_first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, id: :profile_last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_data %>
+    <%= form.text_field :image_data, id: :profile_image_data %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.date_select :date_of_birth, id: :profile_date_of_birth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :short_bio %>
+    <%= form.text_area :short_bio, id: :profile_short_bio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :superpowers %>
+    <%= form.text_field :superpowers, id: :profile_superpowers %>
+  </div>
+
+  <div class="field">
+    <%= form.label :favourites %>
+    <%= form.text_field :favourites, id: :profile_favourites %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
