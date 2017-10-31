@@ -28,6 +28,7 @@ RSpec.describe User, type: :model do
     before do
       @new_user = User.create!(email: 'glenn@example.com', password: 'password')
       @created_user = User.find_by(email: @new_user.email)
+      @new_user2 = User.new(email: 'glenn@example.com', password: 'password2')
     end
 
     it 'will create a record in the Users table' do
@@ -40,6 +41,10 @@ RSpec.describe User, type: :model do
 
     it 'will ensure that the password is encrypted' do
       expect(@created_user.encrypted_password).to_not eq(@new_user.password)
+    end
+
+    it 'will ensure that the email address is unique' do
+      expect(@new_user2).to be_invalid
     end
   end
 end
