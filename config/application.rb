@@ -29,5 +29,8 @@ module ComicCultureMarketplace
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Initialise Uploaders folder (for Shrine uploader)
+    config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
   end
 end

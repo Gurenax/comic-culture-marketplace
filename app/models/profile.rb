@@ -18,6 +18,8 @@
 #
 
 class Profile < ApplicationRecord
+  include ImageUploader[:image]
+  
   belongs_to :user
 
   belongs_to :billing_address, class_name: 'Address', foreign_key: 'billing_address_id', dependent: :destroy

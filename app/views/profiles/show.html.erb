@@ -17,7 +17,7 @@
 
 <p>
   <strong>Image data:</strong>
-  <%= @profile.image_data %>
+  <%= image_tag @profile.image_url(:thumb) unless @profile.image.nil? %>
 </p>
 
 <p>

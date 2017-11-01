@@ -41,6 +41,15 @@ gem 'mailgun-ruby', '~>1.1.6'
 # Country Select
 gem 'country_select'
 
+# Amazon Web Services
+gem 'aws-sdk', '~> 3'
+
+# Shrine
+gem 'fastimage'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'shrine'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

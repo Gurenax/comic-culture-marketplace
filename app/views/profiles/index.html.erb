@@ -23,7 +23,7 @@
         <td><%= profile.user.email %></td>
         <td><%= profile.first_name %></td>
         <td><%= profile.last_name %></td>
-        <td><%= profile.image_data %></td>
+        <td><%= image_tag profile.image_url(:thumb) unless profile.image.nil? %></td>
         <td><%= profile.date_of_birth %></td>
         <td><%= profile.short_bio %></td>
         <td><%= profile.superpowers %></td>
