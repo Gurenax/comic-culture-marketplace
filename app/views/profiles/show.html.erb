@@ -2,7 +2,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @profile.user %>
+  <%= @profile.user.email %>
 </p>
 
 <p>
@@ -38,6 +38,16 @@
 <p>
   <strong>Favourites:</strong>
   <%= @profile.favourites %>
+</p>
+
+<h2>Billing</h2>
+<p>
+  <%= @profile.billing_address.full_address %>
+</p>
+
+<h2>Shipping</h2>
+<p>
+  <%= @profile.shipping_address.full_address %>
 </p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |

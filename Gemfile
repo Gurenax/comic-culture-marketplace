@@ -38,6 +38,9 @@ gem 'devise'
 # Mailgun
 gem 'mailgun-ruby', '~>1.1.6'
 
+# Country Select
+gem 'country_select'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

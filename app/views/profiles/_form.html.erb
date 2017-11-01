@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :profile_user_id %>
-  </div>
+  <!-- <div class="field"> -->
+    <%#= form.label :user_id %>
+    <%#= form.text_field :user_id, id: :profile_user_id %>
+  <!-- </div> -->
 
   <div class="field">
     <%= form.label :first_name %>
@@ -50,6 +50,88 @@
     <%= form.label :favourites %>
     <%= form.text_field :favourites, id: :profile_favourites %>
   </div>
+
+  <h2>Billing</h2>
+  <%= form.fields_for :billing_address do |billing_address_form| %>
+
+    <div class="field">
+      <%= billing_address_form.label :house_number %>
+      <%= billing_address_form.text_field :house_number %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :street_name %>
+      <%= billing_address_form.text_field :street_name %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :town_suburb %>
+      <%= billing_address_form.text_field :town_suburb %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :city %>
+      <%= billing_address_form.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :state %>
+      <%= billing_address_form.text_field :state %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :postal_code %>
+      <%= billing_address_form.text_field :postal_code %>
+    </div>
+
+    <div class="field">
+      <%= billing_address_form.label :country_code %>
+      <%= billing_address_form.country_select :country_code %>
+    </div>
+  <% end %>
+
+  <h2>Shipping</h2>
+  <%= form.fields_for :shipping_address do |shipping_address_form| %>
+
+    <div class="field">
+      <%= check_box_tag :use_same_address, '1', @use_same_address %> Use same address as billing address
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :house_number %>
+      <%= shipping_address_form.text_field :house_number %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :street_name %>
+      <%= shipping_address_form.text_field :street_name %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :town_suburb %>
+      <%= shipping_address_form.text_field :town_suburb %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :city %>
+      <%= shipping_address_form.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :state %>
+      <%= shipping_address_form.text_field :state %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :postal_code %>
+      <%= shipping_address_form.text_field :postal_code %>
+    </div>
+
+    <div class="field">
+      <%= shipping_address_form.label :country_code %>
+      <%= shipping_address_form.country_select :country_code %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
