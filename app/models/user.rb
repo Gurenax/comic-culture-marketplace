@@ -27,4 +27,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   has_one :profile
+  has_many :products
 end

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Seller</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>Condition</th>
+      <th>Status</th>
+      <th>Category</th>
+      <th>Manufacturer</th>
+      <th>Publisher</th>
+      <th>Publish date</th>
+      <th>Author</th>
+      <th>Illustrator</th>
+      <th>Isbn 10</th>
+      <th>Isbn 13</th>
+      <th>Dimensions</th>
+      <th>Weight</th>
+      <th>Keywords</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.seller.email %></td>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.description %></td>
+        <td><%= product.condition %></td>
+        <td><%= product.status %></td>
+        <td><%= product.category %></td>
+        <td><%= product.manufacturer %></td>
+        <td><%= product.publisher %></td>
+        <td><%= product.publish_date %></td>
+        <td><%= product.author %></td>
+        <td><%= product.illustrator %></td>
+        <td><%= product.isbn_10 %></td>
+        <td><%= product.isbn_13 %></td>
+        <td><%= product.dimensions %></td>
+        <td><%= product.weight %></td>
+        <td><%= product.keywords %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product', new_product_path %>

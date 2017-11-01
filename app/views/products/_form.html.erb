@@ -1,0 +1,102 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- <div class="field"> -->
+    <%#= form.label :seller_id %>
+    <%#= form.text_field :seller_id, id: :product_seller_id %>
+  <!-- </div> -->
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :product_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :product_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :product_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condition %>
+    <%= form.select :condition, Product.condition_types.keys.map{|condition| [condition.titleize, condition]}, id: :product_condition %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Product.status_types.keys.map{|status| [status.titleize, status]}, id: :product_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.select :category, Product.category_types.keys.map{|category| [category.titleize, category]}, id: :product_category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :manufacturer %>
+    <%= form.text_field :manufacturer, id: :product_manufacturer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publisher %>
+    <%= form.text_field :publisher, id: :product_publisher %>
+  </div>
+
+  <div class="field">
+    <%= form.label :publish_date %>
+    <%= form.date_select :publish_date, id: :product_publish_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :author %>
+    <%= form.text_field :author, id: :product_author %>
+  </div>
+
+  <div class="field">
+    <%= form.label :illustrator %>
+    <%= form.text_field :illustrator, id: :product_illustrator %>
+  </div>
+
+  <div class="field">
+    <%= form.label :isbn_10 %>
+    <%= form.text_field :isbn_10, id: :product_isbn_10 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :isbn_13 %>
+    <%= form.text_field :isbn_13, id: :product_isbn_13 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dimensions %>
+    <%= form.text_field :dimensions, id: :product_dimensions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.text_field :weight, id: :product_weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keywords %>
+    <%= form.text_field :keywords, id: :product_keywords %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

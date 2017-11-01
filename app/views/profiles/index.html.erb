@@ -20,7 +20,7 @@
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
-        <td><%= profile.user.email %></td>
+        <td><%= profile.user %></td>
         <td><%= profile.first_name %></td>
         <td><%= profile.last_name %></td>
         <td><%= image_tag profile.image_url(:thumb) unless profile.image.nil? %></td>
