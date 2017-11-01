@@ -1,3 +1,4 @@
+# Migration file for Billing Address and Shipping Address
 class AddAddressesToProfile < ActiveRecord::Migration[5.1]
   def change
     change_table :profiles do |t|

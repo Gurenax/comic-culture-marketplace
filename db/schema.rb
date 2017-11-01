@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031155856) do
+ActiveRecord::Schema.define(version: 20171101050017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,30 @@ ActiveRecord::Schema.define(version: 20171031155856) do
     t.string "country_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "seller_id"
+    t.string "name"
+    t.decimal "price"
+    t.text "description"
+    t.string "condition"
+    t.string "status"
+    t.string "category"
+    t.string "manufacturer"
+    t.string "publisher"
+    t.date "publish_date"
+    t.string "author"
+    t.string "illustrator"
+    t.string "isbn_10"
+    t.string "isbn_13"
+    t.string "dimensions"
+    t.decimal "weight"
+    t.string "keywords"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["seller_id", "name"], name: "index_products_on_seller_id_and_name", unique: true
+    t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -65,5 +89,6 @@ ActiveRecord::Schema.define(version: 20171031155856) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "profiles", "users"
 end
