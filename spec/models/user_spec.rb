@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'will create a record in the Users table' do
-      expect(User.find(@new_user.id).present?).to be_truthy
+      expect(User.find(@new_user.id).present?).to be true
     end
 
     it 'will create the record with the correct email address' do
