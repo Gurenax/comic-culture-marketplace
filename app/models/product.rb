@@ -27,8 +27,8 @@
 class Product < ApplicationRecord
   has_many :photos, dependent: :destroy
   accepts_nested_attributes_for :photos
-
   belongs_to :seller, class_name: 'User'
+  has_many :product_views
 
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
@@ -43,4 +43,16 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :name, presence: true
   validates :postage, presence: true
+
+  # When the buyer, views the Product
+  def toggle_viewed_by(user)
+    unless ProductView.find_by(product_id: self.id, buyer_id: user).present?
+      ProductView.create(product_id: self.id, buyer: user)
+    end
+  end
+
+  # Count the Product Views
+  def view_count
+    product_views.count
+  end
 end

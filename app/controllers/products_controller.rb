@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product.toggle_viewed_by(current_user)
   end
 
   # GET /products/new
