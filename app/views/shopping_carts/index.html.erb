@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shopping Carts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shopping_carts.each do |shopping_cart| %>
+      <tr>
+        <td><%= shopping_cart.buyer.email %></td>
+        <td><%= shopping_cart.product.name %></td>
+        <td><%= shopping_cart.product.price %></td>
+        <td><%= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Checkout', root_path %>
