@@ -22,14 +22,16 @@
 #  keywords     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  postage      :string
 #
 
 class Product < ApplicationRecord
   has_many :photos, dependent: :destroy
   accepts_nested_attributes_for :photos
   belongs_to :seller, class_name: 'User'
-  has_many :product_views
-
+  has_many :product_views, dependent: :destroy
+  has_many :shopping_carts, dependent: :destroy
+  
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
   enum status_types: ['Available', 'Sold']
@@ -45,14 +47,19 @@ class Product < ApplicationRecord
   validates :postage, presence: true
 
   # When the buyer, views the Product
-  def toggle_viewed_by(user)
-    unless ProductView.find_by(product_id: self.id, buyer_id: user).present?
-      ProductView.create(product_id: self.id, buyer: user)
+  def toggle_viewed_by(buyer)
+    unless ProductView.find_by(product_id: self.id, buyer: buyer).present?
+      ProductView.create(product_id: self.id, buyer: buyer)
     end
   end
 
   # Count the Product Views
   def view_count
     product_views.count
+  end
+
+  # Check if already added in Shopping Cart
+  def added_to_cart?(buyer)
+    ShoppingCart.find_by(product_id: self.id, buyer: buyer).present?
   end
 end

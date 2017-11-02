@@ -1,16 +1,25 @@
 class ProductsController < ApplicationController
+  before_action :set_profile!
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
+    # redirect_to new_profile_path if user_signed_in? and current_user.profile.nil?
     @products = Product.all
+    # Add to Cart buttons in product listing
+    @shopping_cart = ShoppingCart.new
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
+    # Toggle product view if user has not already viewed the product
     @product.toggle_viewed_by(current_user)
+
+    # Initialise a new shopping cart item
+    @shopping_cart = ShoppingCart.new
   end
 
   # GET /products/new
@@ -74,8 +83,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_path(@photo.product_id), notice: 'Photo was successfully destroyed.' }      
-      # format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -90,4 +98,5 @@ class ProductsController < ApplicationController
     def product_params
       params.require(:product).permit(:seller_id, :name, :price, :description, :condition, :status, :category, :manufacturer, :publisher, :publish_date, :author, :illustrator, :isbn_10, :isbn_13, :dimensions, :weight, :keywords, :postage)
     end
+
 end

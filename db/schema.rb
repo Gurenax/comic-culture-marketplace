@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102040011) do
+ActiveRecord::Schema.define(version: 20171102100054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,16 @@ ActiveRecord::Schema.define(version: 20171102040011) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "shopping_carts", force: :cascade do |t|
+    t.bigint "buyer_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id", "product_id"], name: "index_shopping_carts_on_buyer_id_and_product_id", unique: true
+    t.index ["buyer_id"], name: "index_shopping_carts_on_buyer_id"
+    t.index ["product_id"], name: "index_shopping_carts_on_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -111,4 +121,6 @@ ActiveRecord::Schema.define(version: 20171102040011) do
   add_foreign_key "product_views", "users", column: "buyer_id"
   add_foreign_key "products", "users", column: "seller_id"
   add_foreign_key "profiles", "users"
+  add_foreign_key "shopping_carts", "products"
+  add_foreign_key "shopping_carts", "users", column: "buyer_id"
 end

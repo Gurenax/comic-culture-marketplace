@@ -22,6 +22,7 @@
 #  keywords     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  postage      :string
 #
 
 # enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']

@@ -86,7 +86,7 @@
 
     <div class="field">
       <%= billing_address_form.label :country_code %>
-      <%= billing_address_form.country_select :country_code %>
+      <%= billing_address_form.country_select :country_code, selected: 'AU' %>
     </div>
   <% end %>
 
@@ -129,7 +129,7 @@
 
     <div class="field">
       <%= shipping_address_form.label :country_code %>
-      <%= shipping_address_form.country_select :country_code %>
+      <%= shipping_address_form.country_select :country_code, selected: 'AU' %>
     </div>
   <% end %>
 

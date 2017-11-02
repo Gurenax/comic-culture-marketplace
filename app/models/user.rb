@@ -26,6 +26,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable #,
          #:confirmable # Commented out confirmable for testing purposes
-  has_one :profile
-  has_many :products
+  has_one :profile, dependent: :destroy
+  has_many :products, foreign_key: 'seller_id', dependent: :destroy
+  has_many :product_views, foreign_key: 'buyer_id', dependent: :destroy
+  has_one :shopping_cart, foreign_key: 'buyer_id', dependent: :destroy
 end
