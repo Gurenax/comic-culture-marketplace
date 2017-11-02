@@ -1,0 +1,42 @@
+<h1>Your Order</h1>
+
+<%#= render 'form', order: @order %>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Product</th>
+      <th>Price</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shopping_carts.each do |shopping_cart| %>
+      <tr>
+        <td><%= shopping_cart.buyer.email %></td>
+        <td><%= shopping_cart.product.name %></td>
+        <td><%= shopping_cart.product.price %></td>
+        <td><%#= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- Checkout button -->
+<%= form_with model: @order, method: :create, local: true do |f| %>
+<%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+data-description="Test desc"
+data-email="<%= current_user.email %>"
+data-amount="500"
+data-currency="aud"
+data-locale="auto"></script>
+<% end %>
+
+<%= link_to 'Back', orders_path %>

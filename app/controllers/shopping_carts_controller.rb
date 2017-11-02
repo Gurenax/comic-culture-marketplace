@@ -7,8 +7,10 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    # @shopping_carts = ShoppingCart.all
+    # Shopping cart of the current user
     @shopping_carts = ShoppingCart.where(buyer: current_user)
+    # Prepare the Order for Checkout
+    @order = Order.new
   end
 
   # POST /shopping_carts

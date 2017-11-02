@@ -29,5 +29,5 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :products, foreign_key: 'seller_id', dependent: :destroy
   has_many :product_views, foreign_key: 'buyer_id', dependent: :destroy
-  has_one :shopping_cart, foreign_key: 'buyer_id', dependent: :destroy
+  has_many :shopping_cart, foreign_key: 'buyer_id', dependent: :destroy
 end

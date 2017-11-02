@@ -20,9 +20,15 @@
       <%= link_to('Login', new_user_session_path)  %>  
       </li>
     <% end %>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
     <%= link_to 'Home', root_path %>
     <%= link_to 'Profile', profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>
     <%= link_to 'Shopping Cart', shopping_carts_path %>
+    <%= link_to 'Order History', orders_path %>
 
     <%= yield %>
   </body>

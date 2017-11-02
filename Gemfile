@@ -50,6 +50,9 @@ gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
 
+# Stripe
+gem 'stripe'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

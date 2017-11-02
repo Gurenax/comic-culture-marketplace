@@ -31,7 +31,7 @@ class Product < ApplicationRecord
   belongs_to :seller, class_name: 'User'
   has_many :product_views, dependent: :destroy
   has_many :shopping_carts, dependent: :destroy
-  
+    
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
   enum status_types: ['Available', 'Sold']
