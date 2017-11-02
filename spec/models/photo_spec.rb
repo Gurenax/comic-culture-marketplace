@@ -4,7 +4,7 @@ RSpec.describe Photo, type: :model do
   context 'when creating a new photo' do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
-      @product = Product.create!(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
+      @product = Product.create!(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @photo1 = Photo.new(image_data: 'image.jpg')
       @photo2 = Photo.new(product: @product)
       @photo3 = Photo.new(product: @product, image_data: 'image.jpg')

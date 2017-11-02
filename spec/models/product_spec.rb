@@ -47,19 +47,21 @@ RSpec.describe Product, type: :model do
       # @shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
       # @profile = Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Dimaliwat', billing_address: @billing_address, shipping_address: @shipping_address)
 
-      @product1 = Product.new(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
+      @product1 = Product.new(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product1.save
-      @product2 = Product.new(seller: @user, name: 'Batman', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
-      @product3 = Product.new(seller: @user, name: 'Spiderman', price: -10, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
-      @product4 = Product.new(seller: @user, name: 'Flash', price: 10, description: '', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
-      @product5 = Product.new(seller: @user, name: 'Iron Man', price: 10, description: 'TEst Product', condition: '', category: 'Comic Books & Graphic Novels', status: 'Available')
-      @product6 = Product.new(seller: @user, name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: '')
-      @product7 = Product.new(seller: @user, name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: '', status: 'Sold')
-      @product8 = Product.new(name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Sold')
-      @product9 = Product.new(seller: @user, name: '', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Sold')
-      @product10 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mmmint', category: 'Comic Books & Graphic Novels', status: 'Sold')
-      @product11 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Avai')
-      @product12 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Con', status: 'Sold')
+      @product2 = Product.new(seller: @user, name: 'Batman', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product3 = Product.new(seller: @user, name: 'Spiderman', price: -10, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product4 = Product.new(seller: @user, name: 'Flash', price: 10, description: '', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product5 = Product.new(seller: @user, name: 'Iron Man', price: 10, description: 'TEst Product', condition: '', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product6 = Product.new(seller: @user, name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: '', postage: 'None/Pickup Only')
+      @product7 = Product.new(seller: @user, name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: '', status: 'Sold', postage: 'None/Pickup Only')
+      @product8 = Product.new(name: 'Captain America', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Sold', postage: 'None/Pickup Only')
+      @product9 = Product.new(seller: @user, name: '', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Sold', postage: 'None/Pickup Only')
+      @product10 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mmmint', category: 'Comic Books & Graphic Novels', status: 'Sold', postage: 'None/Pickup Only')
+      @product11 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Avai', postage: 'None/Pickup Only')
+      @product12 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Con', status: 'Sold', postage: 'None/Pickup Only')
+      @product13 = Product.new(seller: @user, name: 'Aquaman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
+      @product14 = Product.new(seller: @user, name: 'Aquaman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'Non')
     end
 
     it 'will allow to save products when all required fields are filled up' do
@@ -103,11 +105,19 @@ RSpec.describe Product, type: :model do
     end
 
     it 'will only allow product statuses that are part of enum status types' do
-      expect(Product.status_types.include?(@product11.condition)).to be false
+      expect(Product.status_types.include?(@product11.status)).to be false
     end
 
     it 'will only allow product categories that are part of enum category types' do
-      expect(Product.category_types.include?(@product12.condition)).to be false
+      expect(Product.category_types.include?(@product12.category)).to be false
+    end
+
+    it 'will not allow empty product postage' do
+      expect(@product13).to be_invalid
+    end
+
+    it 'will only allow product postages that are part of enum postage types' do
+      expect(Product.postage_types.include?(@product14.postage)).to be false
     end
   end
 

@@ -101,6 +101,11 @@
     <%= form.text_field :keywords, id: :product_keywords %>
   </div>
 
+  <div class="field">
+    <%= form.label :postage %>
+    <%= form.select :postage, Product.postage_types.keys.map{|postage| [postage.titleize, postage]}, id: :product_postage %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
