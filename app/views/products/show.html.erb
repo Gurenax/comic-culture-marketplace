@@ -21,6 +21,14 @@
 </p>
 
 <p>
+  <strong>Photos:</strong><br>
+  <% @product.photos.each do |photo| %>
+    <%= image_tag photo.image_url(:thumb) %><br>
+    <%= link_to 'Delete Photo', photo_path(photo), method: :delete %><br>
+  <% end %>
+</p>
+
+<p>
   <strong>Condition:</strong>
   <%= @product.condition %>
 </p>

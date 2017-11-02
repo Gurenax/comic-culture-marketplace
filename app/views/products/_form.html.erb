@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :images %>
+    <%= form.file_field :images, id: :images, multiple: true %>
+  </div>
+  
+  <div class="field">
     <%= form.label :condition %>
     <%= form.select :condition, Product.condition_types.keys.map{|condition| [condition.titleize, condition]}, id: :product_condition %>
   </div>

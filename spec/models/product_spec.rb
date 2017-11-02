@@ -47,7 +47,8 @@ RSpec.describe Product, type: :model do
       # @shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
       # @profile = Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Dimaliwat', billing_address: @billing_address, shipping_address: @shipping_address)
 
-      @product1 = Product.create!(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
+      @product1 = Product.new(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
+      @product1.save
       @product2 = Product.new(seller: @user, name: 'Batman', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
       @product3 = Product.new(seller: @user, name: 'Spiderman', price: -10, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
       @product4 = Product.new(seller: @user, name: 'Flash', price: 10, description: '', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available')
@@ -61,8 +62,12 @@ RSpec.describe Product, type: :model do
       @product12 = Product.new(seller: @user, name: 'Starlord', price: 10, description: 'TEst Product', condition: 'Mint', category: 'Comic Con', status: 'Sold')
     end
 
+    it 'will allow to save products when all required fields are filled up' do
+      expect(@product1).to be_valid
+    end
+
     it 'will not allow two products with the same seller and name' do
-      expect { @product2.save! }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: Seller Product name already exists')
+      expect { @product2.save! }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'will not allow prices smaller than 0' do

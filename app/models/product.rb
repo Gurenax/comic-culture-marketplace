@@ -25,7 +25,10 @@
 #
 
 class Product < ApplicationRecord
-  belongs_to :seller, class_name: "User"
+  has_many :photos, dependent: :destroy
+  accepts_nested_attributes_for :photos
+
+  belongs_to :seller, class_name: 'User'
 
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
