@@ -1,20 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @profile.user.email %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
+<h1><%= @profile.full_name %></h1>
 <p>
   <strong>Image data:</strong>
   <%= image_tag @profile.image_url(:thumb) unless @profile.image.nil? %>
@@ -50,4 +36,5 @@
   <%= @profile.shipping_address.full_address %>
 </p>
 
+<%= link_to 'Write a Review', new_profile_review_path(@profile) %>
 <%= link_to 'Edit', edit_profile_path(@profile) %>

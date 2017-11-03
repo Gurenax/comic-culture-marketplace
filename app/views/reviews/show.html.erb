@@ -20,5 +20,5 @@
   <%= @review.rating %>
 </p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %>
+<%= link_to 'Edit', edit_profile_review_path(@review.seller, @review) %> |
+<%= link_to 'Back', profile_reviews_path %>

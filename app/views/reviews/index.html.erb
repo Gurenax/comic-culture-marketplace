@@ -20,9 +20,9 @@
         <td><%= review.buyer.email %></td>
         <td><%= review.comment %></td>
         <td><%= review.rating %></td>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', profile_review_path(review.seller, review) %></td>
+        <td><%= link_to 'Edit', edit_profile_review_path(review.seller, review) %></td>
+        <td><%= link_to 'Destroy', profile_review_path(review.seller, review), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Review', new_review_path %>
+<%= link_to 'New Review', new_profile_review_path %>

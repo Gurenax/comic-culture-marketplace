@@ -1,10 +1,12 @@
 class ReviewsController < ApplicationController
+  before_action :set_seller_profile
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
   # GET /reviews.json
   def index
-    @reviews = Review.all
+    # @reviews = Review.all
+    @reviews = Review.where(seller: @seller_profile)
   end
 
   # GET /reviews/1
@@ -25,10 +27,12 @@ class ReviewsController < ApplicationController
   # POST /reviews.json
   def create
     @review = Review.new(review_params)
+    @review.buyer_id = current_user.id
+    @review.seller_id = @seller_profile.id
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to profile_review_path(@review.seller, @review), notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to profile_review_path(@review.seller, @review), notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -56,7 +60,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to profile_reviews_url, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +73,11 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:user_id, :comment, :rating)
+      params.require(:review).permit(:seller_id, :comment, :rating)
+    end
+
+    # Get seller profile
+    def set_seller_profile
+      @seller_profile = Profile.find(params[:profile_id])
     end
 end

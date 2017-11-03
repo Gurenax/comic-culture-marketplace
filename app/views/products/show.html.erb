@@ -8,7 +8,7 @@
 
 <p>
   <strong>Seller:</strong>
-  <%= @product.seller.email %>
+  <%= link_to @product.seller.profile.full_name, @product.seller.profile %>
 </p>
 
 <p>
