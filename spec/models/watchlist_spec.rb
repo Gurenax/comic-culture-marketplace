@@ -19,11 +19,11 @@ RSpec.describe Watchlist, type: :model do
     end
 
     it 'will contain the product price' do
-      expect(@watchlist_item1.product_price).to eq(@product1.price)
+      expect(@watchlist_item1.product.price).to eq(@product1.price)
     end
 
     it 'will contain the product status' do
-      expect(@watchlist_item1.product_status).to eq(@product1.status)
+      expect(@watchlist_item1.product.status).to eq(@product1.status)
     end
   end
 end
