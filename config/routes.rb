@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :watchlists
   devise_for :users
   resources :profiles, only: %i[show new create edit update destroy]
   resources :products

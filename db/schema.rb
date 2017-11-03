@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102130114) do
+ActiveRecord::Schema.define(version: 20171103093129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 20171102130114) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "watchlists", force: :cascade do |t|
+    t.bigint "buyer_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buyer_id", "product_id"], name: "index_watchlists_on_buyer_id_and_product_id", unique: true
+    t.index ["buyer_id"], name: "index_watchlists_on_buyer_id"
+    t.index ["product_id"], name: "index_watchlists_on_product_id"
+  end
+
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users", column: "buyer_id"
@@ -144,4 +154,6 @@ ActiveRecord::Schema.define(version: 20171102130114) do
   add_foreign_key "profiles", "users"
   add_foreign_key "shopping_carts", "products"
   add_foreign_key "shopping_carts", "users", column: "buyer_id"
+  add_foreign_key "watchlists", "products"
+  add_foreign_key "watchlists", "users", column: "buyer_id"
 end
