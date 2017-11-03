@@ -111,5 +111,12 @@
   <% added_to_cart = @product.added_to_cart?(current_user) %>
   <%= f.submit added_to_cart ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart %>
 <% end %>
+<!-- Add to watchlist button -->
+<%= form_with model: @watchlist, method: :create, local: true do |f| %>
+  <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+  <%= f.hidden_field :product_id, value: @product.id %>
+  <% added_to_watchlist = @product.added_to_watchlist?(current_user) %>
+  <%= f.submit added_to_watchlist ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist %>
+<% end %>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

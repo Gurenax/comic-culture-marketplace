@@ -14,11 +14,11 @@
   </thead>
 
   <tbody>
-    <% @shopping_carts.each do |shopping_cart| %>
+    <% @shopping_cart.each do |shopping_cart_item| %>
       <tr>
-        <td><%= shopping_cart.buyer.email %></td>
-        <td><%= shopping_cart.product.name %></td>
-        <td><%= shopping_cart.product.price %></td>
+        <td><%= shopping_cart_item.buyer.email %></td>
+        <td><%= shopping_cart_item.product.name %></td>
+        <td><%= shopping_cart_item.product.price %></td>
         <td><%#= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -30,7 +30,7 @@
 <!-- Checkout button -->
 <%= form_with model: @order, method: :create, local: true do |f| %>
 <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
-<%= hidden_field_tag 'shopping_cart_hash', @shopping_cart_hash %>
+<%#= hidden_field_tag 'shopping_cart_hash', @shopping_cart_hash %>
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
 data-description="Comic Culture Marketplace"

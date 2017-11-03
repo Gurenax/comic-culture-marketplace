@@ -7,7 +7,7 @@
     <tr>
       <th>User</th>
       <th>Product</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -16,6 +16,15 @@
       <tr>
         <td><%= watchlist.buyer.email %></td>
         <td><%= watchlist.product.name %></td>
+        <td>
+          <!-- Add to cart button -->
+          <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
+            <%= f.hidden_field :buyer_id, value: current_user.id %>
+            <%= f.hidden_field :product_id, value: watchlist.product.id %>
+            <% added_to_cart = watchlist.product.added_to_cart?(current_user) %>
+            <%= f.submit added_to_cart ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart %>
+          <% end %>
+        </td>
         <td><%= link_to 'Destroy', watchlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

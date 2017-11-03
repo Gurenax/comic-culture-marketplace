@@ -13,16 +13,16 @@
   </thead>
 
   <tbody>
-    <% @shopping_carts.each do |shopping_cart| %>
+    <% @shopping_cart.each do |shopping_cart_item| %>
       <tr>
-        <td><%= shopping_cart.buyer.email %></td>
-        <td><%= shopping_cart.product.name %></td>
-        <td><%= shopping_cart.product.price %></td>
-        <td><%= link_to 'Remove from Cart', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= shopping_cart_item.buyer.email %></td>
+        <td><%= shopping_cart_item.product.name %></td>
+        <td><%= shopping_cart_item.product.price %></td>
+        <td><%= link_to 'Remove from Cart', shopping_cart_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= link_to 'Proceed to Checkout', new_order_path unless @shopping_carts.empty? %>
+<%= link_to 'Proceed to Checkout', new_order_path unless @shopping_cart.empty? %>
