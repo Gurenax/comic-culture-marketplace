@@ -1,0 +1,40 @@
+<tr>
+  <td><%= product.seller.email %></td>
+  <td><%= product.name %></td>
+  <td><%= product.price %></td>
+  <td><%= product.description %></td>
+  <td><%= product.condition %></td>
+  <td><%= product.status %></td>
+  <td><%= product.category %></td>
+  <td><%= product.manufacturer %></td>
+  <td><%= product.publisher %></td>
+  <td><%= product.publish_date %></td>
+  <td><%= product.author %></td>
+  <td><%= product.illustrator %></td>
+  <td><%= product.isbn_10 %></td>
+  <td><%= product.isbn_13 %></td>
+  <td><%= product.dimensions %></td>
+  <td><%= product.weight %></td>
+  <td><%= product.keywords %></td>
+  <td>
+    <!-- Add to watchlist button -->
+    <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+      <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <% added_to_watchlist = product.added_to_watchlist?(current_user) %>
+      <%= f.submit added_to_watchlist ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist %>
+    <% end %>
+  </td>
+  <td>
+    <!-- Add to cart button -->
+    <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
+      <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <% added_to_cart = product.added_to_cart?(current_user) %>
+      <%= f.submit added_to_cart ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart %>
+    <% end %>
+  </td>
+  <td><%= link_to 'Show', product %></td>
+  <td><%= link_to 'Edit', edit_product_path(product) %></td>
+  <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
