@@ -25,29 +25,13 @@
 #  postage      :string
 #
 
-# enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
-# enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
-# enum status_types: ['Available', 'Sold']
-
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  # seller id and name should be unique
-  # price should be greater than or equal 0
-  # seller id should not be empty
-  # name should not be empty
-  # description should not be empty
-  # condition should not be empty
-  # status should not be empty
-  # category should not be empty
 
   context 'when creating a new Product' do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
-      # @billing_address = Address.new(house_number: '7', street_name: 'Auburn')
-      # @shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
-      # @profile = Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Dimaliwat', billing_address: @billing_address, shipping_address: @shipping_address)
-
       @product1 = Product.new(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product1.save
       @product2 = Product.new(seller: @user, name: 'Batman', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
@@ -122,4 +106,63 @@ RSpec.describe Product, type: :model do
     end
   end
 
+  context 'when a user is viewing a product' do
+    before do
+      @user = User.create!(email: 'a@example.com', password: 'password')
+      @user2 = User.create!(email: 'b@example.com', password: 'password')
+      @user3 = User.create!(email: 'c@example.com', password: 'password')
+      @user4 = User.create!(email: 'd@example.com', password: 'password')
+      @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+    end
+
+    it 'will count 1 view per user' do
+      @product1.toggle_viewed_by(@user)
+      @product1.toggle_viewed_by(@user2)
+      @product1.toggle_viewed_by(@user3)
+      expect(@product1.view_count).to eq(3)
+    end
+
+    it 'will not count duplicate views' do
+      @product1.toggle_viewed_by(@user)
+      @product1.toggle_viewed_by(@user2)
+      @product1.toggle_viewed_by(@user3)
+      @product1.toggle_viewed_by(@user)
+      @product1.toggle_viewed_by(@user4)
+      expect(@product1.view_count).to eq(4)
+    end
+  end
+
+  context 'when adding a product to shopping cart' do
+    before do
+      @user = User.create!(email: 'a@example.com', password: 'password')
+      @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+    end
+
+    it 'will show that the product is already added in the cart' do
+      @shopping_cart = ShoppingCart.create!(product_id: @product1.id, buyer: @user)
+      expect(@product1.added_to_cart?(@user)).to be true
+    end
+
+    it 'will show that the product is not in the cart' do
+      expect(@product2.added_to_cart?(@user)).to be false
+    end
+  end
+
+  context 'when adding a product to watchlist' do
+    before do
+      @user = User.create!(email: 'a@example.com', password: 'password')
+      @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+    end
+
+    it 'will show that the product is already added in the watchlist' do
+      @shopping_cart = Watchlist.create!(product_id: @product1.id, buyer: @user)
+      expect(@product1.added_to_watchlist?(@user)).to be true
+    end
+
+    it 'will show that the product is not in the watchlist' do
+      expect(@product2.added_to_watchlist?(@user)).to be false
+    end
+  end
 end

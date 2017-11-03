@@ -25,15 +25,15 @@ RSpec.describe ShoppingCart, type: :model do
       @shopping_cart_item3 = ShoppingCart.create!(product_id: @product3.id, buyer: @user2)
     end
 
-    it 'will retrieve the product' do
+    it 'will contain the product' do
       expect(@shopping_cart_item1.product).to eq(@product1)
     end
 
-    it 'will retrieve the product price' do
+    it 'will contain the product price' do
       expect(@shopping_cart_item1.product_price).to eq(@product1.price)
     end
 
-    it 'will retrieve the product status' do
+    it 'will contain the product status' do
       expect(@shopping_cart_item1.product_status).to eq(@product1.status)
     end
 
