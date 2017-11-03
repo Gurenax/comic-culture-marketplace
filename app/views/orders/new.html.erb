@@ -1,6 +1,7 @@
 <h1>Your Order</h1>
 
 <%#= render 'form', order: @order %>
+<%= @shopping_cart_hash %>
 
 <table>
   <thead>
@@ -29,12 +30,12 @@
 <!-- Checkout button -->
 <%= form_with model: @order, method: :create, local: true do |f| %>
 <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
-
+<%= hidden_field_tag 'shopping_cart_hash', @shopping_cart_hash %>
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-data-description="Test desc"
+data-description="Comic Culture Marketplace"
 data-email="<%= current_user.email %>"
-data-amount="500"
+data-amount="<%= @amount %>"
 data-currency="aud"
 data-locale="auto"></script>
 <% end %>

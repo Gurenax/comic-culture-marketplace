@@ -34,7 +34,7 @@ class Product < ApplicationRecord
     
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
-  enum status_types: ['Available', 'Sold']
+  enum status_types: ['Available', 'Checked Out', 'Sold']
   enum postage_types: ['None/Pickup Only', 'By Weight']
 
   validates :seller_id, uniqueness: { scope: :name, message: 'Product name already exists' }
@@ -62,4 +62,10 @@ class Product < ApplicationRecord
   def added_to_cart?(buyer)
     ShoppingCart.find_by(product_id: self.id, buyer: buyer).present?
   end
+
+# not tested
+  # Set the product status
+  # def set_status(product_status)
+  #   status = product_status
+  # end
 end

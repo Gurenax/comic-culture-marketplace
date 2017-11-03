@@ -20,6 +20,11 @@ class ShoppingCartsController < ApplicationController
 
     respond_to do |format|
       if @shopping_cart.save
+
+        # Set product status to Checked Out
+        @shopping_cart.set_product_status('Checked Out')
+
+
         format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully created.' }
         format.json { render :show, status: :created, location: @shopping_cart }
       else
@@ -32,7 +37,11 @@ class ShoppingCartsController < ApplicationController
   # DELETE /shopping_carts/1
   # DELETE /shopping_carts/1.json
   def destroy
+    # Set product status to Available
+    @shopping_cart.set_product_status('Available')
+
     @shopping_cart.destroy
+
     respond_to do |format|
       format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.' }
       format.json { head :no_content }

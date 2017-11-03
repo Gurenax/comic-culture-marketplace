@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<p><%= flash[:notice] %></p>
 
 <h1>Shopping Carts</h1>
 
@@ -25,4 +25,4 @@
 </table>
 
 <br>
-<%= link_to 'Checkout', new_order_path %>
+<%= link_to 'Checkout', new_order_path unless @shopping_carts.empty? %>

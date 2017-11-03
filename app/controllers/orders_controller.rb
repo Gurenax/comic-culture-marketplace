@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @shopping_carts = ShoppingCart.where(buyer: current_user)
+    @shopping_cart_hash = @shopping_carts.as_json.hash
   end
 
   # GET /orders/1/edit
@@ -29,64 +30,30 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    
-    @shopping_cart = ShoppingCart.where(buyer: current_user)
+    @shopping_cart = ShoppingCart.where(buyer: @order.buyer)
+    # before_checkout_hash = params.permit(:shopping_cart_hash)[:shopping_cart_hash].to_i
+    # during_checkout_hash = @shopping_cart.as_json.hash
 
     # Amount in cents
     @amount = (@shopping_cart.sum(&:product_price) * 100).to_i
+    customer = Stripe::Customer.create( email: @order.buyer.email, source: params[:stripeToken] )
+    charge = Stripe::Charge.create( customer: customer.id, amount: @amount, description: 'Comic Culture Marketplace', currency: 'aud' )
+    @order.charge_identifier = charge.id
+    @order.save
 
-    # New Rental to save to database
-    # @rental = Rental.new
-    # The video_id comes from the form (hidden_tag :video_id)
-    # @rental.video = Video.find(rental_params[:video_id])
-    # @rental.user = current_user
+    # @shopping_cart.map(&:checkout_products(@order))
 
-    # Amount in cents
-    # @amount = 500
-    
-      customer = Stripe::Customer.create(
-        :email => @order.buyer.email, #current_user.email, #params[:stripeEmail],
-        :source  => params[:stripeToken]
-      )
-    
-      charge = Stripe::Charge.create(
-        :customer    => customer.id,
-        :amount      => @amount,
-        :description => 'Test Description', #@rental.video.name,
-        :currency    => 'aud'
-      )
-    
-      @order.charge_identifier = charge.id
-      @order.save
+    @shopping_cart.each do |cart_item|
+      cart_item.set_product_status('Sold')
+      OrderItem.create!(order: @order, product_id: cart_item.product_id)
+    end
+    @shopping_cart.destroy_all
 
-      @shopping_cart.each do |cart|
-        product_id = cart.product.id
-        product = Product.find(product_id)
-        product.status = 'Sold'
-        product.save!
-        OrderItem.create!(order: @order, product_id: product_id)
-      end
-      @shopping_cart.destroy_all
+    redirect_to root_path
 
-      redirect_to root_path #shopping_carts_path
-
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to shopping_carts_url
-      #redirect_to new_rental_path(video_id: @rental.video.id)
-
-
-
-    # respond_to do |format|
-    #   if @order.save
-        
-    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to new_order_path
   end
 
   # PATCH/PUT /orders/1
