@@ -12,21 +12,21 @@
 class ShoppingCart < ApplicationRecord
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id'
   has_many :products
-  
+
   # Get Product data for Product id
   def product
     Product.find(product_id)
   end
 
-  # Get Product data for Product id
-  def product_price
-    Product.find(product_id).price
-  end
+  # # Get Product data for Product id
+  # def product_price
+  #   product.price
+  # end
 
-  # Get Products status for Product id
-  def product_status
-    Product.find(product_id).status
-  end
+  # # Get Products status for Product id
+  # def product_status
+  #   product.status
+  # end
 
   # Change status of product (shopping cart item)
   def change_product_status_to(status)

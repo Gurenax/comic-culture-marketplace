@@ -18,8 +18,9 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @shopping_carts = ShoppingCart.where(buyer: current_user)
-    @shopping_cart_hash = @shopping_carts.as_json.hash
+    @shopping_cart = ShoppingCart.where(buyer: current_user)
+    @amount = (@shopping_cart.map(&:product).map(&:price).sum * 100).to_i
+    # @shopping_cart_hash = @shopping_carts.as_json.hash
   end
 
   # GET /orders/1/edit
@@ -35,7 +36,7 @@ class OrdersController < ApplicationController
     # during_checkout_hash = @shopping_cart.as_json.hash
 
     # Amount in cents
-    @amount = (@shopping_cart.sum(&:product_price) * 100).to_i
+    @amount = (@shopping_cart.map(&:product).map(&:price).sum * 100).to_i
     customer = Stripe::Customer.create( email: @order.buyer.email, source: params[:stripeToken] )
     charge = Stripe::Charge.create( customer: customer.id, amount: @amount, description: 'Comic Culture Marketplace', currency: 'aud' )
     @order.charge_identifier = charge.id
