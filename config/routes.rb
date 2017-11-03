@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :watchlists, only: %i[index create destroy]
   resources :shopping_carts, only: %i[index create destroy]
   resources :orders, only: %i[index new create]
+  resources :reviews
   
   root 'products#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
