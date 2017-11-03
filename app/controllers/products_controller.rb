@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
     @products = Product.all
     # Add to Cart buttons in product listing
     @shopping_cart = ShoppingCart.new
+    # Add to Watchlist buttons
+    @watchlist = Watchlist.new
   end
 
   # GET /products/1
@@ -17,9 +19,10 @@ class ProductsController < ApplicationController
   def show
     # Toggle product view if user has not already viewed the product
     @product.toggle_viewed_by(current_user)
-
     # Initialise a new shopping cart item
     @shopping_cart = ShoppingCart.new
+    # Initialise a new watchlist item
+    @watchlist = Watchlist.new
   end
 
   # GET /products/new
@@ -39,7 +42,6 @@ class ProductsController < ApplicationController
     
     respond_to do |format|
       if @product.save
-
         # Get photos directly from the params and save them to the database one by one
         if params[:product][:images]
           params[:product][:images].each { |image|
@@ -61,7 +63,6 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-
         # Get photos directly from the params and save them to the database one by one
         if params[:product][:images]
           params[:product][:images].each { |image|

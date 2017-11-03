@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :watchlists
   devise_for :users
   resources :profiles, only: %i[show new create edit update destroy]
   resources :products
   resources :photos
+  resources :watchlists, only: %i[index create destroy]
   resources :shopping_carts, only: %i[index create destroy]
   resources :orders, only: %i[index new create]
   

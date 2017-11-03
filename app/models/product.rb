@@ -63,9 +63,9 @@ class Product < ApplicationRecord
     ShoppingCart.find_by(product_id: self.id, buyer: buyer).present?
   end
 
-# not tested
-  # Set the product status
-  # def set_status(product_status)
-  #   status = product_status
-  # end
+  # Check if already added in Watchlist
+  def added_to_watchlist?(buyer)
+    Watchlist.find_by(product_id: self.id, buyer: buyer).present?
+  end
+
 end

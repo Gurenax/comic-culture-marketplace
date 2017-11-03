@@ -1,24 +1,15 @@
 class WatchlistsController < ApplicationController
-  before_action :set_watchlist, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_profile!
+  before_action :set_watchlist, only: [:show, :destroy]
+  protect_from_forgery
 
   # GET /watchlists
   # GET /watchlists.json
   def index
     @watchlists = Watchlist.all
-  end
-
-  # GET /watchlists/1
-  # GET /watchlists/1.json
-  def show
-  end
-
-  # GET /watchlists/new
-  def new
-    @watchlist = Watchlist.new
-  end
-
-  # GET /watchlists/1/edit
-  def edit
+    # Add to Cart buttons in watchlist
+    @shopping_cart = ShoppingCart.new
   end
 
   # POST /watchlists
@@ -28,24 +19,10 @@ class WatchlistsController < ApplicationController
 
     respond_to do |format|
       if @watchlist.save
-        format.html { redirect_to @watchlist, notice: 'Watchlist was successfully created.' }
+        format.html { redirect_to watchlists_url, notice: 'Watchlist was successfully created.' }
         format.json { render :show, status: :created, location: @watchlist }
       else
         format.html { render :new }
-        format.json { render json: @watchlist.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /watchlists/1
-  # PATCH/PUT /watchlists/1.json
-  def update
-    respond_to do |format|
-      if @watchlist.update(watchlist_params)
-        format.html { redirect_to @watchlist, notice: 'Watchlist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @watchlist }
-      else
-        format.html { render :edit }
         format.json { render json: @watchlist.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +46,6 @@ class WatchlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def watchlist_params
-      params.require(:watchlist).permit(:user_id, :product_id)
+      params.require(:watchlist).permit(:buyer_id, :product_id)
     end
 end

@@ -14,16 +14,10 @@
   <tbody>
     <% @watchlists.each do |watchlist| %>
       <tr>
-        <td><%= watchlist.user %></td>
-        <td><%= watchlist.product %></td>
-        <td><%= link_to 'Show', watchlist %></td>
-        <td><%= link_to 'Edit', edit_watchlist_path(watchlist) %></td>
+        <td><%= watchlist.buyer.email %></td>
+        <td><%= watchlist.product.name %></td>
         <td><%= link_to 'Destroy', watchlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Watchlist', new_watchlist_path %>
