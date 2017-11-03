@@ -12,5 +12,21 @@
 require 'rails_helper'
 
 RSpec.describe OrderItem, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  context 'when adding a product as a new order item' do
+    before do
+      @user = User.create!(email: 'glenn@example.com', password: 'password')
+      @buyer = User.create!(email: 'sam@example.com', password: 'password')
+      @product = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+      @order = Order.create!(buyer: @buyer)
+      @order_item = OrderItem.create!(order: @order, product_id: @product.id)
+    end
+
+    it 'will retrieve the product' do
+      expect(@order_item.product).to eq(@product)
+    end
+
+
+  end
+
 end

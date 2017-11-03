@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     # @shopping_cart.map(&:checkout_products(@order))
 
     @shopping_cart.each do |cart_item|
-      cart_item.set_product_status('Sold')
+      cart_item.change_product_status_to('Sold')
       OrderItem.create!(order: @order, product_id: cart_item.product_id)
     end
     @shopping_cart.destroy_all

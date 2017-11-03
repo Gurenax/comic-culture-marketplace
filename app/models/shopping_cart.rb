@@ -23,25 +23,13 @@ class ShoppingCart < ApplicationRecord
     Product.find(product_id).price
   end
 
-  # Sets products in shopping cart to Sold and adds them as Order Item
-  # scope :checkout_products, -> {
-  # puts self  
-  # self.each do |cart|
-  # def checkout_products(order)
-  #   product_id = cart.product.id
-  #   product = Product.find(product_id)
-  #   product.status = 'Sold'
-  #   product.save!
-  #   OrderItem.create!(order: order, product_id: product_id)
-  #   destroy
-  # end
-
   # Get Products status for Product id
   def product_status
     Product.find(product_id).status
   end
 
-  def set_product_status(status)
+  # Change status of product (shopping cart item)
+  def change_product_status_to(status)
     shopping_cart_item = Product.find(product_id)
     shopping_cart_item.status = status
     shopping_cart_item.save
