@@ -36,6 +36,11 @@ class ShoppingCart < ApplicationRecord
   #   destroy
   # end
 
+  # Get Products status for Product id
+  def product_status
+    Product.find(product_id).status
+  end
+
   def set_product_status(status)
     shopping_cart_item = Product.find(product_id)
     shopping_cart_item.status = status

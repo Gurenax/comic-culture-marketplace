@@ -18,11 +18,11 @@
         <td><%= shopping_cart.buyer.email %></td>
         <td><%= shopping_cart.product.name %></td>
         <td><%= shopping_cart.product.price %></td>
-        <td><%= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Remove from Cart', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<%= link_to 'Checkout', new_order_path unless @shopping_carts.empty? %>
+<%= link_to 'Proceed to Checkout', new_order_path unless @shopping_carts.empty? %>

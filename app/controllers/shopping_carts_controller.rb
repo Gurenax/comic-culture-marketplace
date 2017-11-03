@@ -22,7 +22,7 @@ class ShoppingCartsController < ApplicationController
       if @shopping_cart.save
 
         # Set product status to Checked Out
-        @shopping_cart.set_product_status('Checked Out')
+        @shopping_cart.set_product_status('Checked Out') if @shopping_cart.product_status == 'Available'
 
 
         format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully created.' }
@@ -38,7 +38,7 @@ class ShoppingCartsController < ApplicationController
   # DELETE /shopping_carts/1.json
   def destroy
     # Set product status to Available
-    @shopping_cart.set_product_status('Available')
+    @shopping_cart.set_product_status('Available') if @shopping_cart.product_status == 'Checked Out'
 
     @shopping_cart.destroy
 
