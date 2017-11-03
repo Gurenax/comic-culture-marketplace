@@ -29,4 +29,11 @@ class Profile < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def full_name
+    full_name = []
+    full_name << first_name unless first_name.blank?
+    full_name << last_name unless last_name.blank?
+    full_name.join(' ')
+  end
 end

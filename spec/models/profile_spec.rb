@@ -23,17 +23,17 @@ RSpec.describe Profile, type: :model do
   context 'when creating a new profile' do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
-      @billing_address = Address.new(house_number: '7', street_name: 'Auburn')
-      @shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
 
-      @profile = Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Dimaliwat', billing_address: @billing_address, shipping_address: @shipping_address)
+      @profile = Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Dimaliwat', billing_address: billing_address, shipping_address: shipping_address)
       
-      @user2 = User.create!(email: 'john@example.com', password: 'password')
-      @profile2 = Profile.new(user: @user2, first_name: '', last_name: 'Smith', billing_address: @billing_address, shipping_address: @shipping_address)
-      @user3 = User.create!(email: 'sam@example.com', password: 'password')
-      @profile3 = Profile.new(user: @user3, first_name: 'Sam', last_name: '', billing_address: @billing_address, shipping_address: @shipping_address)
-      @profile4 = Profile.new(user: @user3, first_name: 'Sam', last_name: '', shipping_address: @shipping_address)
-      @profile5 = Profile.new(user: @user3, first_name: 'Sam', last_name: '', billing_address: @billing_address)
+      user2 = User.create!(email: 'john@example.com', password: 'password')
+      @profile2 = Profile.new(user: user2, first_name: '', last_name: 'Smith', billing_address: billing_address, shipping_address: shipping_address)
+      user3 = User.create!(email: 'sam@example.com', password: 'password')
+      @profile3 = Profile.new(user: user3, first_name: 'Sam', last_name: '', billing_address: billing_address, shipping_address: shipping_address)
+      @profile4 = Profile.new(user: user3, first_name: 'Sam', last_name: '', shipping_address: shipping_address)
+      @profile5 = Profile.new(user: user3, first_name: 'Sam', last_name: '', billing_address: billing_address)
     end
 
     it 'will create a record in the Profiles table' do
@@ -58,6 +58,22 @@ RSpec.describe Profile, type: :model do
 
     it 'will not allow an empty shipping address' do
       expect(@profile5).to be_invalid
+    end
+  end
+
+  context 'when referring to a user profile' do
+    before do
+      user = User.create!(email: 'glenn@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      first_name = 'Glenn'
+      last_name = 'Dimaliwat'
+      @full_name = "#{first_name} #{last_name}"
+      @profile = Profile.create!(user: user, first_name: first_name, last_name: last_name, billing_address: billing_address, shipping_address: shipping_address)
+    end
+
+    it 'will get the full name' do
+      expect(@profile.full_name).to eq(@full_name)
     end
   end
 end
