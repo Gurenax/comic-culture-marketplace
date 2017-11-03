@@ -7,7 +7,9 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     # redirect_to new_profile_path if user_signed_in? and current_user.profile.nil?
-    @products = Product.all
+    # @products = Product.all
+    @available_products = Product.where(status: 'Available')
+    @sold_products = Product.where(status: 'Sold')
     # Add to Cart buttons in product listing
     @shopping_cart = ShoppingCart.new
     # Add to Watchlist buttons
