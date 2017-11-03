@@ -34,6 +34,6 @@ class Profile < ApplicationRecord
     full_name = []
     full_name << first_name unless first_name.blank?
     full_name << last_name unless last_name.blank?
-    full_name.join(' ')
+    full_name.join(' ').strip
   end
 end

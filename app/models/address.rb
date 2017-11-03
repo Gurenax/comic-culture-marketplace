@@ -32,6 +32,6 @@ class Address < ApplicationRecord
     state_postal = "#{state} #{postal_code}".strip
     address_array << state_postal unless state_postal.blank?
     address_array << country_name unless country_name.blank?
-    address_array.join(', ')
+    address_array.join(', ').strip
   end
 end
