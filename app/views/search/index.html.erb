@@ -1,4 +1,15 @@
 <h1>Search Results</h1>
 
-<%= render @products %>
+<div>
+  Search
+  <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
+    <%= form.text_field :keywords, value: @keywords %>
+    <%= form.text_field :location, value: @location.blank? ? current_user.profile.billing_address.full_address : @location %>
+    <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
+    <%= form.submit %>
+  <% end %>
+  <%= link_to 'Advanced Search', search_index_path %>
+</div>
+
+<%= render @products unless @products.nil? %>
 <%#= render 'products/product', product: @products %>

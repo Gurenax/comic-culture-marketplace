@@ -30,7 +30,7 @@ class Product < ApplicationRecord
 
   algoliasearch do
     # All Attributes Used by Algolia
-    attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count, :latitude, :longitude
+    attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count, :latitude, :longitude, :status
 
     # Search Index
     searchableAttributes ['name', 'keywords', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
@@ -40,6 +40,9 @@ class Product < ApplicationRecord
 
     # Location Search by Radius
     geoloc :latitude, :longitude
+
+    # Facet Filters
+    attributesForFaceting [:status]
   end
 
   has_many :photos, dependent: :destroy
