@@ -32,6 +32,9 @@ RSpec.describe Product, type: :model do
   context 'when creating a new Product' do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.new(seller: @user, name: 'Batman', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product1.save
       @product2 = Product.new(seller: @user, name: 'Batman', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
@@ -109,6 +112,9 @@ RSpec.describe Product, type: :model do
   context 'when a user is viewing a product' do
     before do
       @user = User.create!(email: 'a@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @user2 = User.create!(email: 'b@example.com', password: 'password')
       @user3 = User.create!(email: 'c@example.com', password: 'password')
       @user4 = User.create!(email: 'd@example.com', password: 'password')
@@ -135,6 +141,9 @@ RSpec.describe Product, type: :model do
   context 'when adding a product to shopping cart' do
     before do
       @user = User.create!(email: 'a@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
     end
@@ -182,4 +191,6 @@ RSpec.describe Product, type: :model do
       expect(@product1.seller_name).to eq(@profile.full_name)
     end
   end
+
+  
 end

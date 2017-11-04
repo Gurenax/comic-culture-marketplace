@@ -16,7 +16,13 @@ RSpec.describe ShoppingCart, type: :model do
   context 'when checking out products in shopping cart' do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @user2 = User.create!(email: 'sam@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user2, first_name: 'Sam', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100.24, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200.13, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product3 = Product.create!(seller: @user, name: 'Batman3', price: 300.44, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')

@@ -17,6 +17,10 @@ RSpec.describe OrderItem, type: :model do
     before do
       @user = User.create!(email: 'glenn@example.com', password: 'password')
       @buyer = User.create!(email: 'sam@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Glenn', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
+      Profile.create!(user: @buyer, first_name: 'Sam', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @order = Order.create!(buyer: @buyer)
       @order_item = OrderItem.create!(order: @order, product_id: @product.id)
