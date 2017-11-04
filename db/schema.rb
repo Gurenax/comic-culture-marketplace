@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103130917) do
+ActiveRecord::Schema.define(version: 20171104004146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,21 @@ ActiveRecord::Schema.define(version: 20171103130917) do
     t.string "country_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -123,6 +138,15 @@ ActiveRecord::Schema.define(version: 20171103130917) do
     t.index ["product_id"], name: "index_shopping_carts_on_product_id"
   end
 
+  create_table "user_conversations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -155,6 +179,8 @@ ActiveRecord::Schema.define(version: 20171103130917) do
     t.index ["product_id"], name: "index_watchlists_on_product_id"
   end
 
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users", column: "buyer_id"
@@ -167,6 +193,8 @@ ActiveRecord::Schema.define(version: 20171103130917) do
   add_foreign_key "reviews", "users", column: "seller_id"
   add_foreign_key "shopping_carts", "products"
   add_foreign_key "shopping_carts", "users", column: "buyer_id"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
   add_foreign_key "watchlists", "products"
   add_foreign_key "watchlists", "users", column: "buyer_id"
 end

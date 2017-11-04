@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: watchlists
+#
+#  id         :integer          not null, primary key
+#  buyer_id   :integer
+#  product_id :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Watchlist, type: :model do

@@ -30,4 +30,10 @@ class User < ApplicationRecord
   has_many :products, foreign_key: 'seller_id', dependent: :destroy
   has_many :product_views, foreign_key: 'buyer_id', dependent: :destroy
   has_many :shopping_cart, foreign_key: 'buyer_id', dependent: :destroy
+  has_many :user_conversations
+  has_many :conversations, through: :user_conversations
+
+  def has_joined?(conversation)
+    conversations.where(id: conversation).exists?
+  end
 end

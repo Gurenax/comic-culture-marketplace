@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :messages
+  resources :conversations
   devise_for :users
   resources :profiles, only: %i[show new create edit update destroy] do
     resources :reviews #, only: %i[index show new create edit update destroy]
