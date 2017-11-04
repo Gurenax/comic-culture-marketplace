@@ -108,6 +108,7 @@
 <%= form_with(url: conversations_url, local:true) do |f| %>
   <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
   <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
+  <%= hidden_field_tag :receiver, @product.seller.id %>
   <%= f.submit 'Message' %>
 <% end %>
 

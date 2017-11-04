@@ -3,7 +3,8 @@ class ConversationsController < ApplicationController
 
   # Shows a list of Conversations
   def index
-    @conversations = Conversation.all
+    # @conversations = Conversation.all
+    @conversations = current_user.conversations
   end
 
   # Creates a new Conversation or Joins an existing Conversation
@@ -12,6 +13,8 @@ class ConversationsController < ApplicationController
     topic = params[:topic]
     # Get the title
     title = params[:title]
+    # Get the receiver
+    receiver = User.find(params.permit(:receiver)[:receiver])
 
     # Search for the topic in Conversation table
     @conversation = Conversation.where(topic: topic).first
@@ -20,6 +23,7 @@ class ConversationsController < ApplicationController
     if !@conversation
       @conversation = Conversation.new(topic: topic, title: title)
       @conversation.users << current_user
+      @conversation.users << receiver
       @conversation.save
 
     # If topic exists, join the conversation
