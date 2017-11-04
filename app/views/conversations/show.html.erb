@@ -1,4 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
+<h1><%= @conversation.title %></h1>
+
+<% unless @conversation.messages.empty? %>
+<uL>
+<% @conversation.messages.each do |m| %>
+    <li>
+        <strong><%= m.user.email %>:</strong>
+        <p><%= simple_format(m.body) %></p>
+    </li>
+<% end %>
+</uL>
+<% end %>
+
+
+<%= form_with(url: message_path, method: :patch, local: true) do |f| %>
+<%= f.hidden_field :conversation_id, value: @conversation.id %>
+<div>
+    Message<br>
+    <%= f.text_area :body %>
+</div>
+<%= f.submit 'Send' %>
+<% end %>
+
+<br>
 <%= link_to 'Back', conversations_path %>

@@ -37,4 +37,9 @@
 </p>
 
 <%= link_to 'Write a Review', new_profile_review_path(@profile) %>
+<%= form_with(url: conversations_url, local:true) do |f| %>
+  <%= f.hidden_field :topic, value: direct_message_topic_between(@profile.user, current_user) %>
+  <%= f.hidden_field :title, value: conversation_title_between(@profile.user, current_user) %>
+  <%= f.submit 'Message' %>
+<% end %>
 <%= link_to 'Edit', edit_profile_path(@profile) %>
