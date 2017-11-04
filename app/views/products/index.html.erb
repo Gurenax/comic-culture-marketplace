@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
 
+<div>
+  Search
+  <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
+    <%= form.text_field :keywords %>
+    <%= form.submit %>
+  <% end %>
+</div>
+
 <h1>All Available Products</h1>
 
 <table>
@@ -65,7 +73,5 @@
 </table>
 
 <br>
-
-
 
 <%= link_to 'New Product', new_product_path %>
