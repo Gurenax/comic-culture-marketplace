@@ -53,6 +53,9 @@ gem 'shrine'
 # Stripe
 gem 'stripe'
 
+# Algolia Search
+gem "algoliasearch-rails"
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

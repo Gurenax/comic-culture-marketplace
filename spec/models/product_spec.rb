@@ -152,6 +152,9 @@ RSpec.describe Product, type: :model do
   context 'when adding a product to watchlist' do
     before do
       @user = User.create!(email: 'a@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      Profile.create!(user: @user, first_name: 'Donald', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200, description: 'Test Product 2', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
     end
@@ -163,6 +166,20 @@ RSpec.describe Product, type: :model do
 
     it 'will show that the product is not in the watchlist' do
       expect(@product2.added_to_watchlist?(@user)).to be false
+    end
+  end
+
+  context 'when accessing the name of the seller' do
+    before do
+      @user = User.create!(email: 'a@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      @profile = Profile.create!(user: @user, first_name: 'Donald', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
+      @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
+    end
+
+    it 'will show the full name of the seller' do
+      expect(@product1.seller_name).to eq(@profile.full_name)
     end
   end
 end

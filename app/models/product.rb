@@ -26,13 +26,26 @@
 #
 
 class Product < ApplicationRecord
+  include AlgoliaSearch
+
+  algoliasearch do
+    # All Attributes Used by Algolia
+    attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count
+
+    # Search Index
+    searchableAttributes ['name', 'keywords', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
+
+    # Rank by Product View Count
+    customRanking ['desc(view_count)']
+  end
+
   has_many :photos, dependent: :destroy
   accepts_nested_attributes_for :photos
   belongs_to :seller, class_name: 'User'
   has_many :product_views, dependent: :destroy
   has_many :shopping_carts, dependent: :destroy
   has_many :watchlists, dependent: :destroy
-    
+
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
   enum status_types: ['Available', 'Checked Out', 'Sold']
@@ -46,6 +59,10 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :name, presence: true
   validates :postage, presence: true
+
+  def seller_name
+    seller.profile.full_name
+  end
 
   # When the buyer, views the Product
   def toggle_viewed_by(buyer)
