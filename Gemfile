@@ -56,6 +56,9 @@ gem 'stripe'
 # Algolia Search
 gem "algoliasearch-rails"
 
+# Geocoder
+gem 'geocoder'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

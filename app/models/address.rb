@@ -19,7 +19,7 @@ class Address < ApplicationRecord
 
   # Get country name from country code
   def country_name
-    country = ISO3166::Country[country_code].name
+    country = ISO3166::Country[country_code].name unless country_code.blank?
   end
 
   # Get full address while ignoring blank details

@@ -178,19 +178,43 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  context 'when accessing the name of the seller' do
+  context 'when accessing the profile of the seller' do
     before do
       @user = User.create!(email: 'a@example.com', password: 'password')
-      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
-      shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn', town_suburb: 'Hawthorn', city: 'Melbourne', state: 'VIC', country_code: 'AU')
+      shipping_address = Address.new(house_number: '7', street_name: 'Auburn', town_suburb: 'Hawthorn', city: 'Melbourne', state: 'VIC', country_code: 'AU')
       @profile = Profile.create!(user: @user, first_name: 'Donald', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
+      @buyer = User.create!(email: 'b@example.com', password: 'password')
+      billing_address = Address.new(town_suburb: 'Camberwell', city: 'Melbourne', state: 'VIC', country_code: 'AU')
+      shipping_address = Address.new(town_suburb: 'Camberwell', city: 'Melbourne', state: 'VIC', country_code: 'AU')
+      @profile2 = Profile.create!(user: @buyer, first_name: 'Jane', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
     end
 
     it 'will show the full name of the seller' do
       expect(@product1.seller_name).to eq(@profile.full_name)
     end
-  end
 
-  
+    it 'will show the full address of the seller' do
+      expect(@product1.seller_location).to eq(@profile.billing_address.full_address)
+    end
+
+    it 'will show the coordinates of the seller' do
+      expect(@product1.seller_coordinates).not_to be_empty
+    end
+
+    it 'will show the latitude of the seller' do
+      seller_coordinates = @product1.seller_coordinates
+      expect(@product1.latitude).to eq(seller_coordinates[0])
+    end
+
+    it 'will show the longitude of the seller' do
+      seller_coordinates = @product1.seller_coordinates
+      expect(@product1.longitude).to eq(seller_coordinates[1])
+    end
+
+    it 'will show the distance between the seller and buyer to be at least 2kms to 4kms' do
+      expect(@product1.distance_from_seller(@buyer)).to be_between(2, 4).inclusive
+    end
+  end
 end

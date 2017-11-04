@@ -30,13 +30,16 @@ class Product < ApplicationRecord
 
   algoliasearch do
     # All Attributes Used by Algolia
-    attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count
+    attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count, :latitude, :longitude
 
     # Search Index
     searchableAttributes ['name', 'keywords', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
 
     # Rank by Product View Count
     customRanking ['desc(view_count)']
+
+    # Location Search by Radius
+    geoloc :latitude, :longitude
   end
 
   has_many :photos, dependent: :destroy
@@ -60,8 +63,35 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :postage, presence: true
 
+  # Full name of the Seller
   def seller_name
     seller.profile.full_name
+  end
+
+  # Location of the Seller
+  def seller_location
+    seller.profile.billing_address.full_address
+  end
+
+  # Coordinates of the Seller's location
+  def seller_coordinates
+    Geocoder.coordinates(seller_location) if seller_location.present?
+  end
+
+  # Seller's latitude
+  def latitude
+    seller_coordinates[0] if seller_coordinates.present?
+  end
+
+  # Seller's longitude
+  def longitude
+    seller_coordinates[1] if seller_coordinates.present?
+  end
+
+  # Distance between the seller and buyer
+  def distance_from_seller(buyer)
+    buyer_coordinates = Geocoder.coordinates(buyer.profile.billing_address.full_address)
+    Geocoder::Calculations.distance_between(seller_coordinates, buyer_coordinates, :units => :km)
   end
 
   # When the buyer, views the Product

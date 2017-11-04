@@ -519,6 +519,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     fastimage (2.1.0)
     ffi (1.9.18)
+    geocoder (1.4.4)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     http-cookie (1.0.3)
@@ -682,6 +683,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   fastimage
+  geocoder
   image_processing
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
