@@ -33,7 +33,7 @@ class Product < ApplicationRecord
     attribute :name, :keywords, :description, :seller_name, :manufacturer, :publisher, :author, :illustrator, :view_count, :latitude, :longitude, :status, :category
 
     # Search Index
-    searchableAttributes ['name', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
+    searchableAttributes ['name', 'keywords', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
 
     # Rank by Product View Count
     customRanking ['desc(view_count)']

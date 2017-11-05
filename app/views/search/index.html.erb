@@ -1,4 +1,4 @@
-<h1>Search Results</h1>
+<h1>Advanced Search</h1>
 
 <div>
   Search
@@ -24,5 +24,6 @@
   <% end %>
 </div>
 
-<%= render @products unless @products.nil? %>
+<h1><%= "Search Results (Found #{@products.count} items)" unless @products.blank? %></h1>
+<%= render @products unless @products.blank? %>
 <%#= render 'products/product', product: @products %>
