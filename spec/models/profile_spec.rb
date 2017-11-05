@@ -76,4 +76,22 @@ RSpec.describe Profile, type: :model do
       expect(@profile.full_name).to eq(@full_name)
     end
   end
+
+  context 'when creating a new profile' do
+    before do
+      user = User.create!(email: 'glenn@example.com', password: 'password')
+      billing_address = Address.new(house_number: '7', street_name: 'Auburn')
+      @country_code = 'GB'
+      shipping_address = Address.new(house_number: '8', street_name: 'Auburn', country_code: @country_code)
+      @profile = Profile.create!(user: user, first_name: 'Donald', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
+    end
+
+    it 'will get the default country code AU when country code is blank' do
+      expect(@profile.selected_country_code(@profile.billing_address)).to eq('AU')
+    end
+
+    it "will get the correct country code #{@country_code} when country code is blank" do
+      expect(@profile.selected_country_code(@profile.shipping_address)).to eq(@country_code)
+    end
+  end
 end

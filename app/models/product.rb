@@ -80,23 +80,24 @@ class Product < ApplicationRecord
   end
 
   # Coordinates of the Seller's location
-  def seller_coordinates
-    Geocoder.coordinates(seller_location) if seller_location.present?
-  end
+  # def seller_coordinates
+  #   Geocoder.coordinates(seller_location) if seller_location.present?
+  # end
 
   # Seller's latitude
   def latitude
-    seller_coordinates[0] if seller_coordinates.present?
+    seller.profile.billing_address.latitude
   end
 
   # Seller's longitude
   def longitude
-    seller_coordinates[1] if seller_coordinates.present?
+    seller.profile.shipping_address.longitude
   end
 
   # Distance between the seller and buyer
   def distance_from_seller(buyer)
-    buyer_coordinates = Geocoder.coordinates(buyer.profile.billing_address.full_address)
+    seller_coordinates = "#{latitude}, #{longitude}"
+    buyer_coordinates = "#{buyer.profile.billing_address.latitude}, #{buyer.profile.billing_address.longitude}"
     Geocoder::Calculations.distance_between(seller_coordinates, buyer_coordinates, :units => :km)
   end
 

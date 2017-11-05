@@ -27,5 +27,4 @@ module ProfilesHelper
       "Conversation with self"
     end
   end
-  
 end

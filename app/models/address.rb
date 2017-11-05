@@ -17,6 +17,9 @@
 class Address < ApplicationRecord
   has_one :profile
 
+  geocoded_by :full_address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+
   # Get country name from country code
   def country_name
     country = ISO3166::Country[country_code].name unless country_code.blank?

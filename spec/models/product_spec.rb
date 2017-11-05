@@ -199,18 +199,16 @@ RSpec.describe Product, type: :model do
       expect(@product1.seller_location).to eq(@profile.billing_address.full_address)
     end
 
-    it 'will show the coordinates of the seller' do
-      expect(@product1.seller_coordinates).not_to be_empty
-    end
+    # it 'will show the coordinates of the seller' do
+    #   expect(@product1.seller_coordinates).not_to be_empty
+    # end
 
     it 'will show the latitude of the seller' do
-      seller_coordinates = @product1.seller_coordinates
-      expect(@product1.latitude).to eq(seller_coordinates[0])
+      expect(@product1.latitude).to eq(@profile.billing_address.latitude)
     end
 
     it 'will show the longitude of the seller' do
-      seller_coordinates = @product1.seller_coordinates
-      expect(@product1.longitude).to eq(seller_coordinates[1])
+      expect(@product1.longitude).to eq(@profile.billing_address.longitude)
     end
 
     it 'will show the distance between the seller and buyer to be at least 2kms to 4kms' do

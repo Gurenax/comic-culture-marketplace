@@ -30,10 +30,16 @@ class Profile < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  # Get Full Name
   def full_name
     full_name = []
     full_name << first_name unless first_name.blank?
     full_name << last_name unless last_name.blank?
     full_name.join(' ').strip
+  end
+
+  # Select Australia as Default Country Code
+  def selected_country_code(address)
+    address.country_code.blank? ? 'AU' : address.country_code
   end
 end
