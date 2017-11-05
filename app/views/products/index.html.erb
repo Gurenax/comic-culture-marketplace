@@ -4,7 +4,7 @@
   Search
   <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
     <%= form.text_field :keywords, value: @keywords %>
-    <% current_location = user_signed_in? ? current_user.profile.billing_address.full_address : '' %>
+    <% current_location = search_location %>
     <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
     <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
     <%= form.submit 'Search' %>
