@@ -57,7 +57,7 @@ class Product < ApplicationRecord
 
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
-  enum status_types: ['Available', 'Checked Out', 'Sold']
+  enum status_types: ['Available', 'Reserved', 'Sold']
   enum postage_types: ['None/Pickup Only', 'By Weight']
 
   validates :seller_id, uniqueness: { scope: :name, message: 'Product name already exists' }

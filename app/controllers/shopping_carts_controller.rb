@@ -22,7 +22,7 @@ class ShoppingCartsController < ApplicationController
       if @shopping_cart.save
 
         # Set product status to Checked Out
-        @shopping_cart.change_product_status_to('Checked Out') if @shopping_cart.product.status == 'Available'
+        @shopping_cart.change_product_status_to('Reserved') if @shopping_cart.product.status == 'Available'
 
         format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully created.' }
         format.json { render :show, status: :created, location: @shopping_cart }
@@ -37,7 +37,7 @@ class ShoppingCartsController < ApplicationController
   # DELETE /shopping_carts/1.json
   def destroy
     # Set product status to Available
-    @shopping_cart.change_product_status_to('Available') if @shopping_cart.product.status == 'Checked Out'
+    @shopping_cart.change_product_status_to('Available') if @shopping_cart.product.status == 'Reserved'
     @shopping_cart.destroy
 
     respond_to do |format|
