@@ -59,6 +59,9 @@ gem "algoliasearch-rails"
 # Geocoder
 gem 'geocoder'
 
+# Bootstrap
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'
@@ -68,7 +71,7 @@ group :development, :test do
 
   # Shoulda Matchers
   gem 'shoulda-matchers', '~> 3.1'
-  
+
   # Annotate
   gem 'annotate', require: false
 
