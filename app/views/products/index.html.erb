@@ -1,17 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-  Search
-  <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
-    <%= form.text_field :keywords, value: @keywords %>
-    <% current_location = search_location %>
-    <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
-    <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
-    <%= form.submit 'Search' %>
-  <% end %>
-  <%= link_to 'Advanced Search', search_index_path %>
-</div>
-
 <h1>All Available Products</h1>
 
 <table>

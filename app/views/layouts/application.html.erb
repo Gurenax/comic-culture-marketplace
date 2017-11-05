@@ -4,35 +4,73 @@
     <title>ComicCultureMarketplace</title>
     <%= csrf_meta_tags %>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Bangers|Oswald:400,700" rel="stylesheet">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      <li>
-      <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-      </li>
-    <% else %>
-      <li>
-      <%= link_to('Login', new_user_session_path)  %>  
-      </li>
-    <% end %>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <%= link_to 'Home', root_path %>
-    <%= link_to 'Profile', profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>
-    <%= link_to 'Watchlist', watchlists_path %>
-    <%= link_to 'Shopping Cart', shopping_carts_path %>
-    <%= link_to 'Order History', orders_path %>
-    <%= link_to 'Messages', conversations_path %>
-    <%= link_to 'Contact Support', new_contact_support_path %>
+    <div class="container-fluid">
 
-    <%= yield %>
+      <section class="header">
+        <!-- Comic Culture Logo -->
+        <div class="logo row align-items-center">
+          <%= image_tag asset_path('logo.svg'), class: 'col-6' %>
+          <h1 class="col-6">Comic Culture Marketplace</h1>
+        </div>
+
+        <!-- Search Bar Desktop -->
+        <div class="search-bar desktop-only">
+          Search
+          <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
+            <%= form.text_field :keywords, value: @keywords %>
+            <% current_location = search_location %>
+            <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
+            <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
+            <%= form.submit 'Search' %>
+          <% end %>
+          <%= link_to 'Advanced Search', search_index_path %>
+        </div>
+      </section>
+<!-- 
+      <section class="navigation">
+        
+      </section> -->
+      <nav class="nav nav-pills nav-justified fixed-bottom">
+        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
+        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
+        <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-item nav-link"><%= image_tag asset_path('profile.svg') %></a>
+        <a href="<%= conversations_path %>" class="nav-item nav-link"><%= image_tag asset_path('message.svg') %></a>
+        <a href="<%= shopping_carts_path %>" class="nav-item nav-link"><%= image_tag asset_path('shopping_cart.svg') %></a>
+      </nav>
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if user_signed_in? %>
+        <li>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+        </li>
+      <% else %>
+        <li>
+        <%= link_to('Login', new_user_session_path)  %>  
+        </li>
+      <% end %>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+      <%= link_to 'Home', root_path %>
+      <%= link_to 'Profile', profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>
+      <%= link_to 'Watchlist', watchlists_path %>
+      <%= link_to 'Shopping Cart', shopping_carts_path %>
+      <%= link_to 'Order History', orders_path %>
+      <%= link_to 'Messages', conversations_path %>
+      <%= link_to 'Contact Support', new_contact_support_path %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
