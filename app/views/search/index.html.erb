@@ -3,12 +3,25 @@
 <div>
   Search
   <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
-    <%= form.text_field :keywords, value: @keywords %>
-    <%= form.text_field :location, value: @location.blank? ? current_user.profile.billing_address.full_address : @location %>
+    <%= form.text_field :keywords, value: @keywords, placeholder: 'What are you looking for?' %>
+
+    <% current_location = user_signed_in? ? current_user.profile.billing_address.full_address : '' %>
+    <%= form.label 'Location' %>
+    <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
     <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
-    <%= form.submit %>
+
+    <%= form.label 'Manufacturer/Publisher' %>
+    <%= form.text_field :manufacturer_or_publisher, value: @manufacturer_or_publisher %>
+
+    <%= form.label 'Category' %>
+    <%= form.select :category, category_types.map{|category| [category[0].titleize, category[1]]}, selected: @category %>
+
+    <%= form.label 'Seller Name' %>
+    <%= form.text_field :seller_name, value: @seller_name %>
+
+    <br>
+    <%= form.submit 'Search' %>
   <% end %>
-  <%= link_to 'Advanced Search', search_index_path %>
 </div>
 
 <%= render @products unless @products.nil? %>

@@ -1,5 +1,11 @@
 module SearchHelper
 
+  def category_types
+    category_types = { 'All' => '' }
+    Product.category_types.keys.map { |k| category_types.merge!(k => k) }
+    category_types
+  end
+
   def location_radius
     {
       '0km' => '0',
