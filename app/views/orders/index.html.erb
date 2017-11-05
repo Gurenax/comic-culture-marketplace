@@ -19,7 +19,7 @@
         <td><%= order.buyer.email %></td>
         <td>
           <% order.order_items.each do |item| %>
-          <%= item.product.seller.created_at %> <%= item.product.seller.email %> <%= item.product.name %> <%= item.product.price %><br>
+          <%= item.product.seller.created_at %> <%= item.product.seller.email %> <%= item.product.name %> <%= number_to_currency item.product.price %><br>
           <% end %>
         </td>
         <td><%= order.charge_identifier %></td>

@@ -8,7 +8,14 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts.json
   def index
     # Get shopping cart items
-    @shopping_cart = current_user.shopping_cart.products if !current_user.shopping_cart.blank?
+    @shopping_cart = current_user.shopping_cart if !current_user.shopping_cart.blank?
+
+    # Get products total price
+    @postage_total_price = @shopping_cart.products_total_price
+
+    # Get total postage price
+    @postage_total_price = @shopping_cart.postage_total_price
+
     # Prepare the Order for Checkout
     @order = Order.new
   end

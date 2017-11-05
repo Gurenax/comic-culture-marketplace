@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     @shopping_cart = current_user.shopping_cart
 
     # Total price of products in cents
-    @amount = @shopping_cart.products_total_price
+    @amount = @shopping_cart.products_total_price + @shopping_cart.postage_total_price
   end
 
   # GET /orders/1/edit
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
     @shopping_cart = current_user.shopping_cart
 
     # Total price of products in cents
-    @amount = @shopping_cart.products_total_price
+    @amount = @shopping_cart.products_total_price + @shopping_cart.postage_total_price
     
     # Begin stripe transaction
     customer = Stripe::Customer.create( email: @order.buyer.email, source: params[:stripeToken] )

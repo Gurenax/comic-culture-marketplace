@@ -35,9 +35,18 @@ class ShoppingCart < ApplicationRecord
     products.include?(product)
   end
 
-  # Get total price of products in cart
+  # Get total price of products in cart (in cents)
   def products_total_price
     (products.sum(:price) * 100).to_i
+  end
+
+  # Get total price of postage (in cents)
+  def postage_total_price
+    total = 0.0
+    products.group(:seller_id).sum(:weight).each_value do |weight|
+      total += (weight <= 500 ? 4.0 : 6.0)
+    end
+    (total * 100).to_i
   end
 
   # Get Product data for Product id

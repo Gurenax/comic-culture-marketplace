@@ -18,14 +18,17 @@
       <tr>
         <td><%= shopping_cart_item.seller.profile.full_name %></td>
         <td><%= shopping_cart_item.name %></td>
-        <td><%= shopping_cart_item.price %></td>
+        <td><%= number_to_currency shopping_cart_item.price %></td>
         <td><%#= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+Product Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price) %><br>
+Postage Total: <%= number_to_currency  format_amount_from_cents(@shopping_cart.postage_total_price) %><br>
+Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price + @shopping_cart.postage_total_price) %>
+<br><br>
 
 <!-- Checkout button -->
 <%= form_with model: @order, method: :create, local: true do |f| %>

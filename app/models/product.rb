@@ -55,13 +55,13 @@ class Product < ApplicationRecord
   has_many :shopping_carts, dependent: :destroy
   has_many :watchlists, dependent: :destroy
   has_many :orders, dependent: :destroy
-  
+
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
   enum status_types: ['Available', 'Reserved', 'Sold']
   enum postage_types: ['None/Pickup Only', 'By Weight']
 
-  validates :seller_id, uniqueness: { scope: :name, message: 'Product name already exists' }
+  validates :name, uniqueness: { scope: :seller_id }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :description, presence: true
   validates :condition, presence: true
@@ -69,6 +69,7 @@ class Product < ApplicationRecord
   validates :category, presence: true
   validates :name, presence: true
   validates :postage, presence: true
+  validates :weight, numericality: { greater_than_or_equal_to: 0 }
 
   # Full name of the Seller
   def seller_name
@@ -79,11 +80,6 @@ class Product < ApplicationRecord
   def seller_location
     seller.profile.billing_address.full_address
   end
-
-  # Coordinates of the Seller's location
-  # def seller_coordinates
-  #   Geocoder.coordinates(seller_location) if seller_location.present?
-  # end
 
   # Seller's latitude
   def latitude
@@ -113,18 +109,6 @@ class Product < ApplicationRecord
   def view_count
     product_views.count
   end
-
-  # # Check if already added in Shopping Cart
-  # def added_to_cart?(buyer)
-  #   return false if buyer.shopping_cart.blank?
-  #   buyer.shopping_cart.products.find_by(id: self.id).present?
-  # end
-
-  # # Check if already added in Watchlist
-  # def added_to_watchlist?(buyer)
-  #   return false if buyer.watchlist.blank?
-  #   buyer.watchlist.products.find_by(id: self.id).present?
-  # end
 
   # Change status of product to
   def change_status_to(new_status)
