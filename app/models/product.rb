@@ -113,16 +113,21 @@ class Product < ApplicationRecord
     product_views.count
   end
 
-  # Check if already added in Shopping Cart
-  def added_to_cart?(buyer)
-    return false if buyer.shopping_cart.blank?
-    buyer.shopping_cart.products.find_by(id: self.id).present?
-  end
+  # # Check if already added in Shopping Cart
+  # def added_to_cart?(buyer)
+  #   return false if buyer.shopping_cart.blank?
+  #   buyer.shopping_cart.products.find_by(id: self.id).present?
+  # end
 
-  # Check if already added in Watchlist
-  def added_to_watchlist?(buyer)
-    return false if buyer.watchlist.blank?
-    buyer.watchlist.products.find_by(id: self.id).present?
-  end
+  # # Check if already added in Watchlist
+  # def added_to_watchlist?(buyer)
+  #   return false if buyer.watchlist.blank?
+  #   buyer.watchlist.products.find_by(id: self.id).present?
+  # end
 
+  # Change status of product to
+  def change_status_to(new_status)
+    self.status = new_status
+    save
+  end
 end

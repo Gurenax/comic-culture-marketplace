@@ -23,23 +23,20 @@ RSpec.describe Watchlist, type: :model do
       shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
       Profile.create!(user: @user2, first_name: 'Sam', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product1 = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
-      @product2 = Product.create!(seller: @user, name: 'Batman2', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
-      @product3 = Product.create!(seller: @user, name: 'Batman3', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
-      @watchlist_item1 = Watchlist.create!(product_id: @product1.id, buyer: @user2)
-      @watchlist_item2 = Watchlist.create!(product_id: @product2.id, buyer: @user2)
-      @watchlist_item3 = Watchlist.create!(product_id: @product3.id, buyer: @user2)
+      @watchlist = Watchlist.create!(buyer: @user2)
+      @watchlist.add_product(@product1)
     end
 
     it 'will contain the product' do
-      expect(@watchlist_item1.product).to eq(@product1)
+      expect(@watchlist.added?(@product1)).to be true
     end
 
     it 'will contain the product price' do
-      expect(@watchlist_item1.product.price).to eq(@product1.price)
+      expect(@watchlist.product(@product1).price).to eq(@product1.price)
     end
 
     it 'will contain the product status' do
-      expect(@watchlist_item1.product.status).to eq(@product1.status)
+      expect(@watchlist.product(@product1).status).to eq(@product1.status)
     end
   end
 end

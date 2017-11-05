@@ -13,6 +13,33 @@ class ShoppingCart < ApplicationRecord
   has_many :shopping_cart_items
   has_many :products, through: :shopping_cart_items, dependent: :destroy
 
+  # Add product to shopping cart
+  def add_product(product)
+    products << product
+    save
+  end
+
+  # Remove product from shopping cart
+  def remove_product(product)
+    products.delete(product)
+    save
+  end
+
+  # Access a product from cart
+  def product(product)
+    products.find(product.id)
+  end
+
+  # Check if product already added in cart
+  def added?(product)
+    products.include?(product)
+  end
+
+  # Get total price of products in cart
+  def products_total_price
+    (products.sum(:price) * 100).to_i
+  end
+
   # Get Product data for Product id
   # def product
   #   Product.find(product_id)
@@ -28,12 +55,12 @@ class ShoppingCart < ApplicationRecord
   #   product.status
   # end
 
-  # Change status of product (shopping cart item)
-  def change_product_status_to(status)
-    shopping_cart_item = Product.find(product_id)
-    shopping_cart_item.status = status
-    shopping_cart_item.save
-  end
+  # # Change status of product (shopping cart item)
+  # def change_product_status_to(status)
+  #   shopping_cart_item = Product.find(product_id)
+  #   shopping_cart_item.status = status
+  #   shopping_cart_item.save
+  # end
   
   # # Get the product's seller id
   # def seller_id

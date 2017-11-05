@@ -149,12 +149,21 @@ RSpec.describe Product, type: :model do
     end
 
     it 'will show that the product is already added in the cart' do
-      @shopping_cart = ShoppingCart.create!(product_id: @product1.id, buyer: @user)
-      expect(@product1.added_to_cart?(@user)).to be true
+      @shopping_cart = ShoppingCart.create!(buyer: @user)
+      @shopping_cart.add_product(@product1)
+      expect(@shopping_cart.added?(@product1)).to be true
     end
 
     it 'will show that the product is not in the cart' do
-      expect(@product2.added_to_cart?(@user)).to be false
+      @shopping_cart = ShoppingCart.create!(buyer: @user)
+      expect(@shopping_cart.added?(@product2)).to be false
+    end
+
+    it 'will show that the product is removed from the cart' do
+      @shopping_cart = ShoppingCart.create!(buyer: @user)
+      @shopping_cart.add_product(@product1)
+      @shopping_cart.remove_product(@product1)
+      expect(@shopping_cart.added?(@product1)).to be false
     end
   end
 
@@ -169,12 +178,21 @@ RSpec.describe Product, type: :model do
     end
 
     it 'will show that the product is already added in the watchlist' do
-      @shopping_cart = Watchlist.create!(product_id: @product1.id, buyer: @user)
-      expect(@product1.added_to_watchlist?(@user)).to be true
+      @watchlist = Watchlist.create!(buyer: @user)
+      @watchlist.add_product(@product1)
+      expect(@watchlist.added?(@product1)).to be true
     end
 
     it 'will show that the product is not in the watchlist' do
-      expect(@product2.added_to_watchlist?(@user)).to be false
+      @watchlist = Watchlist.create!(buyer: @user)
+      expect(@watchlist.added?(@product2)).to be false
+    end
+
+    it 'will show that the product is removed from the watchlist' do
+      @watchlist = Watchlist.create!(buyer: @user)
+      @watchlist.add_product(@product1)
+      @watchlist.remove_product(@product1)
+      expect(@watchlist.added?(@product1)).to be false
     end
   end
 

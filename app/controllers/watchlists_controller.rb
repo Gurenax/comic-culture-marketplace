@@ -17,31 +17,11 @@ class WatchlistsController < ApplicationController
   # POST /watchlists
   # POST /watchlists.json
   def create
-    # @watchlist = Watchlist.new(watchlist_params)
-
-    # respond_to do |format|
-    #   if @watchlist.save
-    #     format.html { redirect_to watchlists_url, notice: 'Watchlist was successfully created.' }
-    #     format.json { render :show, status: :created, location: @watchlist }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @watchlist.errors, status: :unprocessable_entity }
-    #   end
-    # end
-
     watchlist_item = params.require(:watchlist)[:product_id]
-    
     product = Product.find(watchlist_item)
     @watchlist = Watchlist.find_by(buyer: current_user)
-    
-    if !@watchlist
-      @watchlist = Watchlist.new(buyer: current_user)
-      @watchlist.products << product
-      @watchlist.save
-    else
-      @watchlist.products << product
-      @watchlist.save
-    end
+    @watchlist ||= Watchlist.new(buyer: current_user)
+    @watchlist.add_product(product)
 
     redirect_to watchlists_url
   end
@@ -51,7 +31,7 @@ class WatchlistsController < ApplicationController
   def destroy
     # @watchlist.destroy
     watchlist_item = params.permit(:id)[:id]
-    current_user.watchlist.products.delete(watchlist_item)
+    current_user.watchlist.remove_product(watchlist_item)
 
     respond_to do |format|
       format.html { redirect_to watchlists_url, notice: 'Watchlist was successfully destroyed.' }

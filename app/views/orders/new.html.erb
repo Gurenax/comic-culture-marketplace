@@ -14,11 +14,11 @@
   </thead>
 
   <tbody>
-    <% @shopping_cart.each do |shopping_cart_item| %>
+    <% @shopping_cart.products.each do |shopping_cart_item| %>
       <tr>
-        <td><%= shopping_cart_item.buyer.email %></td>
-        <td><%= shopping_cart_item.product.name %></td>
-        <td><%= shopping_cart_item.product.price %></td>
+        <td><%= shopping_cart_item.seller.profile.full_name %></td>
+        <td><%= shopping_cart_item.name %></td>
+        <td><%= shopping_cart_item.price %></td>
         <td><%#= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -29,6 +29,7 @@
 
 <!-- Checkout button -->
 <%= form_with model: @order, method: :create, local: true do |f| %>
+<%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
 <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
 <%#= hidden_field_tag 'shopping_cart_hash', @shopping_cart_hash %>
 <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -40,4 +41,4 @@ data-currency="aud"
 data-locale="auto"></script>
 <% end %>
 
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Back', shopping_carts_path %>

@@ -35,6 +35,8 @@ class User < ApplicationRecord
   has_many :watchlist_items, through: :watchlist
   has_many :user_conversations
   has_many :conversations, through: :user_conversations
+  has_one :order, foreign_key: 'buyer_id', dependent: :destroy
+  has_many :order_items, through: :order
 
   def has_joined?(conversation)
     conversations.where(id: conversation).exists?

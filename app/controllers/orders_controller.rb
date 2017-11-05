@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile!
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  protect_from_forgery
 
   # GET /orders
   # GET /orders.json
@@ -18,9 +17,12 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
-    @shopping_cart = ShoppingCart.where(buyer: current_user)
-    @amount = (@shopping_cart.map(&:product).map(&:price).sum * 100).to_i
-    # @shopping_cart_hash = @shopping_carts.as_json.hash
+
+    # Get user's shopping cart
+    @shopping_cart = current_user.shopping_cart
+
+    # Total price of products in cents
+    @amount = @shopping_cart.products_total_price
   end
 
   # GET /orders/1/edit
@@ -31,24 +33,30 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @shopping_cart = ShoppingCart.where(buyer: @order.buyer)
-    # before_checkout_hash = params.permit(:shopping_cart_hash)[:shopping_cart_hash].to_i
-    # during_checkout_hash = @shopping_cart.as_json.hash
+    
+    # Get user's shopping cart
+    @shopping_cart = current_user.shopping_cart
 
-    # Amount in cents
-    @amount = (@shopping_cart.map(&:product).map(&:price).sum * 100).to_i
+    # Total price of products in cents
+    @amount = @shopping_cart.products_total_price
+    
+    # Begin stripe transaction
     customer = Stripe::Customer.create( email: @order.buyer.email, source: params[:stripeToken] )
     charge = Stripe::Charge.create( customer: customer.id, amount: @amount, description: 'Comic Culture Marketplace', currency: 'aud' )
     @order.charge_identifier = charge.id
     @order.save
+    # End of stripe transaction
 
-    # @shopping_cart.map(&:checkout_products(@order))
-
-    @shopping_cart.each do |cart_item|
-      cart_item.change_product_status_to('Sold')
-      OrderItem.create!(order: @order, product_id: cart_item.product_id)
+    # For every product in shopping cart
+    @shopping_cart.products.each do |product|
+      # Change the product status to Sold
+      product.change_status_to('Sold')
+      # Create an Order Item for that product
+      OrderItem.create!(order: @order, product_id: product.id)
     end
-    @shopping_cart.destroy_all
+
+    # Remove all products from shopping cart
+    @shopping_cart.products.destroy_all
 
     redirect_to root_path
 

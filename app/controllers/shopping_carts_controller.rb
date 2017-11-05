@@ -25,14 +25,11 @@ class ShoppingCartsController < ApplicationController
       @shopping_cart = ShoppingCart.new(buyer: current_user)
       product.status = 'Reserved' if product.status == 'Available'
       product.save
-      @shopping_cart.products << product
-      @shopping_cart.save
     else
       product.status = 'Reserved' if product.status == 'Available'
       product.save
-      @shopping_cart.products << product
-      @shopping_cart.save
     end
+    @shopping_cart.add_product(product)
 
     redirect_to shopping_carts_url
   end
@@ -42,7 +39,7 @@ class ShoppingCartsController < ApplicationController
   def destroy
     # Set product status to Available
     shopping_cart_item = params.permit(:id)[:id]
-    current_user.shopping_cart.products.delete(shopping_cart_item)
+    current_user.shopping_cart.remove_product(shopping_cart_item)
     product = Product.find(shopping_cart_item)
     product.status = 'Available' if product.status == 'Reserved'
     product.save

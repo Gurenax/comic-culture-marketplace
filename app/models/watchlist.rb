@@ -13,6 +13,28 @@ class Watchlist < ApplicationRecord
   has_many :watchlist_items
   has_many :products, through: :watchlist_items, dependent: :destroy
 
+  # Add product to watchlist
+  def add_product(product)
+    products << product
+    save
+  end
+
+  # Remove product from watchlist
+  def remove_product(product)
+    products.delete(product)
+    save
+  end
+
+  # Access a product from watchlist
+  def product(product)
+    products.find(product.id)
+  end
+
+  # Check if product already added in watchlist
+  def added?(product)
+    products.include?(product)
+  end
+
   # Get Product data for Product id
   # def product
   #   Product.find(product_id)
