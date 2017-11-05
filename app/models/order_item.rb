@@ -10,11 +10,16 @@
 #
 
 class OrderItem < ApplicationRecord
-  belongs_to :order
-  has_one :product
+  # belongs_to :order
+  # has_one :product
 
-  # Get Product data for Product id
-  def product
-    Product.find(product_id)
-  end
+  # # Get Product data for Product id
+  # def product
+  #   Product.find(product_id)
+  # end
+
+  belongs_to :product
+  belongs_to :order
+
+  validates_uniqueness_of :product_id, scope: :order_id
 end

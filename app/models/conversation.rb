@@ -15,6 +15,12 @@ class Conversation < ApplicationRecord
   has_many :users, through: :user_conversations, dependent: :destroy
 
   def includes_user?(user)
-    users.where(id: user).exists?
+    #users.where(id: user).exists?
+    users.include?(user)
+  end
+
+  def add_user(user)
+    users << user
+    save
   end
 end

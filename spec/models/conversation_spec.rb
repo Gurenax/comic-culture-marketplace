@@ -12,5 +12,15 @@
 require 'rails_helper'
 
 RSpec.describe Conversation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when adding users to a conversation' do
+    before do
+      @user = User.create!(email: 'glenn@example.com', password: 'password')
+      @conversation = Conversation.create!(topic: 'Test')
+    end
+
+    it 'will contain the user' do
+      @conversation.add_user(@user)
+      expect(@conversation.includes_user?(@user)).to be true
+    end
+  end
 end

@@ -40,7 +40,7 @@ RSpec.describe ShoppingCart, type: :model do
     end
 
     it 'will contain the product' do
-      expect(@shopping_cart.added?(@product1)).to be true
+      expect(@shopping_cart.includes_product?(@product1)).to be true
     end
 
     it 'will contain the product price' do

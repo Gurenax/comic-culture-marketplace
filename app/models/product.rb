@@ -54,7 +54,8 @@ class Product < ApplicationRecord
   has_many :product_views, dependent: :destroy
   has_many :shopping_carts, dependent: :destroy
   has_many :watchlists, dependent: :destroy
-
+  has_many :orders, dependent: :destroy
+  
   enum category_types: ['Comic Books & Graphic Novels', 'Toys & Collectables', 'Costumes', 'Clothing & Apparel']
   enum condition_types: ['Brand New', 'Mint', 'Good', 'Fair', 'Poor']
   enum status_types: ['Available', 'Reserved', 'Sold']

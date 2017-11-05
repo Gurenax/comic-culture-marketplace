@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = current_user.orders
   end
 
   # GET /orders/1
@@ -51,8 +51,8 @@ class OrdersController < ApplicationController
     @shopping_cart.products.each do |product|
       # Change the product status to Sold
       product.change_status_to('Sold')
-      # Create an Order Item for that product
-      OrderItem.create!(order: @order, product_id: product.id)
+      # Create an Order Item for each product
+      @order.add_product(product)
     end
 
     # Remove all products from shopping cart

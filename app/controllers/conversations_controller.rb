@@ -18,24 +18,19 @@ class ConversationsController < ApplicationController
 
     # Search for the topic in Conversation table
     @conversation = Conversation.where(topic: topic).first
-    
+
     # If topic does not exists, create the topic
     if !@conversation
       @conversation = Conversation.new(topic: topic, title: title)
-      @conversation.users << current_user
-      @conversation.users << receiver
-      @conversation.save
+      @conversation.add_user(current_user)
+      @conversation.add_user(receiver)
 
     # If topic exists, join the conversation
     else
       # @conversation = Conversation.find(conversation.id)
 
       # If user is not yet in conversation, add user to conversation
-      unless current_user.has_joined?(@conversation)
-        @conversation.users << current_user
-        @conversation.save
-      end
-      
+      @conversation.add_user(current_user) unless current_user.has_joined?(@conversation)      
     end
 
     # Redirect to conversation show page
@@ -47,11 +42,7 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
 
     # If user is not yet in conversation, add user to conversation
-    unless current_user.has_joined?(@conversation)
-      @conversation.users << current_user
-      @conversation.save
-    end
-
+    @conversation.add_user(current_user) unless current_user.has_joined?(@conversation)
   end
 
   # Deletes a conversation and its messages

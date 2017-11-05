@@ -31,7 +31,7 @@ class ShoppingCart < ApplicationRecord
   end
 
   # Check if product already added in cart
-  def added?(product)
+  def includes_product?(product)
     products.include?(product)
   end
 

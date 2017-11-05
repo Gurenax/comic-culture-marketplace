@@ -28,7 +28,7 @@ RSpec.describe Watchlist, type: :model do
     end
 
     it 'will contain the product' do
-      expect(@watchlist.added?(@product1)).to be true
+      expect(@watchlist.includes_product?(@product1)).to be true
     end
 
     it 'will contain the product price' do

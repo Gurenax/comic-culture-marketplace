@@ -17,18 +17,10 @@ class ShoppingCartsController < ApplicationController
   # POST /shopping_carts.json
   def create
     shopping_cart_item = params.require(:shopping_cart)[:product_id]
-    
     product = Product.find(shopping_cart_item)
     @shopping_cart = ShoppingCart.find_by(buyer: current_user)
-    
-    if !@shopping_cart
-      @shopping_cart = ShoppingCart.new(buyer: current_user)
-      product.status = 'Reserved' if product.status == 'Available'
-      product.save
-    else
-      product.status = 'Reserved' if product.status == 'Available'
-      product.save
-    end
+    @shopping_cart ||= ShoppingCart.new(buyer: current_user)
+    product.change_status_to('Reserved')
     @shopping_cart.add_product(product)
 
     redirect_to shopping_carts_url
@@ -41,7 +33,7 @@ class ShoppingCartsController < ApplicationController
     shopping_cart_item = params.permit(:id)[:id]
     current_user.shopping_cart.remove_product(shopping_cart_item)
     product = Product.find(shopping_cart_item)
-    product.status = 'Available' if product.status == 'Reserved'
+    product.change_status_to('Available')
     product.save
 
     respond_to do |format|

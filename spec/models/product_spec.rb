@@ -151,19 +151,19 @@ RSpec.describe Product, type: :model do
     it 'will show that the product is already added in the cart' do
       @shopping_cart = ShoppingCart.create!(buyer: @user)
       @shopping_cart.add_product(@product1)
-      expect(@shopping_cart.added?(@product1)).to be true
+      expect(@shopping_cart.includes_product?(@product1)).to be true
     end
 
     it 'will show that the product is not in the cart' do
       @shopping_cart = ShoppingCart.create!(buyer: @user)
-      expect(@shopping_cart.added?(@product2)).to be false
+      expect(@shopping_cart.includes_product?(@product2)).to be false
     end
 
     it 'will show that the product is removed from the cart' do
       @shopping_cart = ShoppingCart.create!(buyer: @user)
       @shopping_cart.add_product(@product1)
       @shopping_cart.remove_product(@product1)
-      expect(@shopping_cart.added?(@product1)).to be false
+      expect(@shopping_cart.includes_product?(@product1)).to be false
     end
   end
 
@@ -180,19 +180,19 @@ RSpec.describe Product, type: :model do
     it 'will show that the product is already added in the watchlist' do
       @watchlist = Watchlist.create!(buyer: @user)
       @watchlist.add_product(@product1)
-      expect(@watchlist.added?(@product1)).to be true
+      expect(@watchlist.includes_product?(@product1)).to be true
     end
 
     it 'will show that the product is not in the watchlist' do
       @watchlist = Watchlist.create!(buyer: @user)
-      expect(@watchlist.added?(@product2)).to be false
+      expect(@watchlist.includes_product?(@product2)).to be false
     end
 
     it 'will show that the product is removed from the watchlist' do
       @watchlist = Watchlist.create!(buyer: @user)
       @watchlist.add_product(@product1)
       @watchlist.remove_product(@product1)
-      expect(@watchlist.added?(@product1)).to be false
+      expect(@watchlist.includes_product?(@product1)).to be false
     end
   end
 
@@ -217,10 +217,6 @@ RSpec.describe Product, type: :model do
       expect(@product1.seller_location).to eq(@profile.billing_address.full_address)
     end
 
-    # it 'will show the coordinates of the seller' do
-    #   expect(@product1.seller_coordinates).not_to be_empty
-    # end
-
     it 'will show the latitude of the seller' do
       expect(@product1.latitude).to eq(@profile.billing_address.latitude)
     end
@@ -229,8 +225,9 @@ RSpec.describe Product, type: :model do
       expect(@product1.longitude).to eq(@profile.billing_address.longitude)
     end
 
-    it 'will show the distance between the seller and buyer to be at least 2kms to 4kms' do
-      expect(@product1.distance_from_seller(@buyer)).to be_between(2, 4).inclusive
-    end
+    # Turn off test to save some Google API Query Limit
+    # it 'will show the distance between the seller and buyer to be at least 2kms to 4kms' do
+    #   expect(@product1.distance_from_seller(@buyer)).to be_between(2, 4).inclusive
+    # end
   end
 end
