@@ -30,9 +30,10 @@
     <% end %>
   </tbody>
 </table>
-
+<% unless @shopping_cart.blank? %>
 Product Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price) %><br>
 Postage Total: <%= number_to_currency  format_amount_from_cents(@shopping_cart.postage_total_price) %><br>
 Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price + @shopping_cart.postage_total_price) %>
+<% end %>
 <br><br>
 <%= link_to 'Proceed to Checkout', new_order_path unless @shopping_cart.blank? %>
