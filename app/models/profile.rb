@@ -19,9 +19,8 @@
 
 class Profile < ApplicationRecord
   include ImageUploader[:image]
-  
-  belongs_to :user
 
+  belongs_to :user
   belongs_to :billing_address, class_name: 'Address', foreign_key: 'billing_address_id', dependent: :destroy
   belongs_to :shipping_address, class_name: 'Address', foreign_key: 'shipping_address_id', dependent: :destroy
   accepts_nested_attributes_for :billing_address
@@ -29,6 +28,8 @@ class Profile < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :billing_address, presence: true
+  validates :shipping_address, presence: true
 
   # Get Full Name
   def full_name

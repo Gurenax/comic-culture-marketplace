@@ -14,11 +14,12 @@ class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :users, through: :user_conversations, dependent: :destroy
 
+  # Check is user is already in the conversation
   def includes_user?(user)
-    #users.where(id: user).exists?
     users.include?(user)
   end
 
+  # Add a user to the conversation
   def add_user(user)
     users << user
     save

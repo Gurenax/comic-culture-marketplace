@@ -19,8 +19,9 @@
 class Address < ApplicationRecord
   has_one :profile
 
-  geocoded_by :full_address   # can also be an IP address
-  after_validation :geocode          # auto-fetch coordinates
+  # Geocoder
+  geocoded_by :full_address
+  after_validation :geocode
 
   # Get country name from country code
   def country_name
