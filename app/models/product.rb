@@ -45,7 +45,7 @@ class Product < ApplicationRecord
     # attributesForFaceting ['status', 'category']
     # attributesForFaceting [:company]
     attributesForFaceting [:status, :manufacturer, :publisher, :category, :seller_name]
-    tags [:keywords]
+    # tags [:keywords]
   end
 
   has_many :photos, dependent: :destroy
