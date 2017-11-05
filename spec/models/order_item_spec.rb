@@ -23,14 +23,14 @@ RSpec.describe OrderItem, type: :model do
       Profile.create!(user: @buyer, first_name: 'Sam', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
       @product = Product.create!(seller: @user, name: 'Batman1', price: 100, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only')
       @order = Order.create!(buyer: @buyer)
-      @order_item = OrderItem.create!(order: @order, product_id: @product.id)
+      @order.add_product(@product)
     end
 
-    it 'will retrieve the product' do
-      expect(@order_item.product).to eq(@product)
+    it 'will contain the product which was added' do
+      expect(@order.includes_product?(@product)).to be true
     end
 
-
+    it { should validate_uniqueness_of(:product_id).scoped_to(:order_id) }
   end
 
 end

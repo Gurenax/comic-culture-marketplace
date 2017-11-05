@@ -107,6 +107,16 @@ RSpec.describe Product, type: :model do
     it 'will only allow product postages that are part of enum postage types' do
       expect(Product.postage_types.include?(@product14.postage)).to be false
     end
+
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:condition) }
+    it { should validate_presence_of(:status) }
+    it { should validate_presence_of(:category) }
+    it { should validate_presence_of(:postage) }
+    it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0) }
+    it { should validate_numericality_of(:weight).is_greater_than_or_equal_to(0) }
+    it { should validate_uniqueness_of(:name).scoped_to(:seller_id) }
   end
 
   context 'when a user is viewing a product' do

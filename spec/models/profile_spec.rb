@@ -59,6 +59,11 @@ RSpec.describe Profile, type: :model do
     it 'will not allow an empty shipping address' do
       expect(@profile5).to be_invalid
     end
+
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:billing_address) }
+    it { should validate_presence_of(:shipping_address) }
   end
 
   context 'when referring to a user profile' do
@@ -77,7 +82,7 @@ RSpec.describe Profile, type: :model do
     end
   end
 
-  context 'when creating a new profile' do
+  context 'when creating a new profile with a billing address' do
     before do
       user = User.create!(email: 'glenn@example.com', password: 'password')
       billing_address = Address.new(house_number: '7', street_name: 'Auburn')

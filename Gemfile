@@ -66,6 +66,9 @@ group :development, :test do
   # Rspec Rails
   gem 'rspec-rails', '~> 3.6'
 
+  # Shoulda Matchers
+  gem 'shoulda-matchers', '~> 3.1'
+  
   # Annotate
   gem 'annotate', require: false
 

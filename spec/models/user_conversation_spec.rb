@@ -12,5 +12,13 @@
 require 'rails_helper'
 
 RSpec.describe UserConversation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when adding a new user to a conversation' do
+    before do
+      @user = User.create!(email: 'glenn@example.com', password: 'password')
+      @conversation = Conversation.create!(topic: 'Test')
+      @conversation.users << @user
+    end
+
+    it { should validate_uniqueness_of(:user_id).scoped_to(:conversation_id) }
+  end
 end
