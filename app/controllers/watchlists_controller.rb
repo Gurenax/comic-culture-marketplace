@@ -2,7 +2,7 @@ class WatchlistsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile!
   before_action :set_watchlist, only: [:show, :destroy]
-  protect_from_forgery
+  # protect_from_forgery
 
   # GET /watchlists
   # GET /watchlists.json

@@ -19,7 +19,7 @@
         <td>
           <!-- Add to cart button -->
           <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-            <%= f.hidden_field :buyer_id, value: current_user.id %>
+            <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
             <%= f.hidden_field :product_id, value: watchlist.product.id %>
             <% added_to_cart = watchlist.product.added_to_cart?(current_user) %>
             <%= f.submit added_to_cart ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart %>

@@ -1,5 +1,5 @@
 <tr>
-  <td><%= product.seller.email %></td>
+  <td><%= product.seller.profile.full_name %></td>
   <td><%= product.name %></td>
   <td><%= product.price %></td>
   <td><%= product.description %></td>
@@ -19,6 +19,7 @@
   <td>
     <!-- Add to watchlist button -->
     <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
       <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
       <%= f.hidden_field :product_id, value: product.id %>
       <% added_to_watchlist = product.added_to_watchlist?(current_user) %>
@@ -28,7 +29,8 @@
   <td>
     <!-- Add to cart button -->
     <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-      <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+      <%#= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
+      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
       <%= f.hidden_field :product_id, value: product.id %>
       <% added_to_cart = product.added_to_cart?(current_user) %>
       <%= f.submit added_to_cart ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart %>

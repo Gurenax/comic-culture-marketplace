@@ -18,7 +18,7 @@
 #  isbn_10      :string
 #  isbn_13      :string
 #  dimensions   :string
-#  weight       :decimal(, )
+#  weight       :decimal(, )      default(0.0)
 #  keywords     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -115,7 +115,7 @@ class Product < ApplicationRecord
 
   # Check if already added in Shopping Cart
   def added_to_cart?(buyer)
-    ShoppingCart.find_by(product_id: self.id, buyer: buyer).present?
+    buyer.shopping_cart.products.find_by(id: self.id).present?
   end
 
   # Check if already added in Watchlist

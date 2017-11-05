@@ -1,14 +1,14 @@
 class ShoppingCartsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile!
-  before_action :set_shopping_cart, only: [:show, :destroy]
-  protect_from_forgery
+  # before_action :set_shopping_cart, only: [:show, :destroy]
+  # protect_from_forgery
 
   # GET /shopping_carts
   # GET /shopping_carts.json
   def index
-    # Shopping cart of the current user
-    @shopping_cart = ShoppingCart.where(buyer: current_user)
+    # Get shopping cart items
+    @shopping_cart = current_user.shopping_cart.products if !current_user.shopping_cart.blank?
     # Prepare the Order for Checkout
     @order = Order.new
   end
@@ -16,29 +16,36 @@ class ShoppingCartsController < ApplicationController
   # POST /shopping_carts
   # POST /shopping_carts.json
   def create
-    @shopping_cart = ShoppingCart.new(shopping_cart_params)
-
-    respond_to do |format|
-      if @shopping_cart.save
-
-        # Set product status to Checked Out
-        @shopping_cart.change_product_status_to('Reserved') if @shopping_cart.product.status == 'Available'
-
-        format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully created.' }
-        format.json { render :show, status: :created, location: @shopping_cart }
-      else
-        format.html { render :new }
-        format.json { render json: @shopping_cart.errors, status: :unprocessable_entity }
-      end
+    shopping_cart_item = params.require(:shopping_cart)[:product_id]
+    
+    product = Product.find(shopping_cart_item)
+    @shopping_cart = ShoppingCart.find_by(buyer: current_user)
+    
+    if !@shopping_cart
+      @shopping_cart = ShoppingCart.new(buyer: current_user)
+      product.status = 'Reserved' if product.status == 'Available'
+      product.save
+      @shopping_cart.products << product
+      @shopping_cart.save
+    else
+      product.status = 'Reserved' if product.status == 'Available'
+      product.save
+      @shopping_cart.products << product
+      @shopping_cart.save
     end
+
+    redirect_to shopping_carts_url
   end
 
   # DELETE /shopping_carts/1
   # DELETE /shopping_carts/1.json
   def destroy
     # Set product status to Available
-    @shopping_cart.change_product_status_to('Available') if @shopping_cart.product.status == 'Reserved'
-    @shopping_cart.destroy
+    shopping_cart_item = params.permit(:id)[:id]
+    current_user.shopping_cart.products.delete(shopping_cart_item)
+    product = Product.find(shopping_cart_item)
+    product.status = 'Available' if product.status == 'Reserved'
+    product.save
 
     respond_to do |format|
       format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.' }
@@ -53,7 +60,7 @@ class ShoppingCartsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def shopping_cart_params
-      params.require(:shopping_cart).permit(:buyer_id, :product_id)
-    end
+    # def shopping_cart_params
+    #   params.require(:shopping_cart).permit(:buyer_id)
+    # end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171105015203) do
+ActiveRecord::Schema.define(version: 20171105041828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20171105015203) do
     t.string "isbn_10"
     t.string "isbn_13"
     t.string "dimensions"
-    t.decimal "weight"
+    t.decimal "weight", default: "0.0"
     t.string "keywords"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,14 +133,20 @@ ActiveRecord::Schema.define(version: 20171105015203) do
     t.index ["seller_id"], name: "index_reviews_on_seller_id"
   end
 
-  create_table "shopping_carts", force: :cascade do |t|
-    t.bigint "buyer_id"
+  create_table "shopping_cart_items", force: :cascade do |t|
     t.bigint "product_id"
+    t.bigint "shopping_cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buyer_id", "product_id"], name: "index_shopping_carts_on_buyer_id_and_product_id", unique: true
+    t.index ["product_id"], name: "index_shopping_cart_items_on_product_id"
+    t.index ["shopping_cart_id"], name: "index_shopping_cart_items_on_shopping_cart_id"
+  end
+
+  create_table "shopping_carts", force: :cascade do |t|
+    t.bigint "buyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["buyer_id"], name: "index_shopping_carts_on_buyer_id"
-    t.index ["product_id"], name: "index_shopping_carts_on_product_id"
   end
 
   create_table "user_conversations", force: :cascade do |t|
@@ -196,7 +202,8 @@ ActiveRecord::Schema.define(version: 20171105015203) do
   add_foreign_key "profiles", "users"
   add_foreign_key "reviews", "users", column: "buyer_id"
   add_foreign_key "reviews", "users", column: "seller_id"
-  add_foreign_key "shopping_carts", "products"
+  add_foreign_key "shopping_cart_items", "products"
+  add_foreign_key "shopping_cart_items", "shopping_carts"
   add_foreign_key "shopping_carts", "users", column: "buyer_id"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"

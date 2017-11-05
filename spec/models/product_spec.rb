@@ -18,7 +18,7 @@
 #  isbn_10      :string
 #  isbn_13      :string
 #  dimensions   :string
-#  weight       :decimal(, )
+#  weight       :decimal(, )      default(0.0)
 #  keywords     :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

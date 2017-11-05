@@ -6,6 +6,7 @@
 #  topic      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  title      :string
 #
 
 class Conversation < ApplicationRecord
