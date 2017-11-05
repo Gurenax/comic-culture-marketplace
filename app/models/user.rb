@@ -31,6 +31,8 @@ class User < ApplicationRecord
   has_many :product_views, foreign_key: 'buyer_id', dependent: :destroy
   has_one :shopping_cart, foreign_key: 'buyer_id', dependent: :destroy
   has_many :shopping_cart_items, through: :shopping_cart
+  has_one :watchlist, foreign_key: 'buyer_id', dependent: :destroy
+  has_many :watchlist_items, through: :watchlist
   has_many :user_conversations
   has_many :conversations, through: :user_conversations
 
