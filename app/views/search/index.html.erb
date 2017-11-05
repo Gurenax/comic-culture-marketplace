@@ -24,6 +24,6 @@
   <% end %>
 </div>
 
-<h1><%= "Search Results (Found #{@products.count} items)" unless @products.blank? %></h1>
+<h1><%= "Search Results (Found #{pluralize(@products.count,'item')})" unless @products.blank? %></h1>
 <%= render @products unless @products.blank? %>
 <%#= render 'products/product', product: @products %>
