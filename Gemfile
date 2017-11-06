@@ -62,6 +62,9 @@ gem 'geocoder'
 # Bootstrap
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 
+# JQuery
+gem 'jquery-rails'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

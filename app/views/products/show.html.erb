@@ -1,3 +1,115 @@
+<section class="product-show">
+  <div class="breadcrumbs">
+    <%= link_to 'Home', root_path %> / <%= @product.category %>
+  </div>
+  <h2 class="product-title"><%= @product.name %></h2>
+  <div class="seller-summary">
+    <div class="posted-by">Posted by <%= link_to @product.seller.profile.full_name, @product.seller.profile %></div>
+    <div class="product-condition-and-views"><%= @product.condition %> / <%= pluralize(@product.view_count, 'people') %> viewed this</div>
+  </div>
+  <div class="seller-ratings">
+    <div class="ratings-stars"></div>
+    <div class="ratings-reviews"></div>
+  </div>
+
+  <div id="product-photos" class="product-photos carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <% @product.photos.each_with_index do |photo, index| %>
+      <div class="carousel-item <%= 'active' if index==0 %>" style="<%= style_for_backgound_image(photo.image_url(:thumb)) %>">
+        <%= image_tag photo.image_url(:thumb), class:'d-block img-fluid' %><br>
+      </div>
+      <% end %>
+    </div>
+    <a class="carousel-control-prev" href="#product-photos" role="button" data-slide="prev" onclick="$('#product-photos').carousel('prev'); return false;">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#product-photos" role="button" data-slide="next" onclick="$('#product-photos').carousel('next'); return false;">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="product-description">
+    <p>
+      <%= @product.description %>
+    </p>
+  </div>
+
+  <div class="product-price">
+    <h3><%= number_to_currency @product.price %></h3>
+  </div>
+
+  <div class="product-buttons">
+    <!-- Add to cart button -->
+    <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.submit added_to_cart?(@product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(@product) %>
+    <% end %>
+
+    <!-- Add to watchlist button -->
+    <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <%= f.submit added_to_watchlist?(@product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(@product) %>
+    <% end %>
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+    <%= link_to 'Back', products_path %>
+  </div>
+
+  <div class="product-details">
+    <h2>Product Details</h2>
+    <p>
+      <%= @product.author %><br>
+      <%= @product.illustrator %><br>
+      <%= @product.isbn_10 %><br>
+      <%= @product.isbn_13 %><br>
+      <%= @product.manufacturer %><br>
+      <%= @product.publisher %> (<%= @product.publish_date %>)
+      <%= @product.dimensions %>
+      <%= @product.weight %>
+    </p>
+  </div>
+</section>
+<section class="seller-info">
+  <h2>About the Seller</h2>
+  <div class="seller-divider">
+    <div class="seller-photo"></div>
+    <div class="seller-data">
+      <div class="seller-name"></div>
+      <div class="seller-location"></div>
+      <div class="seller-description"></div>
+      <div class="seller-reviews">
+        <div class="seller-stars"></div>
+        <div class="seller-review-count"></div>
+      </div>
+    </div>
+    <div class="seller-buttons">
+      <!-- Message User about product button -->
+      <% if user_signed_in? %>
+      <%= form_with(url: conversations_url, local:true) do |f| %>
+        <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
+        <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
+        <%= hidden_field_tag :receiver, @product.seller.id %>
+        <%= f.submit 'Message' %>
+      <% end %>
+      <% end %>
+
+      <!-- Writw a review -->
+      <%= link_to 'Write a Review', new_profile_review_path(@product.seller.profile) %>
+    </div>
+  </div>
+</section>
+<section class="top-customer-reviews">
+  <h2>Top Customer Reviews</h2>
+  <div class="customer-review">
+    <div class="customer-review-stars"></div>
+    <div class="customer-review-summary"></div>
+  </div>
+  <div class="posted-by-customer"></div>
+  <div class="customer-review-description"></div>
+
+</section>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -18,7 +130,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= number_to_currency @product.price %>
 </p>
 
 <p>
@@ -104,26 +216,8 @@
   <%= @product.postage %>
 </p>
 
-<!-- Message User about product button -->
-<% if user_signed_in? %>
-  <%= form_with(url: conversations_url, local:true) do |f| %>
-    <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
-    <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
-    <%= hidden_field_tag :receiver, @product.seller.id %>
-    <%= f.submit 'Message' %>
-  <% end %>
-<% end %>
-
-<!-- Add to cart button -->
-<%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-  <%= f.hidden_field :product_id, value: @product.id %>
-  <%= f.submit added_to_cart?(@product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(@product) %>
-<% end %>
-
-<!-- Add to watchlist button -->
-<%= form_with model: @watchlist, method: :create, local: true do |f| %>
-  <%= f.hidden_field :product_id, value: @product.id %>
-  <%= f.submit added_to_watchlist?(@product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(@product) %>
-<% end %>
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<script>
+  $('.carousel').carousel({
+    interval: 2000
+  }).carousel('cycle')
+</script>
