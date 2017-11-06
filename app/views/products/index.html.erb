@@ -1,17 +1,15 @@
-<p id="notice"><%= notice %></p>
-
 <section class="products">
   <h2 class="products-list-label">All Available Products</h1>
-  <div class="products-list row">
+  <div class="products-list row justify-content-center justify-content-md-start">
     <%= render @available_products %>
   </div>
 </section>
 
 <br>
 
-<section class="products justify-content-center">
+<section class="products">
   <h2 class="products-list-label">All Sold Products</h1>
-  <div class="products-list row">
+  <div class="products-list row justify-content-center justify-content-md-start">
     <%= render @sold_products %>
   </div>
 </section>

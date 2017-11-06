@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ComicCultureMarketplace</title>
+    <title>Comic Culture Marketplace</title>
     <%= csrf_meta_tags %>
 
     <!-- Google Fonts -->
@@ -17,14 +17,14 @@
   <body>
     <div class="container-fluid">
 
-      <section class="header">
+      <section class="header row align-items-center">
         <!-- Comic Culture Logo -->
-        <a href="<%= root_path %>">
-          <div class="logo row align-items-center">
+        <div class="logo col-12">
+          <a href="<%= root_path %>" class="row align-items-center">
             <%= image_tag asset_path('logo.svg'), class: 'col-6' %>
-            <h1 class="col-6">Comic Culture Marketplace</h1>
-          </div>
-        </a>
+            <h1 class="col-6">COMIC CULTURE MARKETPLACE</h1>
+          </a>
+        </div>
 
         <!-- Search Bar Desktop -->
         <div class="search-bar desktop-only">
@@ -39,17 +39,66 @@
           <%= link_to 'Advanced Search', search_index_path %>
         </div>
       </section>
-<!-- 
-      <section class="navigation">
-        
-      </section> -->
-      <nav class="nav nav-pills nav-justified fixed-bottom">
-        <a href="#" class="nav-item nav-link" data-toggle="dropdown"><%= image_tag asset_path('hamburger.svg') %></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
-        </ul>
+      <section class="primary-navigation">
+        <nav class="navbar navbar-expand">
+          <ul class="navbar-nav navbar-left justify-content-start align-items-center justify-content-center">
+            <li class="nav-item">
+              <a href="<%= root_path %>" class="nav-link d-flex align-items-center"><div class="primary-nav-icon-home"></div></a>
+            </li>
+            <li class="nav-item nav-item-category">
+              <%= link_to 'Shop by Category', '#', class: 'nav-link category-dropdown d-flex align-items-center justify-content-center' %>
+              <div class="category-dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </li>
+            <li class="nav-item"><%= link_to 'Watchlist', watchlists_path, class: 'nav-link d-flex align-items-center justify-content-center' %></li>
+          </ul>
+          <ul class="navbar-nav navbar-right justify-content-end align-items-center">
+            <li class="nav-item">
+              <% if user_signed_in? and current_user.profile.present? %>
+              <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-link d-flex flex-wrap align-items-center">
+                <div class="primary-nav-icon primary-nav-icon-profile p-2"></div>
+                <div class="p-2 primary-nav-label d-flex align-items-center justify-content-center">Profile</div>
+              </a>
+              <% end %>
+            </li>
+            
+            <li class="nav-item">
+              <% if user_signed_in? and current_user.profile.present? %>
+              <a href="<%= conversations_path %>" class="nav-link d-flex flex-wrap align-items-center">
+                <div class="primary-nav-icon primary-nav-icon-messages p-2"></div>
+                <div class="p-2 primary-nav-label d-flex align-items-center justify-content-center">Messages</div>
+              </a>
+              <% end %>
+            </li>
+            
+            <li class="nav-item">
+              <% if user_signed_in? and current_user.profile.present? %>
+              <a href="<%= shopping_carts_path %>" class="nav-link d-flex flex-wrap align-items-center">
+                <div class="primary-nav-icon primary-nav-icon-shopping-cart p-2"></div>
+                <div class="p-2 primary-nav-label d-flex align-items-center justify-content-center"><%= shopping_cart_label %></div>
+              </a>
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link d-flex align-items-center justify-content-center' %>
+              <% else %>
+                <%= link_to 'Sign in', new_user_session_path, class: 'nav-link d-flex align-items-center justify-content-center' %>  
+              <% end %>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      
+      <%= link_to 'Order History', orders_path, class: 'nav-link' %>
+      <%= link_to 'Contact Support', new_contact_support_path, class: 'nav-link' %>
+
+      <nav class="mobile-navigation nav nav-pills nav-justified fixed-bottom align-items-center">
+        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
         <a href="<%= search_index_path %>" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
         <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-item nav-link"><%= image_tag asset_path('profile.svg') %></a>
         <a href="<%= conversations_path %>" class="nav-item nav-link"><%= image_tag asset_path('message.svg') %></a>
@@ -58,27 +107,13 @@
 
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <% if user_signed_in? %>
-        <li>
-        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
-        </li>
-      <% else %>
-        <li>
-        <%= link_to('Login', new_user_session_path)  %>  
-        </li>
-      <% end %>
+      
       <% if flash[:error].present? %>
         <div id="error_explanation">
           <p><%= flash[:error] %></p>
         </div>
       <% end %>
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'Profile', profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>
-      <%= link_to 'Watchlist', watchlists_path %>
-      <%= link_to 'Shopping Cart', shopping_carts_path %>
-      <%= link_to 'Order History', orders_path %>
-      <%= link_to 'Messages', conversations_path %>
-      <%= link_to 'Contact Support', new_contact_support_path %>
+      
 
       <%= yield %>
     </div>
