@@ -42,4 +42,10 @@ class User < ApplicationRecord
   def has_joined?(conversation)
     conversations.where(id: conversation).exists?
   end
+
+  # Get review ratings average
+  def average_review_rating
+    return 0 if reviews.blank?
+    reviews.average(:rating)
+  end
 end

@@ -70,6 +70,8 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :postage, presence: true
   validates :weight, numericality: { greater_than_or_equal_to: 0 }
+  validates :isbn_10, length: {minimum: 10, maximum: 10}, allow_blank: true
+  validates :isbn_13, length: {minimum: 10, maximum: 13}, allow_blank: true
 
   # Full name of the Seller
   def seller_name
@@ -78,7 +80,7 @@ class Product < ApplicationRecord
 
   # Location of the Seller
   def seller_location
-    seller.profile.billing_address.full_address
+    seller.profile.billing_address.public_address
   end
 
   # Seller's latitude

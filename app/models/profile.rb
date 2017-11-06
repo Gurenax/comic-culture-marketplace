@@ -43,4 +43,5 @@ class Profile < ApplicationRecord
   def selected_country_code(address)
     address.country_code.blank? ? 'AU' : address.country_code
   end
+
 end

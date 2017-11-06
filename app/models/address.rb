@@ -40,4 +40,14 @@ class Address < ApplicationRecord
     address_array << country_name unless country_name.blank?
     address_array.join(', ').strip
   end
+
+  # Get full address without street and house details
+  def public_address
+    address_array = []
+    address_array << town_suburb unless town_suburb.blank?
+    address_array << city unless city.blank?
+    address_array << state unless state.blank?
+    address_array << country_name unless country_name.blank?
+    address_array.join(', ').strip
+  end
 end

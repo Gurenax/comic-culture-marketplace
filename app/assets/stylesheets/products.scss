@@ -5,10 +5,11 @@ section.products {
   max-width: 1016px;
   margin-left: auto !important;
   margin-right: auto !important;
+  margin-top: 30px !important;
   // background: blue;
 
   h2.products-list-label {
-    font-size: 24px;
+    font-size: 36px;
   }
   div.products-list {
     // background: red;
@@ -39,14 +40,14 @@ section.products {
       div.card-body {
         h4.card-title {
           height: 30px;
-          font-size: 18px;
+          font-size: 20px;
           font-weight: bold;
           line-height: 30px;
         }
 
         p.card-text {
           height: 75px;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: normal;
         }
 
@@ -73,7 +74,7 @@ section.products {
           input[type=submit] {
             height: 21px;
             border: none;
-            font-size: 14px;
+            font-size: 16px;
             background: none;
             transition: $button_transition;
           }
@@ -97,6 +98,14 @@ section.products {
   }
 }
 
+@media (max-width: 768px) {
+  /* Center the product list label below medium size screens */
+  section.products {
+    h2.products-list-label {
+      text-align: center;
+    }
+  }
+}
 @media (min-width: 401px) and (max-width: 1016px) {
   /* Have a 10px margin before the product list */
   section.products {
@@ -106,5 +115,256 @@ section.products {
     div.products-list {
       margin-left: 10px !important;
     }
+  }
+}
+
+/*
+* Product Show
+*/
+section.product-show {
+  div.breadcrumbs {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+    font-size: 16px;
+    color: black;
+    a {
+      font-size: 16px;
+      color: black;
+    }
+  }
+  
+  h2.product-title {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+    font-size: 36px;
+  }
+
+  div.seller-divider {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+
+    div.seller-summary {
+      div.posted-by {
+        font-size: 16px;
+        color: $gray;
+        a {
+          font-size: 16px;
+          color: $gray;
+        }
+      }
+      div.product-condition-and-views {
+        font-size: 16px;
+        color: black;
+      }
+    }
+
+    div.seller-ratings {
+      div.ratings-stars {
+        font-size: 16px;
+        color: $yellow;
+      }
+      div.ratings-reviews {
+        font-size: 16px;
+      }
+    }
+  }
+
+  div.product-photos {
+    max-width: 560px;
+  }
+
+  div.product-description {
+    margin-top: 5px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    max-width: 560px;
+    p {
+      font-size: 16px;
+    }
+  }
+
+  div.product-price {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    max-width: 546px;
+    text-align: right;
+    h3 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  div.product-buttons {
+    max-width: 560px;
+    form {
+      padding-left: 5px !important;
+      padding-right: 0px !important;
+      
+      input[type=submit] {
+        // width: 120px;
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+      }
+      input[type=submit]:hover {
+        background: $hover_blue;
+      }
+    }
+    form:last-of-type {
+      padding-right: 10px !important;;
+    }
+  }
+
+  div.product-details {
+    margin-left: 10px !important;
+    margin-bottom: 10px !important;
+    h2 {
+      font-size: 30px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+}
+/* Seller Info */
+section.seller-info {
+  max-width: 560px;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  margin-bottom: 10px !important;
+  padding-top: 10px !important;
+  border-top: 1px solid $blue;
+  
+  h2 {
+    font-size: 34px;
+  }
+
+  div.seller-divider {
+    margin-top: 5px !important;
+    min-width: 300px;
+
+    div.seller-photo {
+      max-height: 80px;
+      max-width: 80px;
+      min-height: 80px;
+      min-width: 80px;
+      border-radius: 100%;
+      background: $blue;
+      background-size: cover;
+      color: $white;
+      font-size: 36px;
+    }
+    div.seller-data {
+      margin-left: 5px !important;
+
+      div.seller-name {
+        font-size: 18px;
+        color: black;
+        a {
+          font-size: 18px;
+          color: black;
+        }
+      }
+
+      div.seller-location {
+        font-size: 16px;
+        color: $gray;
+      }
+
+      div.seller-description {
+        font-size: 16px;
+        color: black;
+      }
+
+      div.seller-reviews {
+        div.seller-stars {
+          font-size: 16px;
+          color: $yellow;
+        }
+        div.seller-review-count {
+          font-size: 16px;
+          color: black;
+        }
+      }
+    }
+  }
+  div.seller-buttons {
+    max-width: 560px;    
+    
+    form {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      
+      input[type=submit] {
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+      }
+      input[type=submit]:hover {
+        background: $hover_blue;
+      }
+    }
+    a {
+      padding-right: 0px !important;
+
+      button {
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+      }
+      button:hover {
+        background: $hover_blue;
+      }
+    }
+  }
+}
+
+/* Top Customer Reviews */
+section.top-customer-reviews {
+  max-width: 560px;
+  border-top: 1px solid $blue;
+  padding-top: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+
+  h2 {
+    font-size: 34px;
+  }
+  div.customer-review {
+    div.customer-review-stars {
+      font-size: 16px;
+      color: $yellow;
+    }
+    div.customer-review-summary {
+      font-size: 16px;
+    }
+  }
+
+  div.posted-by-customer {
+    font-size: 16px;
+  }
+  div.customer-review-comment {
+    font-size: 16px;
   }
 }

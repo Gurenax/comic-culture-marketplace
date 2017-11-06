@@ -1,8 +1,10 @@
 @import 'bootstrap';
+@import "font-awesome";
 
 $blue: #27323E;
 $yellow: #E8A020;
 $white: #FBFBFB;
+$gray: #828282;
 $hover_blue: #284A6F;
 
 $oswald: 'Oswald', sans-serif;
@@ -14,7 +16,7 @@ $button_transition: all 0.2s ease;
   padding: 0 !important;
   margin: 0 !important;
   font-family: $oswald;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 17px;  
 }
