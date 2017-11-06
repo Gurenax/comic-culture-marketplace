@@ -1,11 +1,30 @@
+<section class="hero">
+  <div id="hero-carousel" class="hero-carousel carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active" style="<%= style_for_backgound_image(asset_url('carousel1.jpg')) %>"></div>
+      <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel2.jpg')) %>"></div>
+      <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel3.jpg')) %>; background-position: top center;"></div>
+    </div>
+    <a class="carousel-control-prev" href="#hero-carousel" role="button" data-slide="prev" onclick="$('#hero-carousel').carousel('prev'); return false;">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#hero-carousel" role="button" data-slide="next" onclick="$('#hero-carousel').carousel('next'); return false;">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <div class="new-product-button d-flex justify-content-center">
+    <%= link_to button_tag('Sell a Product'), new_product_path, class: 'p-2' %>
+  </div>
+</section>
+
 <section class="products">
   <h2 class="products-list-label">All Available Products</h2>
   <div class="products-list row justify-content-center justify-content-md-start">
     <%= render @available_products %>
   </div>
 </section>
-
-<br>
 
 <section class="products">
   <h2 class="products-list-label">All Sold Products</h2>
@@ -14,6 +33,8 @@
   </div>
 </section>
 
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+<script>
+  $('.carousel').carousel({
+    interval: 2000
+  }).carousel('cycle')
+</script>

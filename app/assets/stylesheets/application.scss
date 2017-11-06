@@ -6,6 +6,7 @@ $yellow: #E8A020;
 $white: #FBFBFB;
 $gray: #828282;
 $hover_blue: #284A6F;
+$hover_yellow: #ECB14A;
 
 $oswald: 'Oswald', sans-serif;
 $bangers: 'Bangers', cursive;
@@ -44,6 +45,11 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+
+div.spacer10 {
+  min-height: 10px;
+  max-height: 10px;
 }
 
 section.header {

@@ -35,9 +35,7 @@ module ApplicationHelper
     end
     if decimal >= 0.6
       stars.concat(full_star)
-    elsif decimal == 0
-      stars.concat(no_star)
-    else
+    elsif decimal > 0
       stars.concat(half_star)
     end
     remaining.downto(1) do

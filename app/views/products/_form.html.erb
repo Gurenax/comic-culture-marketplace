@@ -31,6 +31,14 @@
     <%= form.file_field :images, id: :images, multiple: true %>
   </div>
   
+    <p>
+      <strong>Photos:</strong><br>
+      <% product.photos.each do |photo| %>
+        <%= image_tag photo.image_url(:thumb) %><br>
+        <%= link_to 'Delete Photo', photo_path(photo), method: :delete %><br>
+      <% end %>
+    </p>
+    
   <div class="field">
     <%= form.label :condition %>
     <%= form.select :condition, Product.condition_types.keys.map{|condition| [condition.titleize, condition]}, id: :product_condition %>

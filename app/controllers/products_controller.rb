@@ -14,6 +14,8 @@ class ProductsController < ApplicationController
     @shopping_cart = ShoppingCart.new
     # Add to Watchlist buttons
     @watchlist = Watchlist.new
+    # Carousel Images
+    # @carousel = Photo.limit(5).order("RANDOM()")
   end
 
   # GET /products/1
