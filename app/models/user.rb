@@ -37,6 +37,7 @@ class User < ApplicationRecord
   has_many :conversations, through: :user_conversations
   has_many :orders, foreign_key: 'buyer_id', dependent: :destroy
   has_many :order_items, through: :order
+  has_many :reviews, foreign_key: 'seller_id', dependent: :destroy
 
   def has_joined?(conversation)
     conversations.where(id: conversation).exists?
