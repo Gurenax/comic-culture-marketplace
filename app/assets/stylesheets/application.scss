@@ -98,7 +98,7 @@ section.header {
 section.primary-navigation {
   height: 50px;
   border: 1px solid $blue;
-
+  
   nav.navbar {
     height: 50px;
     max-width: 1120px;
@@ -135,6 +135,7 @@ section.primary-navigation {
             max-width: 20px;
             background: image-url('home-blue.svg') no-repeat;
             padding-right: 30px !important;
+            margin-left: 50px !important;
             border-right: 1px solid $blue;
             // margin-top: 15px !important;
           }
@@ -190,17 +191,27 @@ section.primary-navigation {
       div.category-dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
+        background: $blue;
+        min-width: 300px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
+        margin-left: -5px !important;
+        
         a {
-          color: black;
+          height: 40px;
+          font-family: $bangers;
+          font-size: 24px;
+          color: $white;
+          background: $blue;
           padding: 12px 16px;
           text-decoration: none;
           display: block;
+          padding-left: 5px !important;
+          padding-right: 5px !important;
         }
-        a:hover {background-color: #f1f1f1}
+        a:hover {
+          background-color: $yellow
+        }
       }
       li.nav-item-category:hover {
         div.category-dropdown-content {
@@ -288,6 +299,7 @@ section.products {
       margin-right: 5px !important;
       margin-bottom: 5px !important;
       overflow: hidden;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
       a {
         div.product-photo {
@@ -325,7 +337,7 @@ section.products {
               font-weight: bold;
               color: $yellow;
               background: $blue;
-              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);              
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             }
           }
 

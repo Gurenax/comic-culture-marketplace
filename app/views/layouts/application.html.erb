@@ -46,14 +46,15 @@
               <a href="<%= root_path %>" class="nav-link d-flex align-items-center"><div class="primary-nav-icon-home"></div></a>
             </li>
             <li class="nav-item nav-item-category">
-              <%= link_to 'Shop by Category', '#', class: 'nav-link category-dropdown d-flex align-items-center justify-content-center' %>
+              <%= link_to 'Shop by Category', '#', class: 'nav-link category-dropdown d-flex align-items-center' %>
               <div class="category-dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Comic Books & Graphic Novels') %></a>
+                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Toys & Collectables') %></a>
+                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Costumes') %></a>
+                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Clothing & Apparel') %></a>
               </div>
             </li>
-            <li class="nav-item"><%= link_to 'Watchlist', watchlists_path, class: 'nav-link d-flex align-items-center justify-content-center' %></li>
+            <li class="nav-item"><%= link_to 'Watchlist', watchlists_path, class: 'nav-link d-flex align-items-center' %></li>
           </ul>
           <ul class="navbar-nav navbar-right justify-content-end align-items-center">
             <li class="nav-item">
