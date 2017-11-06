@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ComicCultureMarketplace</title>
     <%= csrf_meta_tags %>
 
@@ -16,10 +19,12 @@
 
       <section class="header">
         <!-- Comic Culture Logo -->
-        <div class="logo row align-items-center">
-          <%= image_tag asset_path('logo.svg'), class: 'col-6' %>
-          <h1 class="col-6">Comic Culture Marketplace</h1>
-        </div>
+        <a href="<%= root_path %>">
+          <div class="logo row align-items-center">
+            <%= image_tag asset_path('logo.svg'), class: 'col-6' %>
+            <h1 class="col-6">Comic Culture Marketplace</h1>
+          </div>
+        </a>
 
         <!-- Search Bar Desktop -->
         <div class="search-bar desktop-only">
@@ -39,8 +44,13 @@
         
       </section> -->
       <nav class="nav nav-pills nav-justified fixed-bottom">
-        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
-        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
+        <a href="#" class="nav-item nav-link" data-toggle="dropdown"><%= image_tag asset_path('hamburger.svg') %></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">JavaScript</a></li>
+        </ul>
+        <a href="<%= search_index_path %>" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
         <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-item nav-link"><%= image_tag asset_path('profile.svg') %></a>
         <a href="<%= conversations_path %>" class="nav-item nav-link"><%= image_tag asset_path('message.svg') %></a>
         <a href="<%= shopping_carts_path %>" class="nav-item nav-link"><%= image_tag asset_path('shopping_cart.svg') %></a>

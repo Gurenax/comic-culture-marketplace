@@ -17,37 +17,57 @@ $white: #FBFBFB;
   display: none; /* Disable for mobile */
 }
 
+html {
+  background: $blue;
+}
+
 body {
-  margin-bottom: 50px; /* For mobile navigation */
+  margin-bottom: 50px !important; /* For mobile navigation */
   background: $white;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Bangers', cursive;
+  color: $blue;
 }
 
 section.header {
   height: 100px;
   background: $blue;
 
-  div.logo {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    height: 100px;
-    min-width: 190px;
-    max-width: 190px;
+  a {
+    text-decoration: none;
 
-    img {
-      height: 82px;
-      width: auto;
-      margin-left: -15px !important;
+    div.logo {
+      margin-left: auto !important;
+      margin-right: auto !important;
+      height: 100px;
+      min-width: 190px;
+      max-width: 190px;
+
+      img {
+        height: 82px;
+        width: auto;
+        margin-left: -15px !important;
+      }
+
+      h1 {
+        font-size: 24px;
+        line-height: 22px;
+        color: $yellow;
+        text-shadow: -1px 0 $white, 0 1px $white, 1px 0 $white, 0 -1px $white;
+      }
     }
+  }
+}
 
-    h1 {
-      font-size: 24px;
-      line-height: 22px;
-      color: $yellow;
-      text-shadow: -1px 0 $white, 0 1px $white, 1px 0 $white, 0 -1px $white;
+@media (min-width: 768px) {
+  section.header {
+    a {
+      div.logo {
+        margin-left: 30px !important;
+        margin-right: 0 !important;
+      }
     }
   }
 }
@@ -73,5 +93,106 @@ nav.nav {
   a {
     // padding:0 15px;
     line-height:50px;
+    text-decoration: none;
+  }
+}
+
+section.products {
+  max-width: 1016px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  // background: blue;
+
+  h2.products-list-label {
+    font-size: 24px;
+  }
+  div.products-list {
+    // background: red;
+    
+    div.product-item {
+      min-width: 160px;
+      max-width: 160px;
+      min-height: 300px;
+      max-height: 300px;
+      border: 1px solid $blue;
+      margin-right: 5px !important;
+      margin-bottom: 5px !important;
+      overflow: hidden;
+
+      a {
+        text-decoration: none;
+        div.product-photo {
+          min-width: 160px;
+          max-width: 160px;
+          min-height: 115px;
+          max-height: 115px;
+          background-color: $blue;
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+      }
+
+      div.card-body {
+        h4.card-title {
+          height: 30px;
+          font-size: 18px;
+          font-weight: bold;
+          line-height: 30px;
+        }
+
+        p.card-text {
+          height: 75px;
+          font-size: 14px;
+          font-weight: normal;
+        }
+
+        div.button-cart {
+          form {
+            input[type=submit] {
+              width: 120px;
+              height: 45px;
+              border: none;
+              font-size: 18px;
+              font-weight: bold;
+              color: $yellow;
+              background: $blue;
+              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);              
+            }
+          }
+
+        }
+        div.button-watchlist {
+          input[type=submit] {
+            height: 21px;
+            border: none;
+            font-size: 14px;
+            background: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  /* Remove margin right form Product list items */
+  section.products {
+    div.products-list {
+      div.product-item {
+        margin-right: 0px !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 401px) and (max-width: 1016px) {
+  /* Have a 10px margin before the product list */
+  section.products {
+    h2.products-list-label {
+      margin-left: 10px !important;
+    }
+    div.products-list {
+      margin-left: 10px !important;
+    }
   }
 }

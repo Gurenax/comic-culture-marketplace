@@ -1,68 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<h1>All Available Products</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Seller</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Condition</th>
-      <th>Status</th>
-      <th>Category</th>
-      <th>Manufacturer</th>
-      <th>Publisher</th>
-      <th>Publish date</th>
-      <th>Author</th>
-      <th>Illustrator</th>
-      <th>Isbn 10</th>
-      <th>Isbn 13</th>
-      <th>Dimensions</th>
-      <th>Weight</th>
-      <th>Keywords</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<section class="products">
+  <h2 class="products-list-label">All Available Products</h1>
+  <div class="products-list row">
     <%= render @available_products %>
-  </tbody>
-</table>
+  </div>
+</section>
 
 <br>
 
-<h1>All Sold Products</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Seller</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Description</th>
-      <th>Condition</th>
-      <th>Status</th>
-      <th>Category</th>
-      <th>Manufacturer</th>
-      <th>Publisher</th>
-      <th>Publish date</th>
-      <th>Author</th>
-      <th>Illustrator</th>
-      <th>Isbn 10</th>
-      <th>Isbn 13</th>
-      <th>Dimensions</th>
-      <th>Weight</th>
-      <th>Keywords</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<section class="products justify-content-center">
+  <h2 class="products-list-label">All Sold Products</h1>
+  <div class="products-list row">
     <%= render @sold_products %>
-  </tbody>
-</table>
+  </div>
+</section>
 
 <br>
 

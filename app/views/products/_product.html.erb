@@ -1,40 +1,25 @@
-<tr>
-  <td><%= product.seller.profile.full_name %></td>
-  <td><%= product.name %></td>
-  <td><%= product.price %></td>
-  <td><%= product.description %></td>
-  <td><%= product.condition %></td>
-  <td><%= product.status %></td>
-  <td><%= product.category %></td>
-  <td><%= product.manufacturer %></td>
-  <td><%= product.publisher %></td>
-  <td><%= product.publish_date %></td>
-  <td><%= product.author %></td>
-  <td><%= product.illustrator %></td>
-  <td><%= product.isbn_10 %></td>
-  <td><%= product.isbn_13 %></td>
-  <td><%= product.dimensions %></td>
-  <td><%= product.weight %></td>
-  <td><%= product.keywords %></td>
-  <td>
-    <!-- Add to watchlist button -->
-    <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+<div class="col-4 card product-item">
+  <a href="<%= product_path(product) %>">
+    <div class="card-img-top product-photo" style="<%= style_for_backgound_image(product.photos.first.image_url(:thumb)) unless product.photos.first.blank? %>"></div>  
+  </a>
+  <div class="card-body">
+    <h4 class="card-title text-center"><%= number_to_currency product.price %></h4>
+    <p class="card-text text-center"><%= product.name %></p>
+    <div class="button-cart text-center">
+      <!-- Add to cart button -->
+      <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
       <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
       <%= f.hidden_field :product_id, value: product.id %>
-      <%# added_to_watchlist = current_user.watchlist.added?(product) %>
-      <%= f.submit added_to_watchlist?(product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(product) %>
-    <% end %>
-  </td>
-  <td>
-    <!-- Add to cart button -->
-    <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%# added_to_cart = current_user.shopping_cart.added?(product) %>
       <%= f.submit added_to_cart?(product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(product) %>
     <% end %>
-  </td>
-  <td><%= link_to 'Show', product %></td>
-  <td><%= link_to 'Edit', edit_product_path(product) %></td>
-  <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-</tr>
+    </div>
+    <div class="button-watchlist text-center">
+      <!-- Add to watchlist button -->
+      <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+      <%= f.hidden_field :product_id, value: product.id %>
+      <%= f.submit added_to_watchlist?(product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(product) %>
+      <% end %>
+    </div>
+  </div>
+</div>
