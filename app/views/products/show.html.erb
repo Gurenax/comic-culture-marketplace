@@ -105,25 +105,24 @@
 </p>
 
 <!-- Message User about product button -->
-<%= form_with(url: conversations_url, local:true) do |f| %>
-  <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
-  <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
-  <%= hidden_field_tag :receiver, @product.seller.id %>
-  <%= f.submit 'Message' %>
+<% if user_signed_in? %>
+  <%= form_with(url: conversations_url, local:true) do |f| %>
+    <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
+    <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
+    <%= hidden_field_tag :receiver, @product.seller.id %>
+    <%= f.submit 'Message' %>
+  <% end %>
 <% end %>
 
 <!-- Add to cart button -->
 <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-  <%= f.hidden_field :buyer_id, value: current_user.id %>
   <%= f.hidden_field :product_id, value: @product.id %>
-  <%# added_to_cart = @product.added_to_cart?(current_user) %>
   <%= f.submit added_to_cart?(@product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(@product) %>
 <% end %>
+
 <!-- Add to watchlist button -->
 <%= form_with model: @watchlist, method: :create, local: true do |f| %>
-  <%= f.hidden_field :buyer_id, value: current_user.id if user_signed_in? %>
   <%= f.hidden_field :product_id, value: @product.id %>
-  <%# added_to_watchlist = @product.added_to_watchlist?(current_user) %>
   <%= f.submit added_to_watchlist?(@product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(@product) %>
 <% end %>
 <%= link_to 'Edit', edit_product_path(@product) %> |

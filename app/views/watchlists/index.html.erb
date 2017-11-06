@@ -1,7 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Watchlists</h1>
-
+<section class="products">
+  <h2 class="products-list-label">Watchlists</h2>
+  <div class="products-list row justify-content-center justify-content-md-start">
+      <%= render @watchlist_items unless @watchlist_items.blank? %>
+  </div>
+</section>
 <table>
   <thead>
     <tr>
@@ -12,8 +14,9 @@
   </thead>
 
   <tbody>
-    <% unless @watchlist.blank? %>
-    <% @watchlist.each do |watchlist_item| %>
+    <% unless @watchlist_items.blank? %>
+    <% @watchlist_items.each do |watchlist_item| %>
+      
       <tr>
         <td><%= watchlist_item.seller.profile.full_name %></td>
         <td><%= watchlist_item.name %></td>

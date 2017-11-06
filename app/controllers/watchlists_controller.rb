@@ -8,8 +8,10 @@ class WatchlistsController < ApplicationController
   # GET /watchlists.json
   def index
     # Get watchlist items
-    @watchlist = current_user.watchlist.products if !current_user.watchlist.blank?
+    @watchlist_items = current_user.watchlist.products if !current_user.watchlist.blank?
 
+    @watchlist = Watchlist.new
+    
     # Add to Cart buttons in watchlist
     @shopping_cart = ShoppingCart.new
   end
@@ -19,11 +21,17 @@ class WatchlistsController < ApplicationController
   def create
     watchlist_item = params.require(:watchlist)[:product_id]
     product = Product.find(watchlist_item)
-    @watchlist = Watchlist.find_by(buyer: current_user)
-    @watchlist ||= Watchlist.new(buyer: current_user)
-    @watchlist.add_product(product)
 
-    redirect_to watchlists_url
+    @watchlist = Watchlist.find_by(buyer: current_user)
+
+    if @watchlist.includes_product?(product)
+      @watchlist.remove_product(product)
+    else
+      @watchlist ||= Watchlist.new(buyer: current_user)
+      @watchlist.add_product(product)
+    end
+
+    redirect_to products_url
   end
 
   # DELETE /watchlists/1

@@ -3,9 +3,12 @@
 $blue: #27323E;
 $yellow: #E8A020;
 $white: #FBFBFB;
+$hover_blue: #284A6F;
 
 $oswald: 'Oswald', sans-serif;
 $bangers: 'Bangers', cursive;
+
+$button_transition: all 0.2s ease;
 
 * {
   padding: 0 !important;
@@ -117,9 +120,10 @@ section.primary-navigation {
       li.nav-item {
         // max-height: 50px;
         height: 50px;
-        margin-right: 20px !important;
+        // margin-right: 10px !important;
         padding-left: 5px !important;
         padding-right: 5px !important;        
+        transition: $button_transition;
 
         a.nav-link {
           height: 50px;
@@ -135,7 +139,7 @@ section.primary-navigation {
             max-width: 20px;
             background: image-url('home-blue.svg') no-repeat;
             padding-right: 30px !important;
-            margin-left: 50px !important;
+            // margin-left: 50px !important;
             border-right: 1px solid $blue;
             // margin-top: 15px !important;
           }
@@ -168,7 +172,7 @@ section.primary-navigation {
 
         }
       }
-      li.nav-item:hover {
+      li.nav-item:hover, li.nav-item:active, li.nav-item:focus {
         background: $blue;
         a.nav-link {
           color: $white;
@@ -223,14 +227,14 @@ section.primary-navigation {
 
     ul.navbar-left {
       width: 30%;
-      // li:first-of-type {
-      //   a.nav-link {
-      //     div {
-      //       // padding-right: 10px !important;
-      //       // border-right: 1px solid $blue;
-      //     }
-      //   }
-      // }
+      li:first-of-type {
+        // a.nav-link {
+        //   div {
+            padding-right: 15px !important;
+            // border-right: 1px solid $blue;
+          // }
+        // }
+      }
       li.nav-item:nth-of-type(2) { /* Shop by Category */
         min-width: 165px;
         a.nav-link {
@@ -278,6 +282,9 @@ nav.mobile-navigation {
   }
 }
 
+/*
+* Products
+*/
 section.products {
   max-width: 1016px;
   margin-left: auto !important;
@@ -338,6 +345,10 @@ section.products {
               color: $yellow;
               background: $blue;
               box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+              transition: $button_transition;
+            }
+            input[type=submit]:hover {
+              background: $hover_blue;
             }
           }
 
@@ -348,6 +359,10 @@ section.products {
             border: none;
             font-size: 14px;
             background: none;
+            transition: $button_transition;
+          }
+          input[type=submit]:hover {
+            color: $hover_blue;
           }
         }
       }

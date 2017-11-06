@@ -99,7 +99,7 @@
       <%= link_to 'Contact Support', new_contact_support_path, class: 'nav-link' %>
 
       <nav class="mobile-navigation nav nav-pills nav-justified fixed-bottom align-items-center">
-        <a href="#" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
+        <a href="<%= root_path %>" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
         <a href="<%= search_index_path %>" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
         <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-item nav-link"><%= image_tag asset_path('profile.svg') %></a>
         <a href="<%= conversations_path %>" class="nav-item nav-link"><%= image_tag asset_path('message.svg') %></a>
