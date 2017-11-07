@@ -38,7 +38,7 @@
       </a>
     </div>
     
-    <div class="product-desktop-only col">
+    <div class="product-desktop-only product-desktop-only-margin col">
       <h2 class="product-title"><%= @product.name %></h2>
       <div class="spacer10"></div>
       <div class="seller-divider">
@@ -49,9 +49,9 @@
         </div>
         <div class="spacer10"></div>
         <div class="seller-ratings seller-ratings-align-left">
-          <div class="ratings-stars"><%= star_rating(@product.seller.average_review_rating) %> <span><%= @product.seller.average_review_rating.round(2) %> out of 5</span></div>
+          <div class="ratings-stars"><%= star_rating(@product.seller.average_review_rating) %></div>
           <div class="spacer10"></div>
-          <div class="ratings-review"><%= pluralize @product.seller.reviews.count, 'customer review' %></div>
+          <div class="ratings-review"><span>This seller has <%= @product.seller.average_review_rating.round(2) %> rating out of </span><%= pluralize @product.seller.reviews.count, 'customer review' %></div>
         </div>
       </div>
       <div class="spacer10"></div>
@@ -172,9 +172,9 @@
         <div class="customer-review-stars p-2">
           <%= star_rating(review.rating) %>
         </div>
-        <div class="customer-review-summary p-2"><%= review.rating %> Unavailable</div>
+        <div class="customer-review-summary p-2"><%= summary_rating(review.rating) %></div>
     </div>
-    <div class="posted-by-customer">By <%= review.buyer.profile.full_name %> on <%= review.created_at.localtime.to_formatted_s(:long_ordinal) %></div>
+    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= review.created_at.localtime.to_formatted_s(:long_ordinal) %></div>
     <div class="customer-review-comment"><%= review.comment %></div>
     <% end %>
   </section>

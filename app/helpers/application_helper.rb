@@ -43,4 +43,25 @@ module ApplicationHelper
     end
     stars.html_safe
   end
+
+  # Determine summary text for the rating
+  def summary_rating(rating)
+    if rating <= 5.0
+      'Excellent'
+    elsif rating <= 4.5
+      'Very good'
+    elsif rating <= 4.0
+      'Good'
+    elsif rating <= 3.5
+      'Fair'
+    elsif rating <= 3.0
+      'Average'
+    elsif rating <= 2.0
+      'Poor'
+    elsif rating <= 1.0
+      'Very Poor'
+    elsif rating == 0
+      'Unrated'
+    end
+  end
 end
