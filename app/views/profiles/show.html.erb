@@ -1,47 +1,134 @@
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / Profiles / <%= @profile.full_name %>
+</section>
+
+<section class="profile-divider row">
+  <section class="application profile col col-md-6">
+    <h2><%= @profile.full_name %></h2>
+    <div class="profile-data1 d-flex flex-wrap justify-content-center">
+      <div class="profile-image p-2" style="<%= style_for_backgound_image(@profile.image_url(:thumb)) unless @profile.image.nil? %>"></div>
+      <div class="profile-bio p-2"><p><%= @profile.short_bio %></p></div>
+    </div>
+    <div class="profile-superpowers">
+      <h3>Superpowers</h3>
+      <p><%= @profile.superpowers %></p>
+    </div>
+    <div class="profile-favourites">
+      <h3>Favourites</h3>
+      <p><%= @profile.favourites %></p>
+    </div>
+    <div class="profile-neighbourhood">
+      <h3>Neighbourhood</h3>
+      <p><%= @profile.billing_address.public_address %></p>
+    </div>
+    <div class="spacer20"></div>
+    <div class="profile-buttons d-flex justify-content-end">
+      <% if current_user.profile == @profile %>
+        <%= link_to button_tag('Edit Profile'), edit_profile_path(@profile) %>
+      <% else %>
+        <!-- Message User about product button -->
+        <% if user_signed_in? %>
+          <%= form_with(url: conversations_url, local:true, class: 'p-2') do |f| %>
+            <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+            <%= f.hidden_field :topic, value: direct_message_topic_between(@profile.user, current_user) %>
+            <%= f.hidden_field :title, value: conversation_title_between(@profile.user, current_user) %>
+            <%= hidden_field_tag :receiver, @profile.user.id %>
+            <%= f.submit 'Message' %>
+          <% end %>
+        <% end %>
+
+        <!-- Writw a review -->
+        <%= link_to button_tag('Write a Review'), new_profile_review_path(@profile), class: 'p-2' %>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="application profile-products col col-md-6">
+    <h2>
+      <% if current_user.profile == @profile %>
+        You are selling
+      <% else %>
+        <%= @profile.full_name %> is selling
+      <% end %>
+    </h2>
+    <div class="shopping-cart-list">
+      <% unless @profile.user.products.blank? %>
+        <% @profile.user.products.each do |store_item| %>
+          <div class="cart-item row">
+            <div class="cart-left col d-flex flex-wrap">
+              <a href="<%= product_path(store_item) %>" class="p-2">
+                <div class="cart-item-photo p-2" style="<%= style_for_backgound_image(store_item.photos.first.image_url(:thumb)) unless store_item.photos.blank? %>"></div>
+              </a>
+              <div class="cart-details align-self-center">
+                <p>
+                  <span class="cart-item-name"><%= link_to store_item.name, product_path(store_item) %></span><br>
+                  <span class="cart-item-condition"><%= store_item.condition %></span><br>
+                  <span class="cart-item-weight"><%= pluralize format_grams_to_kg(store_item.weight), 'kg' %></span>
+                </p>
+              </div>
+            </div>
+            <div class="cart-right col align-self-center">
+              <div class="cart-price">
+                <h4><%= number_to_currency store_item.price %></h4>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</section>
+
+<section class="profile-divider row">
+  <section class="application profile-customer-reviews col col-md-6">
+    <h2>Top Customer Reviews</h2>
+    <% @profile.user.reviews.each do |review| %>
+    <div class="customer-review d-flex">
+        <div class="customer-review-stars p-2">
+          <%= star_rating(review.rating) %>
+        </div>
+        <div class="customer-review-summary p-2"><%= summary_rating(review.rating) %></div>
+    </div>
+    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= review.created_at.localtime.to_formatted_s(:long_ordinal) %></div>
+    <div class="customer-review-comment"><%= review.comment %></div>
+    <% end %>
+  </section>
+
+  <section class="application profile-products order-history col col-md-6">
+    <h2>Order History</h2>
+    
+    <% @profile.user.orders.each do |order| %>
+      <div class="shopping-cart-list">
+        <% unless order.order_items.blank? %>
+          <%= order.created_at.localtime.to_formatted_s(:long_ordinal) %>  
+          <% order.order_items.each do |order_item| %>
+            <div class="cart-item row">
+              <div class="cart-left col d-flex flex-wrap">
+                <a href="<%= product_path(order_item.product) %>" class="p-2">
+                  <div class="cart-item-photo p-2" style="<%= style_for_backgound_image(order_item.product.photos.first.image_url(:thumb)) unless order_item.product.photos.blank? %>"></div>
+                </a>
+                <div class="cart-details align-self-center">
+                  <p>
+                    <span class="cart-item-name"><%= link_to order_item.product.name, product_path(order_item.product) %></span><br>
+                    <span class="cart-item-condition"><%= order_item.product.condition %></span><br>
+                    <span class="cart-item-weight"><%= pluralize format_grams_to_kg(order_item.product.weight), 'kg' %></span>
+                  </p>
+                </div>
+              </div>
+              <div class="cart-right col align-self-center">
+                <div class="cart-price">
+                  <h4><%= number_to_currency order_item.product.price %></h4>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      
+    <% end %>
+    
+  </section>
+</section>
+
 <%= link_to 'Order History', orders_path, class: 'nav-link' %>
 <%= link_to 'Contact Support', new_contact_support_path, class: 'nav-link' %>
-
-<h1><%= @profile.full_name %></h1>
-<p>
-  <strong>Image data:</strong>
-  <%= image_tag @profile.image_url(:thumb) unless @profile.image.nil? %>
-</p>
-
-<p>
-  <strong>Date of birth:</strong>
-  <%= @profile.date_of_birth %>
-</p>
-
-<p>
-  <strong>Short bio:</strong>
-  <%= @profile.short_bio %>
-</p>
-
-<p>
-  <strong>Superpowers:</strong>
-  <%= @profile.superpowers %>
-</p>
-
-<p>
-  <strong>Favourites:</strong>
-  <%= @profile.favourites %>
-</p>
-
-<h2>Billing</h2>
-<p>
-  <%= @profile.billing_address.full_address %>
-</p>
-
-<h2>Shipping</h2>
-<p>
-  <%= @profile.shipping_address.full_address %>
-</p>
-
-<%= link_to 'Write a Review', new_profile_review_path(@profile) %>
-<%= form_with(url: conversations_url, local:true) do |f| %>
-  <%= f.hidden_field :topic, value: direct_message_topic_between(@profile.user, current_user) %>
-  <%= f.hidden_field :title, value: conversation_title_between(@profile.user, current_user) %>
-  <%= hidden_field_tag :receiver, @profile.user.id %>
-  <%= f.submit 'Message' %>
-<% end %>
-<%= link_to 'Edit', edit_profile_path(@profile) %>

@@ -1,6 +1,8 @@
-<h1>Editing Product</h1>
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / Edit Product
+</section>
+<section class="application form-product">
+  <h2>Edit Product</h2>
 
-<%= render 'form', product: @product %>
-
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+  <%= render 'form', product: @product %>
+</section>

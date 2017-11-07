@@ -1,5 +1,8 @@
-<h1>New Product</h1>
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / New Product
+</section>
+<section class="application form-product">
+  <h2>New Product</h2>
 
-<%= render 'form', product: @product %>
-
-<%= link_to 'Back', products_path %>
+  <%= render 'form', product: @product %>
+</section>

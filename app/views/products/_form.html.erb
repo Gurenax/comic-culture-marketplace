@@ -1,8 +1,6 @@
 <%= form_with(model: product, local: true) do |form| %>
   <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
+    <div id="error_explanation" class="alert alert-danger">
       <ul>
       <% product.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -27,17 +25,17 @@
   </div>
 
   <div class="field">
-    <%= form.label :images %>
     <%= form.file_field :images, id: :images, multiple: true %>
   </div>
   
-    <p>
-      <strong>Photos:</strong><br>
-      <% product.photos.each do |photo| %>
-        <%= image_tag photo.image_url(:thumb) %><br>
-        <%= link_to 'Delete Photo', photo_path(photo), method: :delete %><br>
-      <% end %>
-    </p>
+  <div class="photos d-flex flex-wrap">
+    <% product.photos.each do |photo| %>
+      <div class="p-2">
+      <%= image_tag photo.image_url(:thumb), width: 100 %><br>
+      <%= link_to 'Delete Photo', photo_path(photo), method: :delete %><br>
+      </div>
+    <% end %>
+  </div>
     
   <div class="field">
     <%= form.label :condition %>
@@ -65,7 +63,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :publish_date %>
+    <%= form.label :publish_date %><br>
     <%= form.date_select :publish_date, id: :product_publish_date %>
   </div>
 

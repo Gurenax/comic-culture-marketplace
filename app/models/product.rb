@@ -62,7 +62,7 @@ class Product < ApplicationRecord
   enum postage_types: ['None/Pickup Only', 'By Weight']
 
   validates :name, uniqueness: { scope: :seller_id }
-  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99999999.99 }
+  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 999999.99 }
   validates :description, presence: true
   validates :condition, presence: true
   validates :status, presence: true

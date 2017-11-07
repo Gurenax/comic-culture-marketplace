@@ -1,3 +1,207 @@
-// Place all the styles related to the Profiles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+section.profile {
+  max-width: 560px;
+  min-width: 300px;
+  margin-right: 10px !important;
+
+  div.profile-data1 {
+    div.profile-image {
+      max-height: 150px;
+      min-height: 150px;
+      max-width: 150px;
+      min-width: 150px;
+      background-size: cover;
+      background-color: $blue;
+      border-radius: 100%;
+    }
+    div.profile-bio {
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
+  div.profile-superpowers, div.profile-favourites, div.profile-neighbourhood {
+    margin-top: 10px !important;
+    h3 {
+      font-family: $bangers;
+      font-size: 30px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+
+  div.profile-buttons {
+    max-width: 540px;    
+    min-width: 300px;
+
+    form {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      
+      input[type=submit] {
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+        cursor: pointer;
+      }
+      input[type=submit]:hover {
+        background: $hover_blue;
+      }
+    }
+    a {
+      padding-right: 0px !important;
+
+      button {
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+        cursor: pointer;
+      }
+      button:hover {
+        background: $hover_blue;
+      }
+    }
+  }
+}
+
+// @media (max-width: 560px) { /* Mobile */
+//   div.profile {
+//     div.profile-data1 {
+//       div.profile-image {
+//         max-height: 100px;
+//         min-height: 100px;
+//         max-width: 100px;
+//         min-width: 100px;
+//       }
+//     }
+//   }
+// }
+
+section.profile-products {
+  max-width: 560px;
+  min-width: 300px;
+  margin-right: 10px !important;
+
+  div.shopping-cart-list {
+    max-width: 560px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    
+    div.cart-item {
+      max-width: 560px;
+      margin-right: 10px !important;
+      padding-bottom: 10px !important;
+      border-bottom: 1px dotted $blue;
+
+      div.cart-left {
+        a {
+          div.cart-item-photo {
+            max-height: 80px;
+            max-width: 80px;
+            min-height: 80px;
+            min-width: 80px;
+            margin-right: 10px !important;
+            border-radius: 100%;
+            background-size: cover;
+            background-color: $blue;
+          }
+        }
+        div.cart-details {
+          p {
+            font-size: 16px;
+
+            span.cart-item-name {
+              font-size: 18px;
+              font-weight: bold;
+              color: $blue;
+              a {
+                color: $blue;
+                font-size: 18px;
+                font-weight: bold;
+              }
+            }
+            span.cart-item-condition {
+              color: $gray;
+            }
+            span.cart-item-weight {
+              color: $gray;
+            }
+          }
+        }
+      }
+      div.cart-right {
+        text-align: right;
+        div.cart-price {
+          h4 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+        div.cart-remove {
+          a {
+            font-size: 16px;
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+section.profile-customer-reviews {
+  max-width: 560px;
+  min-width: 300px;
+  border-top: 1px solid $blue;
+  padding-top: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+
+  h2 {
+    font-size: 34px;
+  }
+  div.customer-review {
+    margin-bottom: 5px !important;
+    div.customer-review-stars {
+      margin-left: -8px !important;
+      min-width: 90px;
+      font-size: 16px;
+      color: $yellow;
+    }
+    div.customer-review-summary {
+      min-width: 80px;
+      font-size: 16px;
+    }
+  }
+
+  div.posted-by-customer {
+    font-size: 16px;
+    color: $gray;
+  }
+  div.customer-review-comment {
+    font-size: 16px;
+  }
+}
+
+section.order-history {
+  min-width: 300px;
+  border-top: 1px solid $blue;
+  padding-top: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+

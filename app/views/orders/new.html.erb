@@ -3,6 +3,11 @@
 </section>
 <section class="application shopping-cart order">
 <h2>Please verify your Order</h2>
+<section class="messages">
+  <% if flash[:error].present? %>
+    <p class="alert alert-danger"><%= flash[:error] %></p>
+  <% end %>
+</section>
 <div class="shopping-cart-list">
   <% unless @shopping_cart.blank? %>
     <% @shopping_cart.products.each do |shopping_cart_item| %>

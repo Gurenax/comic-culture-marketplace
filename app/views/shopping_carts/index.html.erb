@@ -11,7 +11,7 @@
       <% unless @shopping_cart.blank? %>
         <% @shopping_cart.products.each do |shopping_cart_item| %>
           <div class="cart-item row">
-            <div class="cart-left col d-flex">
+            <div class="cart-left col d-flex flex-wrap">
               <a href="<%= product_path(shopping_cart_item) %>" class="p-2">
                 <div class="cart-item-photo p-2" style="<%= style_for_backgound_image(shopping_cart_item.photos.first.image_url(:thumb)) unless shopping_cart_item.photos.blank? %>"></div>
               </a>

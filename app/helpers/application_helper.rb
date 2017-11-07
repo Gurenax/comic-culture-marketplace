@@ -2,7 +2,7 @@
 module ApplicationHelper
   # Search Location Default. If blank, default to Melbourne
   def search_location
-    user_signed_in? ? current_user.profile.billing_address.public_address : 'Melbourne, VIC, Australia'
+    user_signed_in? && current_user.profile.present? ? current_user.profile.billing_address.public_address : 'Melbourne, VIC, Australia'
   end
 
   # Formatted style for background images

@@ -58,10 +58,7 @@ class ShoppingCartsController < ApplicationController
     # Set product status to Available
     product.change_status_to('Available')
 
-    respond_to do |format|
-      format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to shopping_carts_url
   end
 
   private
