@@ -3,50 +3,54 @@
     <%= link_to 'Home', root_path %> / Shopping Cart
   </div>
   <div class="spacer10"></div>
-  <h2>Shopping Cart</h2>
-  <div class="shopping-cart-list">
-    <% unless @shopping_cart.blank? %>
-      <% @shopping_cart.products.each do |shopping_cart_item| %>
-        <div class="cart-item row">
-          <div class="cart-left col d-flex">
-            <a href="<%= product_path(shopping_cart_item) %>" class="p-2">
-              <div class="cart-item-photo p-2" style="<%= style_for_backgound_image(shopping_cart_item.photos.first.image_url(:thumb)) unless shopping_cart_item.photos.blank? %>"></div>
-            </a>
-            <div class="cart-details align-self-center">
-              <p>
-                <span class="cart-item-name"><%= link_to shopping_cart_item.name, product_path(shopping_cart_item) %></span><br>
-                <span class="cart-item-condition"><%= shopping_cart_item.condition %></span><br>
-                <span class="cart-item-weight"><%= pluralize format_grams_to_kg(shopping_cart_item.weight), 'kg' %></span>
-              </p>
-            </div>
-          </div>
-          <div class="cart-right col align-self-center">
-            <div class="cart-price">
-              <h4><%= number_to_currency  shopping_cart_item.price %></h4>
-            </div>
-            <div class="spacer10"></div>
-            <div class="cart-remove">
-                <%= link_to 'Remove from Cart', shopping_cart_path(shopping_cart_item), method: :delete, data: { confirm: 'Are you sure?' } %>
-            </div>
-          </div>
-        </div>
-        
-      <% end %>
-    <% end %>
-  </div>
-  <div class="spacer10"></div>
-  <div class="shopping-cart-totals">
-    <div class="shopping-cart-prices">
+  <% if @shopping_cart.blank? || @shopping_cart.products.blank? %>
+  <h2>Your Shopping Cart is empty</h2>
+  <% else %>
+    <h2>Shopping Cart</h2>
+    <div class="shopping-cart-list">
       <% unless @shopping_cart.blank? %>
-      <h5>Product Price: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price) %></h5>
-      <h5>Postage Price: <%= number_to_currency  format_amount_from_cents(@shopping_cart.postage_total_price) %></h5>
-      <div class="spacer10"></div>
-      <h3>Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price + @shopping_cart.postage_total_price) %></h3>
+        <% @shopping_cart.products.each do |shopping_cart_item| %>
+          <div class="cart-item row">
+            <div class="cart-left col d-flex">
+              <a href="<%= product_path(shopping_cart_item) %>" class="p-2">
+                <div class="cart-item-photo p-2" style="<%= style_for_backgound_image(shopping_cart_item.photos.first.image_url(:thumb)) unless shopping_cart_item.photos.blank? %>"></div>
+              </a>
+              <div class="cart-details align-self-center">
+                <p>
+                  <span class="cart-item-name"><%= link_to shopping_cart_item.name, product_path(shopping_cart_item) %></span><br>
+                  <span class="cart-item-condition"><%= shopping_cart_item.condition %></span><br>
+                  <span class="cart-item-weight"><%= pluralize format_grams_to_kg(shopping_cart_item.weight), 'kg' %></span>
+                </p>
+              </div>
+            </div>
+            <div class="cart-right col align-self-center">
+              <div class="cart-price">
+                <h4><%= number_to_currency  shopping_cart_item.price %></h4>
+              </div>
+              <div class="spacer10"></div>
+              <div class="cart-remove">
+                  <%= link_to 'Remove from Cart', shopping_cart_path(shopping_cart_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+          </div>
+          
+        <% end %>
       <% end %>
     </div>
     <div class="spacer10"></div>
-    <div class="proceed-to-checkout">
-      <%= link_to button_tag('Proceed to Checkout'), new_order_path unless @shopping_cart.blank? %>
+    <div class="shopping-cart-totals">
+      <div class="shopping-cart-prices">
+        <% unless @shopping_cart.blank? %>
+        <h5>Product Price: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price) %></h5>
+        <h5>Postage Price: <%= number_to_currency  format_amount_from_cents(@shopping_cart.postage_total_price) %></h5>
+        <div class="spacer10"></div>
+        <h3>Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price + @shopping_cart.postage_total_price) %></h3>
+        <% end %>
+      </div>
+      <div class="spacer10"></div>
+      <div class="proceed-to-checkout">
+        <%= link_to button_tag('Proceed to Checkout'), new_order_path unless @shopping_cart.blank? %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </section>
