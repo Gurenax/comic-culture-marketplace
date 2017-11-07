@@ -12,7 +12,7 @@ module ApplicationHelper
 
   # Shopping Cart Label with Count if items are in cart
   def shopping_cart_label
-    if user_signed_in? && current_user.shopping_cart.products.count > 0
+    if user_signed_in? && !current_user.shopping_cart.blank? && current_user.shopping_cart.products.count > 0
       ' Shopping Cart ('+current_user.shopping_cart.products.count.to_s+')'
     else
       ' Shopping Cart'
@@ -63,5 +63,15 @@ module ApplicationHelper
     elsif rating == 0
       'Unrated'
     end
+  end
+
+  # Format amount from centts
+  def format_amount_from_cents(amount)
+    (amount / 100.0).round(2)
+  end
+
+  # Format weight to kg from g
+  def format_grams_to_kg(weight)
+    weight / 1000.0
   end
 end

@@ -1,3 +1,15 @@
 // Place all the styles related to the Watchlists controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.watchlist {
+  div.watchlist-products {
+    max-width: 1016px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+
+  
+}

@@ -10,10 +10,13 @@ class ProductsController < ApplicationController
     # @products = Product.all
     @available_products = Product.where(status: 'Available')
     @sold_products = Product.where(status: 'Sold')
+ 
     # Add to Cart buttons in product listing
     @shopping_cart = ShoppingCart.new
+
     # Add to Watchlist buttons
     @watchlist = Watchlist.new
+    
     # Carousel Images
     # @carousel = Photo.limit(5).order("RANDOM()")
   end

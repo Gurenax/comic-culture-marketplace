@@ -4,21 +4,34 @@
   </a>
   <div class="card-body">
     <h4 class="card-title text-center"><%= number_to_currency product.price %></h4>
-    <p class="card-text text-center"><%= product.name %></p>
+    <p class="card-text text-center">
+      <%= product.name %><br>
+    </p>
+    <p class="view_count text-center">
+      <%= pluralize product.view_count, 'people' %> viewed this
+    </p>
     <div class="button-cart text-center">
       <!-- Add to cart button -->
       <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit added_to_cart?(product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(product) %>
-    <% end %>
+        <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+        <%= f.hidden_field :product_id, value: product.id %>
+        <%= f.submit add_to_cart_text(product), disabled: disable_add_to_cart?(product) %>
+      <% end %>
     </div>
     <div class="button-watchlist text-center">
       <!-- Add to watchlist button -->
-      <%= form_with model: @watchlist, method: :create, local: true do |f| %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-      <%= f.hidden_field :product_id, value: product.id %>
-      <%= f.submit added_to_watchlist?(product) ? 'Remove from Watchlist' : 'Add to Watchlist' %>
+      <% if added_to_watchlist?(product) %>
+        <%= form_with model: current_user.watchlist, method: :delete, local: true do |f| %>
+          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <%= f.submit 'Remove from Watchlist' %>
+        <% end %>
+      <% else %>
+        <%= form_with model: @watchlist, method: :create, local: true do |f| %>
+          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <%= f.submit 'Add to Watchlist' %>
+        <% end %>
       <% end %>
     </div>
   </div>

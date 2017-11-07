@@ -1,16 +1,16 @@
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / <%= @product.category %>
+</section>
 <section class="product-show">
-  <div class="breadcrumbs">
-    <%= link_to 'Home', root_path %> / <%= @product.category %>
-  </div>
   <div class="spacer10 product-desktop-only"></div>
   <h2 class="product-title product-mobile-only"><%= @product.name %></h2>
   <div class="seller-divider row product-mobile-only">
     <div class="seller-summary col">
       <div class="posted-by">Posted by <%= link_to @product.seller.profile.full_name, @product.seller.profile %></div>
-      <div class="product-condition-and-views"><%= @product.condition %> | <%= pluralize(@product.view_count, 'view') %></div>
+      <div class="product-condition-and-views"><%= @product.condition %> | <%= pluralize(@product.view_count, 'product view') %></div>
     </div>
     <div class="seller-ratings col align-items-end">
-      <div class="ratings-stars"><%= star_rating(@product.seller.average_review_rating) %> <span><%= @product.seller.average_review_rating.round(2) %> out of 5</span></div>
+      <div class="ratings-stars"><%= star_rating(@product.seller.average_review_rating) %> <span><%= @product.seller.average_review_rating.round(2) %> out of</span></div>
       <div class="ratings-review"><%= pluralize @product.seller.reviews.count, 'customer review' %></div>
     </div>
   </div>
@@ -60,6 +60,7 @@
       <div class="product-price product-price-align-left">
         <h3><%= number_to_currency @product.price %></h3>
       </div>
+      <div class="spacer20"></div>
       <div class="product-buttons d-flex justify-content-center">
         <% if @product.seller == current_user %>
           <%= link_to button_tag('Edit Product'), edit_product_path(@product) %>
@@ -67,15 +68,23 @@
         <% else %>
           <!-- Add to cart button -->
           <%= form_with model: @shopping_cart, method: :create, local: true, class: 'p-2' do |f| %>
-          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-          <%= f.hidden_field :product_id, value: @product.id %>
-          <%= f.submit added_to_cart?(@product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(@product) %>
+            <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <%= f.submit add_to_cart_text(@product), disabled: disable_add_to_cart?(@product) %>
           <% end %>
           <!-- Add to watchlist button -->
-          <%= form_with model: @watchlist, method: :create, local: true, class: 'p-2' do |f| %>
-          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-          <%= f.hidden_field :product_id, value: @product.id %>
-          <%= f.submit added_to_watchlist?(@product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(@product) %>
+          <% if added_to_watchlist?(@product) %>
+            <%= form_with model: current_user.watchlist, method: :delete, local: true, class: 'p-2' do |f| %>
+              <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.submit 'Remove from Watchlist' %>
+            <% end %>
+          <% else %>
+            <%= form_with model: @watchlist, method: :create, local: true, class: 'p-2' do |f| %>
+              <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.submit 'Add to Watchlist' %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -102,15 +111,23 @@
     <% else %>
       <!-- Add to cart button -->
       <%= form_with model: @shopping_cart, method: :create, local: true, class: 'p-2' do |f| %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-      <%= f.hidden_field :product_id, value: @product.id %>
-      <%= f.submit added_to_cart?(@product) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(@product) %>
+        <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.submit add_to_cart_text(@product), disabled: disable_add_to_cart?(@product) %>
       <% end %>
       <!-- Add to watchlist button -->
-      <%= form_with model: @watchlist, method: :create, local: true, class: 'p-2' do |f| %>
-      <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-      <%= f.hidden_field :product_id, value: @product.id %>
-      <%= f.submit added_to_watchlist?(@product) ? 'Added to Watchlist' : 'Add to Watchlist', disabled: added_to_watchlist?(@product) %>
+      <% if added_to_watchlist?(@product) %>
+        <%= form_with model: current_user.watchlist, method: :delete, local: true, class: 'p-2' do |f| %>
+          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.submit 'Remove from Watchlist' %>
+        <% end %>
+      <% else %>
+        <%= form_with model: @watchlist, method: :create, local: true, class: 'p-2' do |f| %>
+          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.submit 'Add to Watchlist' %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
@@ -119,14 +136,16 @@
   <div class="product-details">
     <h2>Product Details</h2>
     <p>
-      Author: <%= @product.author %><br>
-      Illustrator: <%= @product.illustrator %><br>
-      ISBN-10: <%= @product.isbn_10 %><br>
-      ISBN-13: <%= @product.isbn_13 %><br>
-      Manufacturer: <%= @product.manufacturer %><br>
-      Publisher: <%= @product.publisher %> (<%= @product.publish_date %>)<br>
-      Dimensions: <%= @product.dimensions %><br>
-      Weight: <%= @product.weight %>
+      <%= simple_format('Added on '+@product.created_at.localtime.to_formatted_s(:long_ordinal)) unless @product.created_at.blank? %>
+      <%= simple_format('Author: '+@product.author) unless @product.author.blank? %>
+      <%= simple_format('Illustrator: '+@product.illustrator) unless @product.illustrator.blank? %>
+      <%= simple_format('ISBN-10: '+@product.isbn_10) unless @product.isbn_10.blank? %>
+      <%= simple_format('ISBN-13: '+@product.isbn_13) unless @product.isbn_13.blank? %>
+      <%= simple_format('Manufacturer: '+@product.manufacturer) unless @product.manufacturer.blank? %>
+      <%= simple_format('Publisher: '+@product.publisher) unless @product.publisher.blank? %>
+      <%= simple_format('Published/Manufactured on '+@product.publish_date.to_formatted_s(:long_ordinal)) unless @product.publish_date.blank? %>
+      <%= simple_format('Dimensions: '+@product.dimensions) unless @product.dimensions.blank? %>
+      <%= simple_format('Weight: '+(pluralize format_grams_to_kg(@product.weight), 'kg')) unless @product.weight.blank? %>
     </p>
   </div>
   <div class="spacer10"></div>

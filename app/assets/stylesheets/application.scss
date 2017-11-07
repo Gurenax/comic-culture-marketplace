@@ -47,6 +47,10 @@ a:hover {
   text-decoration: none;
 }
 
+button {
+  outline: none !important;
+}
+
 div.spacer10 {
   min-height: 10px;
   max-height: 10px;
@@ -295,8 +299,9 @@ nav.mobile-navigation {
   }
 }
 
-div.breadcrumbs {
-  margin-top: 5px !important;
+
+section.breadcrumbs {
+  margin-top: 10px !important;
   margin-left: 10px !important;
   font-size: 16px;
   color: black;
@@ -306,5 +311,27 @@ div.breadcrumbs {
   }
 }
 
+section.application {
+  margin-left: 10px !important;
+  padding-top: 10px !important;
+  padding-bottom: 30px !important;
+  min-height: 400px;
+
+  h2 {
+    font-size: 36px;
+  }
+}
+
+@media (min-width: 560px) { /* Desktop */
+  section.breadcrumbs {
+    margin-left: 30px !important;
+  }
+  section.application {
+    margin-left: 30px !important;
+  }
+}
+
 @import './products';
 @import './shopping_carts';
+@import './watchlists';
+@import './orders'

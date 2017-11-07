@@ -1,6 +1,15 @@
-<section class="products">
-  <h2 class="products-list-label">Watchlist</h2>
-  <div class="products-list row justify-content-center justify-content-md-start">
-      <%= render @watchlist_items unless @watchlist_items.blank? %>
-  </div>
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / Watchlist
+</section>
+<section class="application watchlist">
+  <% if @watchlist_items.blank? %>
+    <h2>Your Watchlist is empty</h2>
+  <% else %>
+    <h2>Watchlist</h2>
+    <div class="watchlist-products">
+      <div class="products-list row justify-content-center justify-content-md-start">
+          <%= render @watchlist_items unless @watchlist_items.blank? %>
+      </div>
+    </div>
+  <% end %>
 </section>

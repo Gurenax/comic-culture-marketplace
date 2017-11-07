@@ -2,21 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 section.shopping-cart {
-  margin-left: 10px !important;
-  padding-bottom: 30px !important;
-  min-height: 400px;
-  
-  h2 {
-    font-size: 36px;
-  }
-
   div.shopping-cart-list {
-    max-width: 600px;
+    max-width: 1000px;
     margin-left: auto !important;
     margin-right: auto !important;
     
     div.cart-item {
-      max-width: 600px;
+      max-width: 1000px;
       margin-right: 10px !important;
       border-bottom: 1px dotted $blue;
 
@@ -75,7 +67,7 @@ section.shopping-cart {
   }
 
   div.shopping-cart-totals {
-    max-width: 600px;
+    max-width: 1000px;
     margin-left: auto !important;
     margin-right: auto !important;
     text-align: right;
@@ -87,6 +79,7 @@ section.shopping-cart {
       margin-right: 10px !important;
       button {
         height: 45px;
+        width: 200px;
         padding-left: 10px !important;
         padding-right: 10px !important;
         border: none;

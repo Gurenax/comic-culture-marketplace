@@ -59,78 +59,88 @@ section.products {
   h2.products-list-label {
     font-size: 36px;
   }
-  div.products-list {
-    // background: red;
-    
-    div.product-item {
-      min-width: 160px;
-      max-width: 160px;
-      min-height: 300px;
-      max-height: 300px;
-      border: 1px solid $blue;
-      margin-right: 5px !important;
-      margin-bottom: 5px !important;
-      overflow: hidden;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
-      a {
-        div.product-photo {
-          min-width: 160px;
-          max-width: 160px;
-          min-height: 115px;
-          max-height: 115px;
-          background-color: $blue;
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
+div.products-list {
+  
+  div.product-item {
+    min-width: 160px;
+    max-width: 160px;
+    min-height: 300px;
+    max-height: 300px;
+    border: 1px solid $blue;
+    margin-right: 5px !important;
+    margin-bottom: 5px !important;
+    overflow: hidden;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    a {
+      div.product-photo {
+        min-width: 160px;
+        max-width: 160px;
+        min-height: 115px;
+        max-height: 115px;
+        background-color: $blue;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+
+    div.card-body {
+      h4.card-title {
+        height: 30px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 30px;
       }
 
-      div.card-body {
-        h4.card-title {
-          height: 30px;
-          font-size: 20px;
-          font-weight: bold;
-          line-height: 30px;
-        }
+      p.card-text {
+        margin-left: 3px !important;
+        margin-right: 3px !important;
+        margin-bottom: 5px !important;
+        height: 50px;
+        font-size: 18px;
+        font-weight: normal;
+      }
+      p.view_count {
+        margin-left: 3px !important;
+        margin-right: 3px !important;
+        margin-bottom: 5px !important;
+        font-size: 14px;
+        color: $gray;
+      }
 
-        p.card-text {
-          height: 75px;
-          font-size: 16px;
-          font-weight: normal;
-        }
-
-        div.button-cart {
-          form {
-            input[type=submit] {
-              width: 120px;
-              height: 45px;
-              border: none;
-              font-size: 18px;
-              font-weight: bold;
-              color: $yellow;
-              background: $blue;
-              box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-              transition: $button_transition;
-              cursor: pointer;
-            }
-            input[type=submit]:hover {
-              background: $hover_blue;
-            }
-          }
-
-        }
-        div.button-watchlist {
+      div.button-cart {
+        margin-bottom: 3px !important;
+        form {
           input[type=submit] {
-            height: 21px;
+            width: 120px;
+            height: 45px;
             border: none;
-            font-size: 16px;
-            background: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: $yellow;
+            background: $blue;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             transition: $button_transition;
             cursor: pointer;
           }
           input[type=submit]:hover {
-            color: $hover_blue;
+            background: $hover_blue;
           }
+        }
+      }
+      div.button-watchlist {
+        input[type=submit] {
+          height: 21px;
+          border: none;
+          font-size: 16px;
+          background: none;
+          transition: $button_transition;
+          cursor: pointer;
+        }
+        input[type=submit]:hover {
+          color: $hover_blue;
         }
       }
     }
@@ -200,7 +210,7 @@ section.product-show {
     div.seller-ratings {
       text-align: right;
       div.ratings-stars {
-        font-size: 16px;
+        font-size: 18px;
         color: $yellow;
         span {
           color: black;

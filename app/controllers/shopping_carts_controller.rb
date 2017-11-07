@@ -29,11 +29,18 @@ class ShoppingCartsController < ApplicationController
   # POST /shopping_carts
   # POST /shopping_carts.json
   def create
+    # Get the product id
     shopping_cart_item = params.require(:shopping_cart)[:product_id]
+    # Find the product id
     product = Product.find(shopping_cart_item)
-    @shopping_cart = ShoppingCart.find_by(buyer: current_user)
-    @shopping_cart ||= ShoppingCart.new(buyer: current_user)
+    # Find the shopping cart
+    @shopping_cart = current_user.shopping_cart unless current_user.shopping_cart.blank?
+    if current_user.shopping_cart.blank?
+      @shopping_cart = ShoppingCart.new(buyer: current_user)
+    end
+    # Add product to shopping cart
     @shopping_cart.add_product(product)
+    # Change product status to Reserved
     product.change_status_to('Reserved')
 
     redirect_to shopping_carts_url
@@ -42,12 +49,14 @@ class ShoppingCartsController < ApplicationController
   # DELETE /shopping_carts/1
   # DELETE /shopping_carts/1.json
   def destroy
-    # Set product status to Available
+    # Get the product id
     shopping_cart_item = params.permit(:id)[:id]
-    current_user.shopping_cart.remove_product(shopping_cart_item)
+    # Find the product id
     product = Product.find(shopping_cart_item)
+    # Delete product id from shopping_cart
+    current_user.shopping_cart.remove_product(product)
+    # Set product status to Available
     product.change_status_to('Available')
-    product.save
 
     respond_to do |format|
       format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully destroyed.' }

@@ -8,8 +8,7 @@ class WatchlistsController < ApplicationController
   # GET /watchlists.json
   def index
     # Get watchlist items
-    @watchlist_items = current_user.watchlist.products if !current_user.watchlist.blank?
-
+    @watchlist_items = current_user.watchlist.products unless current_user.watchlist.blank?
     @watchlist = Watchlist.new
     
     # Add to Cart buttons in watchlist
@@ -19,27 +18,30 @@ class WatchlistsController < ApplicationController
   # POST /watchlists
   # POST /watchlists.json
   def create
+    # Get the product id
     watchlist_item = params.require(:watchlist)[:product_id]
+    # Find the product id
     product = Product.find(watchlist_item)
-
-    @watchlist = Watchlist.find_by(buyer: current_user)
-
-    if @watchlist.includes_product?(product)
-      @watchlist.remove_product(product)
-    else
-      @watchlist ||= Watchlist.new(buyer: current_user)
-      @watchlist.add_product(product)
+    # Find the watchlist
+    @watchlist = current_user.watchlist unless current_user.watchlist.blank?
+    if current_user.watchlist.blank?
+      @watchlist = Watchlist.new(buyer: current_user)
     end
+    # Add product to watchlist
+    @watchlist.add_product(product)
 
-    redirect_to products_url
+    redirect_to watchlists_url
   end
 
   # DELETE /watchlists/1
   # DELETE /watchlists/1.json
   def destroy
-    # @watchlist.destroy
-    watchlist_item = params.permit(:id)[:id]
-    current_user.watchlist.remove_product(watchlist_item)
+    # Get the product id
+    watchlist_item = params[:watchlist][:product_id]
+    # Find the product id
+    product = Product.find(watchlist_item)
+    # Delete product id from watchlist
+    current_user.watchlist.remove_product(product)
 
     respond_to do |format|
       format.html { redirect_to watchlists_url, notice: 'Watchlist was successfully destroyed.' }

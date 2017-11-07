@@ -1,3 +1,40 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.order {
+  div.shopping-cart-totals {
+    div.proceed-to-payment {
+      margin-right: 10px !important;
+      
+      form {
+        
+        button.stripe-button-el {
+          border-radius: 0 !important;
+          span {
+            height: 45px;
+            width: 200px;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            border: none;
+            border-radius: 0 !important;
+            font-family: $oswald !important;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 45px;
+            font-weight: bold;
+            color: $blue;
+            background: $yellow;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            transition: $button_transition;
+            cursor: pointer;
+          }
+          span:hover {
+            background: $hover_blue;
+            color: $yellow;
+          }
+        }
+      }
+    }
+  }
+}

@@ -62,7 +62,7 @@ class Product < ApplicationRecord
   enum postage_types: ['None/Pickup Only', 'By Weight']
 
   validates :name, uniqueness: { scope: :seller_id }
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :price, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 99999999.99 }
   validates :description, presence: true
   validates :condition, presence: true
   validates :status, presence: true
@@ -72,7 +72,8 @@ class Product < ApplicationRecord
   validates :weight, numericality: { greater_than_or_equal_to: 0 }
   validates :isbn_10, length: {minimum: 10, maximum: 10}, allow_blank: true
   validates :isbn_13, length: {minimum: 10, maximum: 13}, allow_blank: true
-
+  validates :name, length: {maximum: 50}
+  
   # Full name of the Seller
   def seller_name
     seller.profile.full_name
@@ -120,6 +121,7 @@ class Product < ApplicationRecord
 
   # For development purposes, return all products back to the store
   def self.mass_recall
+    ShoppingCart.destroy_all
     Product.update_all(status: 'Available')
   end
 end
