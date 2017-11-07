@@ -2,7 +2,7 @@
   <%= link_to 'Home', root_path %> / <%= link_to 'Shopping Cart', shopping_carts_path %> / Check Out
 </section>
 <section class="application shopping-cart order">
-<h2>Your Order</h2>
+<h2>Please verify your Order</h2>
 <div class="shopping-cart-list">
   <% unless @shopping_cart.blank? %>
     <% @shopping_cart.products.each do |shopping_cart_item| %>
@@ -57,36 +57,3 @@
   </div>
 </div>
 </section>
-
-<h1>Your Order</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Product</th>
-      <th>Price</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shopping_cart.products.each do |shopping_cart_item| %>
-      <tr>
-        <td><%= shopping_cart_item.seller.profile.full_name %></td>
-        <td><%= shopping_cart_item.name %></td>
-        <td><%= number_to_currency shopping_cart_item.price %></td>
-        <td><%#= link_to 'Destroy', shopping_cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-Product Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price) %><br>
-Postage Total: <%= number_to_currency  format_amount_from_cents(@shopping_cart.postage_total_price) %><br>
-Total: <%= number_to_currency format_amount_from_cents(@shopping_cart.products_total_price + @shopping_cart.postage_total_price) %>
-<br><br>
-
-
-
-<%= link_to 'Back', shopping_carts_path %>
