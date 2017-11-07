@@ -4,33 +4,3 @@
       <%= render @watchlist_items unless @watchlist_items.blank? %>
   </div>
 </section>
-<table>
-  <thead>
-    <tr>
-      <th>Seller</th>
-      <th>Product</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% unless @watchlist_items.blank? %>
-    <% @watchlist_items.each do |watchlist_item| %>
-      
-      <tr>
-        <td><%= watchlist_item.seller.profile.full_name %></td>
-        <td><%= watchlist_item.name %></td>
-        <td>
-          <!-- Add to cart button -->
-          <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>
-            <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-            <%= f.hidden_field :product_id, value: watchlist_item.id %>
-            <%= f.submit added_to_cart?(watchlist_item) ? 'Added to Cart' : 'Add to Cart', disabled: added_to_cart?(watchlist_item) %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Destroy', watchlist_path(watchlist_item), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    <% end %>
-  </tbody>
-</table>

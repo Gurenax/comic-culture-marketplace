@@ -1,3 +1,105 @@
 // Place all the styles related to the ShoppingCarts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+section.shopping-cart {
+  margin-left: 10px !important;
+  padding-bottom: 30px !important;
+
+  h2 {
+    font-size: 36px;
+  }
+
+  div.shopping-cart-list {
+    max-width: 600px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    
+    div.cart-item {
+      max-width: 600px;
+      margin-right: 10px !important;
+      border-bottom: 1px dotted $blue;
+
+      div.cart-left {
+        a {
+          div.cart-item-photo {
+            max-height: 80px;
+            max-width: 80px;
+            min-height: 80px;
+            min-width: 80px;
+            margin-right: 10px !important;
+            border-radius: 100%;
+            background-size: cover;
+            background-color: $blue;
+          }
+        }
+        div.cart-details {
+          p {
+            font-size: 16px;
+
+            span.cart-item-name {
+              font-size: 18px;
+              font-weight: bold;
+              color: $blue;
+              a {
+                color: $blue;
+                font-size: 18px;
+                font-weight: bold;
+              }
+            }
+            span.cart-item-condition {
+              color: $gray;
+            }
+            span.cart-item-weight {
+              color: $gray;
+            }
+          }
+        }
+      }
+      div.cart-right {
+        text-align: right;
+        div.cart-price {
+          h4 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+        div.cart-remove {
+          a {
+            font-size: 16px;
+            color: $blue;
+          }
+        }
+      }
+    }
+  }
+
+  div.shopping-cart-totals {
+    max-width: 600px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: right;
+
+    div.shopping-cart-prices {
+      margin-right: 10px !important;
+    }
+    div.proceed-to-checkout {
+      margin-right: 10px !important;
+      button {
+        height: 45px;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+        cursor: pointer;
+      }
+      button:hover {
+        background: $hover_blue;
+      }
+    }
+  }
+}
