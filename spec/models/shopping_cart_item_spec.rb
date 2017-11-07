@@ -23,6 +23,6 @@ RSpec.describe ShoppingCartItem, type: :model do
       @shopping_cart.add_product(@product)
     end
 
-    it { should validate_uniqueness_of(:product_id).scoped_to(:shopping_cart_id) }
+    it { should validate_uniqueness_of(:product_id) }
   end
 end

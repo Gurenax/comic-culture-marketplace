@@ -224,7 +224,7 @@ RSpec.describe Product, type: :model do
     end
 
     it 'will show the full address of the seller' do
-      expect(@product1.seller_location).to eq(@profile.billing_address.full_address)
+      expect(@product1.seller_location).to eq(@profile.billing_address.public_address)
     end
 
     it 'will show the latitude of the seller' do

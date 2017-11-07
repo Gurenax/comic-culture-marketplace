@@ -33,8 +33,8 @@ class ShoppingCartsController < ApplicationController
     product = Product.find(shopping_cart_item)
     @shopping_cart = ShoppingCart.find_by(buyer: current_user)
     @shopping_cart ||= ShoppingCart.new(buyer: current_user)
-    product.change_status_to('Reserved')
     @shopping_cart.add_product(product)
+    product.change_status_to('Reserved')
 
     redirect_to shopping_carts_url
   end

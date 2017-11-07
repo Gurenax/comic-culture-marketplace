@@ -117,4 +117,9 @@ class Product < ApplicationRecord
     self.status = new_status
     save
   end
+
+  # For development purposes, return all products back to the store
+  def self.mass_recall
+    Product.update_all(status: 'Available')
+  end
 end
