@@ -1,0 +1,19 @@
+<section class="application devise">
+  <h2>Forgot your password?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, placeholder: :email %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Send me reset password instructions" %>
+      <div class="links">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+
+</section>

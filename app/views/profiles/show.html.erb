@@ -25,6 +25,7 @@
     <div class="profile-buttons d-flex justify-content-end">
       <% if current_user.profile == @profile %>
         <%= link_to button_tag('Edit Profile'), edit_profile_path(@profile) %>
+        <%= link_to button_tag('Change Password'), edit_user_registration_path %>
       <% else %>
         <!-- Message User about product button -->
         <% if user_signed_in? %>
