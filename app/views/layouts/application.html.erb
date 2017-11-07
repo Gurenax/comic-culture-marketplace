@@ -17,28 +17,21 @@
   <body>
     <div class="container-fluid">
 
-      <section class="header row align-items-center">
-        <!-- Comic Culture Logo -->
-        <div class="logo col-12">
-          <a href="<%= root_path %>" class="row align-items-center">
-            <%= image_tag asset_path('logo.svg'), class: 'col-6' %>
-            <h1 class="col-6">COMIC CULTURE MARKETPLACE</h1>
-          </a>
-        </div>
-
-        <!-- Search Bar Desktop -->
-        <div class="search-bar desktop-only">
-          Search
-          <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
-            <%= form.text_field :keywords, value: @keywords %>
-            <% current_location = search_location %>
-            <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
-            <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
-            <%= form.submit 'Search' %>
-          <% end %>
-          <%= link_to 'Advanced Search', search_index_path %>
-        </div>
+        <!-- d-flex flex-wrap align-items-center -->
+      <section class="header navbar justify-content-lg-between justify-content-center">  
+        <a class="navbar-brand" href="<%= root_path %>">
+          <%= image_tag asset_path('logo2.svg'), height: 120 %>
+        </a>
+        <%= form_with(url: search_index_path, method: 'get', local: true, class: 'form-inline') do |form| %>
+          <%= form.text_field :keywords, id: :keywords, value: @keywords, placeholder: 'What are you looking for?' %>
+          <% current_location = search_location %>
+          <%= form.text_field :location, id: :location, value: @location.blank? ? current_location : @location, placeholder: 'Location' %>
+          <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
+          <%= form.submit 'Search' %>
+          <%#= link_to 'Advanced Search', search_index_path %>
+        <% end %>
       </section>
+      
       <section class="primary-navigation">
         <nav class="navbar navbar-expand">
           <ul class="navbar-nav navbar-left justify-content-start align-items-center justify-content-center">
