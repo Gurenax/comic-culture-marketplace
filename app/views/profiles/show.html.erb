@@ -5,7 +5,7 @@
 <section class="profile-divider row">
   <section class="application profile col col-md-6">
     <h2><%= @profile.full_name %></h2>
-    <div class="profile-data1 d-flex flex-wrap justify-content-center">
+    <div class="profile-data1 d-flex flex-column justify-content-center align-items-center">
       <div class="profile-image p-2" style="<%= style_for_backgound_image(@profile.image_url(:thumb)) unless @profile.image.nil? %>"></div>
       <div class="profile-bio p-2"><p><%= @profile.short_bio %></p></div>
     </div>
