@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources :conversations, only: %i[index create show destroy]
   resources :search, only: %i[index]
   resources :contact_support, only: %i[new create]
-  get '/review-success', to: 'reviews#success', as: 'review_success'
-  get '/order-success', to: 'orders#success', as: 'order_success'
+  # get '/review-success', to: 'reviews#success', as: 'review_success'
+  # get '/order-success', to: 'orders#success', as: 'order_success'
   # get "/top10songs", to: "songs#top_10_songs", as: "top10_songs"
   root 'products#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -26,12 +26,13 @@ section.conversations-list {
       }
       a {
         color: $blue;
+        width: 100%;
       }
       div.message-title > h3 {
         font-size: 24px;
       }
       div.message-delete > i {
-        font-size: 36px;
+        font-size: 45px;
       }
       div.message-last-update > p {
         font-size: 18px;

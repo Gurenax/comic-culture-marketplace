@@ -1,24 +1,32 @@
-<h1>Support</h1>
+<section class="breadcrumbs">
+    <%= link_to 'Home', root_path %> / Contact Support
+</section>
+<section class="application contact-support">
+  <h2>Contact Support</h2>
 
-<p>Please message our support team here:</p>
+  <p>Please message our support team here:</p>
 
-<%= form_with(url: contact_support_index_url, local:true) do |f| %>
+  <%= form_with(url: contact_support_index_url, local:true) do |f| %>
     <% unless @error_messages.empty? %>
-        <% @error_messages.each do |message| %>
-            <p><%= message %></p>
-        <% end %>
+    <div id="error_explanation" class="alert alert-danger">
+      <% @error_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
     <% end %>
 
-    <div>
-        <%= f.label :email %>
-        <%= f.email_field :email %>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.email_field :email %>
     </div>
 
-    <div>
-        <%= f.label :message %>
-        <%= f.text_area :message, rows: 6 %>
+    <div class="field">
+      <%= f.label :message %>
+      <%= f.text_area :message, rows: 6 %>
     </div>
 
-    <%= f.button 'Send', class: 'btn btn-danger' %>
-    <%= link_to 'Back', root_path, class: 'btn btn-danger' %>
+    <div class="actions">
+      <%= f.submit 'Send' %>
+    </div>
 <% end %>
+</section>

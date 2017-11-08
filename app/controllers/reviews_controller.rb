@@ -31,11 +31,7 @@ class ReviewsController < ApplicationController
     @review.buyer_id = current_user.id
     @review.seller_id = @seller_profile.id
 
-    redirect_to review_success_path
-  end
-
-  # Show success message on completed review
-  def success
+    render :success
   end
 
   # PATCH/PUT /reviews/1

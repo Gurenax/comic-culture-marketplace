@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
     # Remove all products from shopping cart
     @shopping_cart.products.destroy_all
 
-    redirect_to order_success_path
+    render :success
 
   rescue Stripe::InvalidRequestError => e
     flash[:error] = e.message
@@ -68,9 +68,6 @@ class OrdersController < ApplicationController
     redirect_to new_order_path
   end
 
-  # Show success message on completed order
-  def success
-  end
 
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
