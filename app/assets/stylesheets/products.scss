@@ -406,7 +406,8 @@ section.product-section-divider {
       }
     }
     div.seller-buttons {
-      max-width: 540px;    
+      max-width: 540px; 
+      margin-top: 10px !important;   
       
       form {
         padding-left: 0px !important;
@@ -535,11 +536,12 @@ section.form-product {
     }
 
     div.field {
-      margin-bottom: 10px !important;
+      margin-bottom: 20px !important;
 
       label {
-        font-family: $bangers;
-        font-size: 24px;
+        font-family: $oswald;
+        font-size: 20px;
+        padding-bottom: 5px !important;
       }
 
       input[type=text] {

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :profiles, only: %i[show new create edit update destroy] do
-    resources :reviews #, only: %i[index show new create edit update destroy]
+    resources :reviews, only: %i[new create]
   end
   resources :products
   resources :photos
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :conversations
   resources :search, only: %i[index new]
   resources :contact_support, only: %i[new create]
+  get '/review-success', to: 'reviews#success', as: 'review_success'
   get '/order-success', to: 'orders#success', as: 'order_success'
   # get "/top10songs", to: "songs#top_10_songs", as: "top10_songs"
   root 'products#index'

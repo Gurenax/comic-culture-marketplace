@@ -1,6 +1,7 @@
-<h1>Editing Review</h1>
-
-<%= render 'form', review: @review %>
-
-<%= link_to 'Show', profile_review_path(@review.seller, @review) %> |
-<%= link_to 'Back', profile_reviews_path %>
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / Edit Review
+</section>
+<section class="application review-form">
+  <h2>Edit Review</h2>
+  <%= render 'form', review: @review %>
+</section>

@@ -1,29 +1,63 @@
-<h1>Advanced Search</h1>
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / Search
+</section>
 
-<div>
-  Search
-  <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
-    <%= form.text_field :keywords, value: @keywords, placeholder: 'What are you looking for?' %>
+<section class="application search-title">
+  <h2>Search</h2>
+</section>
+<section class="search">
+  <div class="advanced-search d-flex justify-content-center">
+    <%= form_with(url: search_index_path, method: 'get', local: true) do |form| %>
+      <div class="row">
+        <div class="field col-12">
+          <%= form.text_field :keywords, value: @keywords, placeholder: 'What are you looking for?' %>
+        </div>
+      </div>
 
-    <% current_location = user_signed_in? ? current_user.profile.billing_address.public_address : '' %>
-    <%= form.label 'Location' %>
-    <%= form.text_field :location, value: @location.blank? ? current_location : @location %>
-    <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius %>
+      <div class="row">
+        <div class="field col-md-6 col location-field">
+          <% current_location = user_signed_in? ? current_user.profile.billing_address.public_address : '' %>
+          <%= form.label 'Location' %>
+          <div class="d-flex">
+            <%= form.text_field :location, value: @location.blank? ? current_location : @location, class: 'p-2' %>
+            <%= form.select :location_radius, location_radius.map{|location_radius| [location_radius[0].titleize, location_radius[1]]}, selected: @location_radius, class: 'p-2' %>
+          </div>
+        </div>
 
-    <%= form.label 'Manufacturer/Publisher' %>
-    <%= form.text_field :manufacturer_or_publisher, value: @manufacturer_or_publisher %>
+        <div class="field col-md-6 col">
+          <%= form.label 'Manufacturer/Publisher' %>
+          <%= form.text_field :manufacturer_or_publisher, value: @manufacturer_or_publisher %>
+        </div>
+      </div>
 
-    <%= form.label 'Category' %>
-    <%= form.select :category, category_types.map{|category| [category[0].titleize, category[1]]}, selected: @category %>
+      <div class="row">
+        <div class="field col-md-6 col category-field">
+          <%= form.label 'Category' %>
+          <%= form.select :category, category_types.map{|category| [category[0].titleize, category[1]]}, selected: @category, class: 'category-dropdown' %>
+        </div>
 
-    <%= form.label 'Seller Name' %>
-    <%= form.text_field :seller_name, value: @seller_name %>
+        <div class="field col-md-6 col">
+          <%= form.label 'Seller Name' %>
+          <%= form.text_field :seller_name, value: @seller_name %>
+        </div>
+      </div>
 
-    <br>
-    <%= form.submit 'Search' %>
+      <div class="actions">
+        <%= form.submit 'Search' %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="application search-results">
+  <% if @products.blank? %>
+    <h2>No Items Found</h2>
+  <% else %>
+    <h2><%= "Search Results (Found #{pluralize(@products.count,'item')})" unless @products.blank? %></h2>
+    <div class="products-list row justify-content-center justify-content-md-start">
+      <%= render @products unless @products.blank? %>
+    </div>
   <% end %>
-</div>
 
-<h1><%= "Search Results (Found #{pluralize(@products.count,'item')})" unless @products.blank? %></h1>
-<%= render @products unless @products.blank? %>
+</section>
 <%#= render 'products/product', product: @products %>

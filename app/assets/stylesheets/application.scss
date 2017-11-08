@@ -98,14 +98,19 @@ section.header {
   form {
     margin-right: 20px !important;
     #keywords {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+      margin-right: 5px !important;
       height: 30px;
       font-size: 18px;
-      min-width: 200px;
+      min-width: 220px;
     }
     #location {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
       height: 30px;
       font-size: 18px;
-      min-width: 100px;
+      min-width: 120px;
     }
     select {
       height: 30px;
@@ -137,51 +142,54 @@ section.header {
     color: $white;
   }
 
-  div.search-bar {
-    // background: red;
-    // position: absolute;
-    right: 20px;
-    color: $white;
+  // section.search-bar {
+  //   background: red !;
+  //   // position: absolute;
+  //   right: 20px;
+  //   color: $white;
 
-    form {
-      #keywords {
-        height: 30px;
-        font-size: 18px;
-        min-width: 200px;
-      }
-      #location {
-        height: 30px;
-        font-size: 18px;
-        min-width: 100px;
-      }
-      select {
-        height: 30px;
-        font-size: 18px;
-      }
-      input[type=submit] {
-        // margin-left: auto !important;
-        // margin-right: auto !important;
-        width: 80px;
-        height: 30px;
-        border: none;
-        font-size: 20px;
-        font-weight: normal;
-        // text-align: center;
-        // line-height: 60px;
-        color: $blue;
-        background: $yellow;
-        transition: $button_transition;
-        cursor: pointer;
-      }
-      input[type=submit]:hover {
-        background: $hover_yellow;
-      }
-    }
+  //   form {
+  //     #keywords {
+  //       height: 30px;
+  //       font-size: 18px;
+  //       min-width: 200px;
+  //       margin-left: 20px !important;
+  //       background: red;
+  //     }
+  //     #location {
+  //       height: 30px;
+  //       font-size: 18px;
+  //       min-width: 100px;
+  //       padding-left: 10px !important;
+  //     }
+  //     select {
+  //       height: 30px;
+  //       font-size: 18px;
+  //     }
+  //     input[type=submit] {
+  //       // margin-left: auto !important;
+  //       // margin-right: auto !important;
+  //       width: 80px;
+  //       height: 30px;
+  //       border: none;
+  //       font-size: 20px;
+  //       font-weight: normal;
+  //       // text-align: center;
+  //       // line-height: 60px;
+  //       color: $blue;
+  //       background: $yellow;
+  //       transition: $button_transition;
+  //       cursor: pointer;
+  //     }
+  //     input[type=submit]:hover {
+  //       background: $hover_yellow;
+  //     }
+  //   }
 
-    a {
-      color: $white;
-    }
-  }
+  //   a {
+  //     color: $white;
+  //   }
+  // }
 }
 
 @media (min-width: 768px) {
@@ -429,6 +437,7 @@ section.application {
 
 
 section.devise {  
+  margin-top: 30px !important;
   margin-right: 30px !important;
 
   h2 {
@@ -496,10 +505,12 @@ section.devise {
 
 section.messages {
   padding-top: 10px !important;
+  padding-bottom: 10px !important;
   p.alert {
     height: 50px;
     line-height: 50px;
     text-align: center;
+    font-size: 16px;
   }
 }
 @import './products';
@@ -507,6 +518,8 @@ section.messages {
 @import './watchlists';
 @import './orders';
 @import './profiles';
+@import './reviews';
+@import './search';
 
 @media (min-width: 560px) { /* Desktop */
   section.breadcrumbs {

@@ -13,6 +13,10 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    # Order History
+    @order_history = @profile.user.orders_descending
+    # Top Customer Review
+    @top_customer_reviews = @profile.user.top_customer_reviews
   end
 
   # GET /profiles/new
@@ -20,7 +24,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
     @profile.billing_address = Address.new
     @profile.shipping_address = Address.new
-    # @use_same_address = false
   end
 
   # GET /profiles/1/edit
@@ -30,16 +33,10 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.json
   def create
-    # byebug
     @profile = Profile.new(profile_params)
 
     # Assign current user to the new profile
     @profile.user = current_user
-
-    # Get checkbox value if billing address is same as shipping address
-    # use_same_address = params.permit(:use_same_address)[:use_same_address]
-    # @profile.shipping_address = @profile.billing_address.dup if use_same_address == '1'
-    # byebug
 
     respond_to do |format|
       if @profile.save

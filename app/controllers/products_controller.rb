@@ -26,6 +26,10 @@ class ProductsController < ApplicationController
   def show
     # Toggle product view if user has not already viewed the product
     @product.toggle_viewed_by(current_user)
+
+    # Top Customer Review
+    @top_customer_reviews = @product.seller.top_customer_reviews
+
     # Initialise a new shopping cart item
     @shopping_cart = ShoppingCart.new
     # Initialise a new watchlist item

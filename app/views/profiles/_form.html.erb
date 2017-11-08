@@ -1,20 +1,13 @@
 <%= form_with(model: profile, local: true) do |form| %>
   <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
-      <ul>
-      <% profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+    <% profile.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
   <% end %>
-
-  <!-- <div class="field"> -->
-    <%#= form.label :user_id %>
-    <%#= form.text_field :user_id, id: :profile_user_id %>
-  <!-- </div> -->
 
   <div class="field">
     <%= form.label :first_name %>
@@ -26,13 +19,19 @@
     <%= form.text_field :last_name, id: :profile_last_name %>
   </div>
 
+  <% if profile.image.present? %>
+  <div class="photos d-flex justify-content-center">
+    <div class="photo" style="<%= style_for_backgound_image(profile.image_url(:thumb)) %>">
+    </div>
+  </div>
+  <% end %>
+
   <div class="field">
-    <%= form.label :image %>
     <%= form.file_field :image, id: :profile_image %>
   </div>
 
   <div class="field">
-    <%= form.label :date_of_birth %>
+    <%= form.label :date_of_birth %><br>
     <%= form.date_select :date_of_birth, id: :profile_date_of_birth %>
   </div>
 
@@ -51,7 +50,7 @@
     <%= form.text_field :favourites, id: :profile_favourites %>
   </div>
 
-  <h2>Billing</h2>
+  <h2>Billing Address</h2>
   <%= form.fields_for :billing_address do |billing_address_form| %>
 
     <div class="field">
@@ -90,44 +89,44 @@
     </div>
   <% end %>
 
-  <h2>Shipping</h2>
+  <h2>Shipping Address</h2>
   <%= form.fields_for :shipping_address do |shipping_address_form| %>
 
     <div class="field">
-      <%= check_box_tag :use_same_address, '1', @use_same_address %> Use same address as billing address
+      <%= check_box_tag :use_same_address, '1', @use_same_address, onclick: "toggle('.field-shipping', this)", class: 'field-shipping-checkbox' %> Use same address as billing address
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :house_number %>
       <%= shipping_address_form.text_field :house_number %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :street_name %>
       <%= shipping_address_form.text_field :street_name %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :town_suburb %>
       <%= shipping_address_form.text_field :town_suburb %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :city %>
       <%= shipping_address_form.text_field :city %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :state %>
       <%= shipping_address_form.text_field :state %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :postal_code %>
       <%= shipping_address_form.text_field :postal_code %>
     </div>
 
-    <div class="field">
+    <div class="field field-shipping">
       <%= shipping_address_form.label :country_code %>
       <%= shipping_address_form.country_select :country_code, selected: profile.selected_country_code(profile.shipping_address) %>
     </div>
@@ -137,3 +136,18 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  function toggle(className, obj) {
+    var $input = $(obj);
+    if ($input.is(':checked')) $(className).hide();
+    else $(className).show();
+  }
+
+  $( document ).ready(function() {
+    var $input = $('.field-shipping-checkbox');
+    var className = '.field-shipping'
+    if ($input.is(':checked')) $(className).hide();
+    else $(className).show();
+  });
+</script>

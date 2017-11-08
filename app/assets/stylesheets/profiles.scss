@@ -4,6 +4,7 @@ section.profile {
   margin-right: 10px !important;
 
   div.profile-data1 {
+    margin-top: 10px !important;
     div.profile-image {
       max-height: 150px;
       min-height: 150px;
@@ -20,7 +21,7 @@ section.profile {
     }
   }
 
-  div.profile-superpowers, div.profile-favourites, div.profile-neighbourhood {
+  div.profile-info {
     margin-top: 10px !important;
     h3 {
       font-family: $bangers;
@@ -60,7 +61,7 @@ section.profile {
       padding-right: 0px !important;
 
       button {
-        margin-left: 10px !important;
+        // margin-left: 10px !important;
         height: 45px;
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -103,6 +104,9 @@ section.profile-products {
     margin-left: auto !important;
     margin-right: auto !important;
     
+    div.cart-item:last-of-type {
+      border-bottom: 0;
+    }
     div.cart-item {
       max-width: 560px;
       margin-right: 10px !important;
@@ -145,6 +149,78 @@ section.profile-products {
           }
         }
       }
+
+      div.cart-right {
+        text-align: right;
+        div.cart-price {
+          h4 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+        div.cart-remove {
+          a {
+            font-size: 16px;
+            color: $blue;
+          }
+        }
+      }
+    }
+    
+  }
+
+  div.order-history-list:last-of-type {
+    border-bottom: 0px;
+  }
+  div.order-history-list {
+    max-width: 560px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 10px !important;
+    border-bottom: 1px dotted $blue;
+    
+    div.cart-item {
+      max-width: 560px;
+      margin-right: 10px !important;
+      padding-bottom: 10px !important;
+
+      div.cart-left {
+        a {
+          div.cart-item-photo {
+            max-height: 80px;
+            max-width: 80px;
+            min-height: 80px;
+            min-width: 80px;
+            margin-right: 10px !important;
+            border-radius: 100%;
+            background-size: cover;
+            background-color: $blue;
+          }
+        }
+        div.cart-details {
+          p {
+            font-size: 16px;
+
+            span.cart-item-name {
+              font-size: 18px;
+              font-weight: bold;
+              color: $blue;
+              a {
+                color: $blue;
+                font-size: 18px;
+                font-weight: bold;
+              }
+            }
+            span.cart-item-condition {
+              color: $gray;
+            }
+            span.cart-item-weight {
+              color: $gray;
+            }
+          }
+        }
+      }
+
       div.cart-right {
         text-align: right;
         div.cart-price {
@@ -206,3 +282,120 @@ section.order-history {
   margin-right: 10px !important;
 }
 
+section.profile-form {
+  margin-right: 10px !important;
+  
+  form {
+    margin-top: 20px !important;
+    max-width: 500px;
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    div.alert {
+      text-align: center;
+      margin-bottom: 20px !important;
+
+      ul {
+        list-style: none;
+      }
+    }
+
+    div.field {
+      padding-bottom: 20px !important;
+
+      label {
+        font-family: $oswald;
+        font-size: 20px;
+        padding-bottom: 5px !important;
+      }
+
+      input[type=text] {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100%;
+        height: 30px;
+        border: 1px solid $blue;
+        box-sizing: border-box;
+        border-radius: 15px;
+        outline: none;
+      }
+
+      textarea {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 5px !important;
+        width: 100%;
+        height: 120px;
+        border: 1px solid $blue;
+        box-sizing: border-box;
+        border-radius: 15px;
+        outline: none;
+      }
+
+      input[type=file] {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 5px !important;
+        width: 100%;
+        height: 45px;
+        border: 1px solid $blue;
+        box-sizing: border-box;
+        border-radius: 15px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      select {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        width: 100%;
+        height: 45px;
+        border: 1px solid $blue;
+        box-sizing: border-box;
+        border-radius: 15px;
+        outline: none;
+      }
+
+      #profile_date_of_birth_1i,
+      #profile_date_of_birth_2i,
+      #profile_date_of_birth_3i {
+        max-width: 30%;
+      }
+    }
+
+    div.photos {
+      padding-bottom: 10px !important;
+      text-align: center;
+      div.photo {
+        max-width: 150px;
+        max-height: 150px;
+        min-width: 150px;
+        min-height: 150px;
+        border-radius: 100%;
+        background-size: cover;
+        background-color: $blue;
+      }
+    }
+
+    div.actions {
+      text-align: center;
+      input[type=submit] {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        height: 45px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        color: $yellow;
+        background: $blue;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        transition: $button_transition;
+        cursor: pointer;
+      }
+      input[type=submit]:hover {
+        background: $hover_blue;
+      }
+    }
+  }
+}

@@ -53,7 +53,7 @@
         <div class="seller-ratings seller-ratings-align-left">
           <div class="ratings-stars"><%= star_rating(@product.seller.average_review_rating) %></div>
           <div class="spacer10"></div>
-          <div class="ratings-review"><span>This seller has <%= @product.seller.average_review_rating.round(2) %> rating out of </span><%= pluralize @product.seller.reviews.count, 'customer review' %></div>
+          <div class="ratings-review"><span>This seller has a rating of <%= @product.seller.average_review_rating.round(2) %> out of </span><%= pluralize @product.seller.reviews.count, 'customer review' %></div>
         </div>
       </div>
       <div class="spacer20"></div>
@@ -136,7 +136,7 @@
   <div class="product-details">
     <h2>Product Details</h2>
     <p>
-      <%= simple_format('Added on '+@product.created_at.localtime.to_formatted_s(:long_ordinal)) unless @product.created_at.blank? %>
+      <%= simple_format('Added on '+format_date_to_localtime(@product.created_at)) unless @product.created_at.blank? %>
       <%= simple_format('Author: '+@product.author) unless @product.author.blank? %>
       <%= simple_format('Illustrator: '+@product.illustrator) unless @product.illustrator.blank? %>
       <%= simple_format('ISBN-10: '+@product.isbn_10) unless @product.isbn_10.blank? %>
@@ -155,7 +155,9 @@
   <section class="seller-info col col-md-6">
     <h2>About the Seller</h2>
     <div class="seller-divider row">
-      <div class="seller-photo col" style="<%= style_for_backgound_image(@product.seller.profile.image_url(:thumb)) %>"></div>
+      <a href="<%= profile_path(@product.seller.profile) %>">
+        <div class="seller-photo col" style="<%= style_for_backgound_image(@product.seller.profile.image_url(:thumb)) %>"></div>
+      </a>
       <div class="seller-data col">
         <div class="seller-name"><%= link_to @product.seller_name, @product.seller.profile %></div>
         <div class="seller-location"><%= @product.seller_location %></div>
@@ -169,33 +171,35 @@
         </div> -->
       </div>
     </div>
-    <div class="seller-buttons d-flex justify-content-end">
-      <!-- Message User about product button -->
-      <% if user_signed_in? %>
-        <%= form_with(url: conversations_url, local:true, class: 'p-2') do |f| %>
-          <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
-          <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
-          <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
-          <%= hidden_field_tag :receiver, @product.seller.id %>
-          <%= f.submit 'Message' %>
+    <% if @product.seller != current_user %>
+      <div class="seller-buttons d-flex justify-content-end">
+        <!-- Message User about product button -->
+        <% if user_signed_in? %>
+          <%= form_with(url: conversations_url, local:true, class: 'p-2') do |f| %>
+            <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+            <%= f.hidden_field :topic, value: product_inquiry_topic_about(@product, current_user) %>
+            <%= f.hidden_field :title, value: conversation_title_about(@product, current_user) %>
+            <%= hidden_field_tag :receiver, @product.seller.id %>
+            <%= f.submit 'Message' %>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <!-- Writw a review -->
-      <%= link_to button_tag('Write a Review'), new_profile_review_path(@product.seller.profile), class: 'p-2' %>
-    </div>
+        <!-- Writw a review -->
+        <%= link_to button_tag('Write a Review'), new_profile_review_path(@product.seller.profile), class: 'p-2' %>
+      </div>
+    <% end %>
   </section>
 
   <section class="top-customer-reviews col col-md-6">
     <h2>Top Customer Reviews</h2>
-    <% @product.seller.reviews.each do |review| %>
+    <% @top_customer_reviews.each do |review| %>
     <div class="customer-review d-flex">
         <div class="customer-review-stars p-2">
           <%= star_rating(review.rating) %>
         </div>
         <div class="customer-review-summary p-2"><%= summary_rating(review.rating) %></div>
     </div>
-    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= review.created_at.localtime.to_formatted_s(:long_ordinal) %></div>
+    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= format_date_to_localtime(review.created_at) %></div>
     <div class="customer-review-comment"><%= review.comment %></div>
     <% end %>
   </section>

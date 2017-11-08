@@ -9,23 +9,53 @@
       <div class="profile-image p-2" style="<%= style_for_backgound_image(@profile.image_url(:thumb)) unless @profile.image.nil? %>"></div>
       <div class="profile-bio p-2"><p><%= @profile.short_bio %></p></div>
     </div>
-    <div class="profile-superpowers">
+    <% if current_user.profile == @profile %>
+      <div class="profile-info">
+        <% if current_user.profile.date_of_birth == Time.now.localtime.to_date %>
+          <h3>Happy Birthday</h3>
+        <% else %>
+          <h3>Birthday</h3>
+        <% end %>
+        <p><%= @profile.date_of_birth.to_formatted_s(:long_ordinal) %></p>
+      </div>
+    <% else %>
+    
+      <div class="profile-info">
+        <% if @profile.date_of_birth == Time.now.localtime.to_date %>
+          <h3>It's <%= @profile.first_name %>'s' Birthday</h3>
+        <% else %>
+          <h3>Birthday</h3>
+        <% end %>
+        <p><%= @profile.date_of_birth.strftime("%B #{@profile.date_of_birth.day.ordinalize}") %></p>
+      </div>
+    <% end %>
+    <div class="profile-info">
       <h3>Superpowers</h3>
       <p><%= @profile.superpowers %></p>
     </div>
-    <div class="profile-favourites">
+    <div class="profile-info">
       <h3>Favourites</h3>
       <p><%= @profile.favourites %></p>
     </div>
-    <div class="profile-neighbourhood">
+    <div class="profile-info">
       <h3>Neighbourhood</h3>
       <p><%= @profile.billing_address.public_address %></p>
     </div>
+    <% if current_user.profile == @profile %>
+      <div class="profile-info">
+        <h3>Billing Address</h3>
+        <p><%= @profile.billing_address.full_address %></p>
+      </div>
+      <div class="profile-info">
+        <h3>Shipping Address</h3>
+        <p><%= @profile.shipping_address.full_address %></p>
+      </div>
+    <% end %>
     <div class="spacer20"></div>
     <div class="profile-buttons d-flex justify-content-end">
       <% if current_user.profile == @profile %>
-        <%= link_to button_tag('Edit Profile'), edit_profile_path(@profile) %>
-        <%= link_to button_tag('Change Password'), edit_user_registration_path %>
+        <%= link_to button_tag('Edit Profile'), edit_profile_path(@profile), class: 'p-2' %>
+        <%= link_to button_tag('Change Password'), edit_user_registration_path, class: 'p-2' %>
       <% else %>
         <!-- Message User about product button -->
         <% if user_signed_in? %>
@@ -83,14 +113,14 @@
 <section class="profile-divider row">
   <section class="application profile-customer-reviews col col-md-6">
     <h2>Top Customer Reviews</h2>
-    <% @profile.user.reviews.each do |review| %>
+    <% @top_customer_reviews.each do |review| %>
     <div class="customer-review d-flex">
         <div class="customer-review-stars p-2">
           <%= star_rating(review.rating) %>
         </div>
         <div class="customer-review-summary p-2"><%= summary_rating(review.rating) %></div>
     </div>
-    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= review.created_at.localtime.to_formatted_s(:long_ordinal) %></div>
+    <div class="posted-by-customer">by <%= review.buyer.profile.full_name %> on <%= format_date_to_localtime(review.created_at) %></div>
     <div class="customer-review-comment"><%= review.comment %></div>
     <% end %>
   </section>
@@ -98,10 +128,10 @@
   <section class="application profile-products order-history col col-md-6">
     <h2>Order History</h2>
     
-    <% @profile.user.orders.each do |order| %>
-      <div class="shopping-cart-list">
-        <% unless order.order_items.blank? %>
-          <%= order.created_at.localtime.to_formatted_s(:long_ordinal) %>  
+    <% @order_history.each do |order| %>
+      <% unless order.order_items.blank? %>
+        <div class="order-history-list">
+          <%= format_date_to_localtime(order.created_at) %>  
           <% order.order_items.each do |order_item| %>
             <div class="cart-item row">
               <div class="cart-left col d-flex flex-wrap">
@@ -123,13 +153,13 @@
               </div>
             </div>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
       
     <% end %>
     
   </section>
 </section>
 
-<%= link_to 'Order History', orders_path, class: 'nav-link' %>
-<%= link_to 'Contact Support', new_contact_support_path, class: 'nav-link' %>
+<%#= link_to 'Order History', orders_path, class: 'nav-link' %>
+<%#= link_to 'Contact Support', new_contact_support_path, class: 'nav-link' %>

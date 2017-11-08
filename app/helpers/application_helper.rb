@@ -74,4 +74,9 @@ module ApplicationHelper
   def format_grams_to_kg(weight)
     weight / 1000.0
   end
+
+  # Format date
+  def format_date_to_localtime(date)
+    date.localtime.to_formatted_s(:long_ordinal)
+  end
 end

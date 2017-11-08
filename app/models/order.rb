@@ -35,4 +35,5 @@ class Order < ApplicationRecord
   def includes_product?(product)
     products.include?(product)
   end
+
 end

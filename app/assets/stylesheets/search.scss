@@ -1,3 +1,107 @@
 // Place all the styles related to the Search controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+section.search-title {
+  min-height: 0px;
+  padding-bottom: 10px !important;
+}
+section.search {
+  div.advanced-search {
+    background: $blue;
+    min-height: 281px;
+
+    form {
+      max-width: 610px;
+      margin-top: 30px !important;
+      max-width: 800px;
+      width: 100%;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+      color: $white;
+
+      div.field {
+        min-width: 300px;
+        padding-bottom: 20px !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        
+        label {
+          font-family: $oswald;
+          font-size: 20px;
+          padding-bottom: 5px !important;
+        }
+
+        input[type=text] {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+          width: 100%;
+          height: 30px;
+          border: 1px solid $blue;
+          box-sizing: border-box;
+          border-radius: 15px;
+          outline: none;
+        }
+
+        // div.select-category {
+        //   select {
+        //     width: 100% !important;
+        //   }
+        // }
+      }
+
+      div.location-field {
+        select {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+          height: 30px;
+          border: 1px solid $blue;
+          box-sizing: border-box;
+          border-radius: 15px;
+          outline: none;
+        }
+      }
+
+      div.category-field {
+        select {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+          width: 100%;
+          height: 30px;
+          border: 1px solid $blue;
+          box-sizing: border-box;
+          border-radius: 15px;
+          outline: none;
+        }
+      }
+
+      div.actions {
+        text-align: center;
+        padding-bottom: 20px !important;
+
+        input[type=submit] {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+          height: 45px;
+          border: none;
+          font-size: 18px;
+          font-weight: bold;
+          color: $blue;
+          background: $yellow;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          transition: $button_transition;
+          cursor: pointer;
+        }
+        input[type=submit]:hover {
+          background: $hover_yellow;
+        }
+      }
+    }
+  }  
+}
+
+section.search-results {
+  min-height: 100px;
+}

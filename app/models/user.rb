@@ -48,4 +48,14 @@ class User < ApplicationRecord
     return 0 if reviews.blank?
     reviews.average(:rating)
   end
+
+  # Top Customer Reviews (Limit to 10)
+  def top_customer_reviews
+    reviews.order(rating: :desc).limit(10)
+  end
+
+  # Orders in Descending order by Created At
+  def orders_descending
+    orders.order(created_at: :desc)
+  end
 end
