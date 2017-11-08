@@ -68,6 +68,9 @@ gem 'jquery-rails'
 # FontAwesome
 gem 'font-awesome-rails'
 
+# Pundit
+gem 'pundit'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'
