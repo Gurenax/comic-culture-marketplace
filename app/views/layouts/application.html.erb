@@ -86,14 +86,61 @@
       </section>
 
       <nav class="mobile-navigation nav nav-pills nav-justified fixed-bottom align-items-center">
-        <a href="<%= root_path %>" class="nav-item nav-link"><%= image_tag asset_path('hamburger.svg') %></a>
+        <a href="#" class="nav-item nav-link hamburger-link"><%= image_tag asset_path('hamburger.svg') %></a>
         <a href="<%= search_index_path %>" class="nav-item nav-link"><%= image_tag asset_path('search.svg') %></a>
         <a href="<%= profile_path(current_user.profile) if user_signed_in? and current_user.profile.present? %>" class="nav-item nav-link"><%= image_tag asset_path('profile.svg') %></a>
         <a href="<%= conversations_path %>" class="nav-item nav-link"><%= image_tag asset_path('message.svg') %></a>
         <a href="<%= shopping_carts_path %>" class="nav-item nav-link"><%= image_tag asset_path('shopping_cart.svg') %></a>
       </nav>
+
+      <section id="mobile-menu" class="mobile-menu">
+        <div class="d-flex flex-column">
+          <div class="close-row p-2 d-flex justify-content-end">
+            <div class="close-button">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+          </div>
+          <ul class="mobile-menu-items row p-2">
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <%= link_to 'Home', root_path %>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <a href="#">Comic Books X Graphic Novels</a>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <a href="#">Toys X Collectibles</a>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <a href="#">Costumes</a>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <a href="#">Clothing X Apparel</a>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <%= link_to 'Watchlist', watchlists_path %>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <%= link_to 'Contact Us', new_contact_support_path %>
+            </li>
+            <li class="mobile-menu-item col-12 d-flex align-items-center">
+              <a href="#">About Comic Culture</a>
+            </li>
+          </ul>
+        </div>
+      </section>
       
       <%= yield %>
     </div>
+
+    <script>
+      $( ".hamburger-link" ).click(function() {
+        $( "#mobile-menu" ).toggleClass( "mobile-menu-show" );
+        return false;
+      });
+      $( ".close-button" ).click(function() {
+        $( "#mobile-menu" ).removeClass( "mobile-menu-show" );
+        return false;
+      });
+    </script>
   </body>
 </html>
