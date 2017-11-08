@@ -10,7 +10,7 @@
     <p class="view_count text-center">
       <%= pluralize product.view_count, 'people' %> viewed this
     </p>
-    <% if user_signed_in? && product.seller == current_user %>
+    <% if user_signed_in? && product.seller != current_user %>
       <div class="button-cart text-center">
         <!-- Add to cart button -->
         <%= form_with model: @shopping_cart, method: :create, local: true do |f| %>

@@ -87,6 +87,7 @@ section.message-bar {
   margin-left: 0 !important;
   margin-right: 0 !important;
   background: $white;
+  border-top: 1px solid $blue;
 
   form {
     div.text_area_field {

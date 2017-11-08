@@ -123,7 +123,7 @@
               <%= link_to 'Contact Us', new_contact_support_path %>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
-              <a href="#">About Comic Culture</a>
+              <a href="#about" class="about-btn">About Comic Culture</a>
             </li>
           </ul>
         </div>
@@ -131,25 +131,107 @@
       
       <%= yield %>
 
-      <section class="footer">
-        <section class="application footer-text">
-          <h2>
-            ABOUT COMIC CULTURE
-          </h2>
+      <% unless controller_name == 'conversations' %>
+        <section class="footer">
           <div class="spacer20"></div>
-          <p>
-            Comic Culture is a community-oriented two-sided marketplace for pop culture enthusasts. The main target market for this marketplace are comic book or graphic novel readers/hobbyist, toy collectors/makers, costume makers/cosplayers, and clothing/apparel collectors/enthusiasts.
-          </p>
-          <div class="spacer20"></div>
-          <p>
-            Comic Culture is currently growing in popularity as the movie and television industry has been using comic-based characters and stories for their shows. As such, there is also an increase in popularity among comic books, graphic novels, toys, collectables, costumes, clothing and other apparel. However, most online stores that sell these products only sell brand new items. As such the community has been relying on generic two-sided marketplaces such as eBay or gumtree which does not have the expertise or speciality of an online comic culture community who are much familiar with these products.
-          </p>
-          <div class="spacer20"></div>
-          <p>
-            A community-oriented two-sided marketplace creates an atmosphere of expertise and enthusiasm among comic culture buyers and hobbyists. It will not only provide ample feedback to sellers, but it will also incorporate better prices for buyers as they are guided by a specialised community.
-          </p>
+          <section class="footer-text">
+            <h2>
+              ABOUT COMIC CULTURE
+            </h2>
+            <div class="spacer20"></div>
+            <p>
+              Comic Culture is a community-oriented two-sided marketplace for pop culture enthusasts. The main target market for this marketplace are comic book or graphic novel readers/hobbyist, toy collectors/makers, costume makers/cosplayers, and clothing/apparel collectors/enthusiasts.
+            </p>
+            <div class="spacer20"></div>
+            <p>
+              Comic Culture is currently growing in popularity as the movie and television industry has been using comic-based characters and stories for their shows. As such, there is also an increase in popularity among comic books, graphic novels, toys, collectables, costumes, clothing and other apparel. However, most online stores that sell these products only sell brand new items. As such the community has been relying on generic two-sided marketplaces such as eBay or gumtree which does not have the expertise or speciality of an online comic culture community who are much familiar with these products.
+            </p>
+            <div class="spacer20"></div>
+            <p>
+              A community-oriented two-sided marketplace creates an atmosphere of expertise and enthusiasm among comic culture buyers and hobbyists. It will not only provide ample feedback to sellers, but it will also incorporate better prices for buyers as they are guided by a specialised community.
+            </p>
+          </section>
         </section>
-      </section>
+        <section class="footer-links row align-items-start">
+          <div class="information col col-md-3">
+            <h2>Information</h2>
+            <ul>
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Staff</a>
+              </li>
+              <li>
+                <a href="#">Terms and Conditions</a>
+              </li>
+              <li>
+                <a href="#">Shipping and Returns</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+            </ul>
+          </div>
+          <div class="myaccount col col-md-3">
+            <h2>My Account</h2>
+            <ul>
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to 'Sign in', new_user_session_path %>
+                </li>
+                <li>
+                  <%= link_to 'Create', new_user_registration_path %>
+                </li>
+                <li>
+                  <%= link_to 'Manage Profile', edit_profile_path %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+                </li>
+              <% end %>
+              <li>
+                  <%= link_to "Forgot your password?", new_user_password_path %>
+              </li>
+              <li>
+                <%= link_to 'Shopping Cart', shopping_carts_path %>
+              </li>
+              <li>
+                <%= link_to 'Watchlist', watchlists_path %>
+              </li>
+            </ul>
+          </div>
+          <div class="social col col-md-3">
+            <h2>Social Media</h2>
+            <ul>
+              <li>
+                <a href="http://facebook.com">Facebook</a>
+              </li>
+              <li>
+                <a href="http://twitter.com">Twitter</a>
+              </li>
+              <li>
+                <a href="http://instagram.com">Instagram</a>
+              </li>
+              <li>
+                <a href="http://twitter.com">Twitter</a>
+              </li>
+            </ul>
+          </div>
+          <div class="help col col-md-3">
+            <h2>Help</h2>
+            <ul>
+              <li>
+                <%= link_to 'Contact Us', new_contact_support_path %>
+              </li>
+              <li>
+                <a href="#">FAQ</a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      <% end %>
     </div>
     
     <script>

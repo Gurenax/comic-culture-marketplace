@@ -485,8 +485,19 @@ section.messages {
 }
 
 section.footer {
-  background: $blue;
+  padding-left: 10px !important;
+  padding-top: 10px !important;
+  padding-bottom: 50px !important;
   padding-right: 10px !important;
+  background: $blue;
+  // min-height: 400px;
+
+  h2 {
+    font-size: 36px;
+  }
+
+  // min-height: 300px !important;
+  // padding-bottom: 30px !important;
 
   section.footer-text {
     h2, p {
@@ -495,6 +506,33 @@ section.footer {
     p {
       font-weight: $light;
       font-size: 18px;
+    }
+  }
+}
+section.footer-links {
+  background: $blue;
+
+  div {
+    min-width: 300px;
+
+    h2 {
+      color: $white;
+      text-align: center;
+      margin-bottom: 10px !important;
+    }
+    ul {
+      margin-left: 80px !important;
+      margin-bottom: 20px !important;
+      list-style: none;
+      li {
+        a {
+          color: $white;
+          font-size: 16px;
+          &:hover {
+            color: $yellow;
+          }
+        }
+      }
     }
   }
 }
@@ -517,6 +555,7 @@ section.footer {
     margin-left: 30px !important;
   }
   section.footer {
+    padding-left: 30px !important;
     padding-right: 30px !important;
   }
 }

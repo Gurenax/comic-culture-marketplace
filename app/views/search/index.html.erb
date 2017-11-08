@@ -49,16 +49,15 @@
   </div>
 </section>
 
-<section class="application search-results">
-  <% if @products.blank? || @search_acton.blank? %>
+<section class="application search-results">  
+  <% if @search_action.blank?  %>
+  <% elsif @products.blank?  %>
     <h2>No Items Found</h2>
-  <% elsif @search_acton.present? %>
   <% else %>
     <h2><%= "Search Results (Found #{pluralize(@products.count,'item')})" unless @products.blank? %></h2>
     <div class="products-list row justify-content-center justify-content-md-start">
       <%= render @products unless @products.blank? %>
     </div>
   <% end %>
-
 </section>
 <%#= render 'products/product', product: @products %>

@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_profile!
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_product_containers, only: [:index, :books, :toys, :costumes, :apparel, :top_products]
   # GET /products
   # GET /products.json
   def index
@@ -14,11 +14,11 @@ class ProductsController < ApplicationController
     # Recently sold
     @sold_products = Product.where(status: 'Sold').order(updated_at: :desc)
 
-    # Add to Cart buttons in product listing
-    @shopping_cart = ShoppingCart.new
+    # # Add to Cart buttons in product listing
+    # @shopping_cart = ShoppingCart.new
 
-    # Add to Watchlist buttons
-    @watchlist = Watchlist.new
+    # # Add to Watchlist buttons
+    # @watchlist = Watchlist.new
 
     # Top viewed products
     @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse
@@ -140,6 +140,15 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:seller_id, :name, :price, :description, :condition, :status, :category, :manufacturer, :publisher, :publish_date, :author, :illustrator, :isbn_10, :isbn_13, :dimensions, :weight, :keywords, :postage)
+    end
+
+    # Initialise the shopping cart and watchlist
+    def set_product_containers
+      # Add to Cart buttons in product listing
+      @shopping_cart = ShoppingCart.new
+  
+      # Add to Watchlist buttons
+      @watchlist = Watchlist.new
     end
 
 end

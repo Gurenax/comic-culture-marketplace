@@ -36,7 +36,7 @@ class Product < ApplicationRecord
     searchableAttributes ['name', 'keywords', 'unordered(description)', 'seller_name', 'unordered(manufacturer)', 'unordered(publisher)', 'unordered(author)', 'unordered(illustrator)']
 
     # Rank by Product View Count
-    customRanking ['desc(view_count)']
+    customRanking ['asc(view_count)']
 
     # Location Search by Radius
     geoloc :latitude, :longitude
