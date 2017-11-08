@@ -1,27 +1,96 @@
-<p id="notice"><%= notice %></p>
+<section class="breadcrumbs">
+	<%= @conversation.title %>
+</section>
 
-<h1><%= @conversation.title %></h1>
+<section class="application conversation-divider row">
+	<section class="conversation-messsages col">
+			<div>
+					<% unless @conversation.messages.empty? %>
+							<% @conversation.messages.each do |message| %>
+								<% if message.user == current_user %>
+								<div class="message d-flex flex-row justify-content-start align-items-stretch">
+									<div class="message_sender p-2">
+										<p><%= message.user.profile.first_name %></p>
+									</div>
+									<div class="message_content message_by_current_user p-2">
+										<p><%= simple_format(parse_emoji(message.body)) %></p>
+									</div>
+								</div>
+								<% else %>
+								<div class="message d-flex flex-row justify-content-end align-items-stretch">
+									<div class="message_content p-2">
+										<p><%= simple_format(parse_emoji(message.body)) %></p>
+									</div>
+									<div class="message_sender p-2">
+										<p><%= message.user.profile.first_name %></p>
+									</div>
+								</div>
+								<% end %>
+									
+							<% end %>
+					<% end %>
+			</div>
+	</section>
+	<section class="conversations-list conversations-list-hidden col-4">
+		
+		<% if @conversations.present? %>
+			<div class="messages">
+			<% @conversations.each do |conversation| %>
+			<div class="message d-flex align-items-center">
+					<a href="<%= conversation_path(conversation) %>">
+					<div class="p-2 d-flex flex-column no-wrap">
+							<div class="message-title p-2">
+							<h3><%= conversation.title %></h3>
+							</div>
+							<div class="message-last-update p-2">
+							<% if conversation.messages.present? %>
+									<p><%= 'Last Updated '+format_date_to_localtime(conversation.messages.last.updated_at) %></p>
+							<% else %>
+									<p><%= 'New' %></p>
+							<% end %>
+							</div>
+					</div>
+					<div class="message-delete p-2 ml-auto">
+							<h3><%= link_to simple_format('<i class="fa fa-times" aria-hidden="true"></i>'), conversation, method: :delete, data: { confirm: 'End the conversation?' } %></h3>
+					</div>
+					
+					</a>
+			</div>
+			<% end %>
+			</div>
+		<% end %>
+	</section>
+</section>
 
-<% unless @conversation.messages.empty? %>
-<uL>
-<% @conversation.messages.each do |m| %>
-    <li>
-        <strong><%= m.user.email %>:</strong>
-        <p><%= simple_format(m.body) %></p>
-    </li>
-<% end %>
-</uL>
-<% end %>
+<section class="message-bar">
+	<%= form_with(url: message_path, method: :patch, local: true, class: 'd-flex message-form') do |f| %>
+			<%= f.hidden_field :conversation_id, value: @conversation.id %>
+			<div class="text_area_field field p-2">
+				<%= f.text_area :body, id: :message_content, placeholder: "Write a message. Press shift enter to send", class: 'input' %>
+			</div>
+		
+			<div class="actions p-2">
+				<%= f.submit 'Send', class: 'btn btn-lg' %>
+			</div>
+	<% end %>
+</section>
 
+<script>
+	// Scroll to bottom on page load
+	setTimeout(function () {
+		// Scroll to bottom of window (for smaller devices)
+		window.scrollTo(0,document.body.scrollHeight);
 
-<%= form_with(url: message_path, method: :patch, local: true) do |f| %>
-<%= f.hidden_field :conversation_id, value: @conversation.id %>
-<div>
-    Message<br>
-    <%= f.text_area :body %>
-</div>
-<%= f.submit 'Send' %>
-<% end %>
+		// Scroll to bottom of message
+		messages = $('.conversation-messsages');
+		messages.scrollTop(messages[0].scrollHeight);
+	}, 2);
 
-<!-- <br> -->
-<%#= link_to 'Back', conversations_path %>
+	// Submit on enter
+	$('.input').keypress(function (e) {
+		if (e.which == 13 && e.shiftKey) {
+			$('.message-form').submit();
+			return false;
+		}
+	});
+</script>

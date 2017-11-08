@@ -72,32 +72,6 @@ section.header {
   a.navbar-brand {
     margin-left: 20px !important;
   }
-  // a.logo {
-  //   // margin-left: auto !important;
-  //   // margin-right: auto !important;
-  //   // min-width: 190px;
-  //   // max-width: 350px;
-  //   // a {
-  //     img {
-  //       height: 82px;
-  //       width: auto;
-  //       // margin-left: -30px !important;
-  //     }
-
-  //     h1 {
-  //       max-width: 230px;
-  //       background:dodgerblue;
-  //       // margin-left: 5px !important;
-  //       font-family: $oswald;
-  //       font-size: 24px;
-  //       font-weight: $bold;
-  //       line-height: 22px;
-  //       color: $white;
-  //       text-shadow: -3px 0 $yellow, 0 3px $yellow, 3px 0 $yellow, 0 -3px $yellow;
-  //     }
-  //   // }
-  // }
-
   form {
     margin-right: 20px !important;
     #keywords {
@@ -122,15 +96,11 @@ section.header {
       margin-right: 5px !important;
     }
     input[type=submit] {
-      // margin-left: auto !important;
-      // margin-right: auto !important;
       width: 80px;
       height: 30px;
       border: none;
       font-size: 20px;
       font-weight: $normal;
-      // text-align: center;
-      // line-height: 60px;
       color: $blue;
       background: $yellow;
       transition: $button_transition;
@@ -145,54 +115,6 @@ section.header {
     color: $white;
   }
 
-  // section.search-bar {
-  //   background: red !;
-  //   // position: absolute;
-  //   right: 20px;
-  //   color: $white;
-
-  //   form {
-  //     #keywords {
-  //       height: 30px;
-  //       font-size: 18px;
-  //       min-width: 200px;
-  //       margin-left: 20px !important;
-  //       background: red;
-  //     }
-  //     #location {
-  //       height: 30px;
-  //       font-size: 18px;
-  //       min-width: 100px;
-  //       padding-left: 10px !important;
-  //     }
-  //     select {
-  //       height: 30px;
-  //       font-size: 18px;
-  //     }
-  //     input[type=submit] {
-  //       // margin-left: auto !important;
-  //       // margin-right: auto !important;
-  //       width: 80px;
-  //       height: 30px;
-  //       border: none;
-  //       font-size: 20px;
-  //       font-weight: $normal;
-  //       // text-align: center;
-  //       // line-height: 60px;
-  //       color: $blue;
-  //       background: $yellow;
-  //       transition: $button_transition;
-  //       cursor: pointer;
-  //     }
-  //     input[type=submit]:hover {
-  //       background: $hover_yellow;
-  //     }
-  //   }
-
-  //   a {
-  //     color: $white;
-  //   }
-  // }
 }
 
 @media (min-width: 768px) {
@@ -523,6 +445,7 @@ section.messages {
 @import './profiles';
 @import './reviews';
 @import './search';
+@import './conversations';
 
 @media (min-width: 560px) { /* Desktop */
   section.breadcrumbs {

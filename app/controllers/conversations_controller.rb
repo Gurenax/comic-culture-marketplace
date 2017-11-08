@@ -37,9 +37,12 @@ class ConversationsController < ApplicationController
     redirect_to conversation_path(@conversation)
   end
 
-  # Shows the conversation and its messages
   def show
+    # Shows the selected conversation's messages  
     @conversation = Conversation.find(params[:id])
+
+    # Show conversations list
+    @conversations = current_user.conversations
 
     # If user is not yet in conversation, add user to conversation
     @conversation.add_user(current_user) unless current_user.has_joined?(@conversation)

@@ -1,3 +1,134 @@
 // Place all the styles related to the Conversations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+section.conversations-list {
+  padding-right: 30px !important;
+  // max-width: 560px;
+  min-width: 300px;
+
+  div.messages {
+    // max-width: 560px;
+    overflow-y: scroll;
+    max-height: 50vh;
+    
+    div.message {
+      border-top: 1px dotted $blue;
+      padding-right: 10px !important;
+      &:first-of-type {
+        border-top: 0;
+      }
+      
+      &:hover {
+        background: $yellow;
+        div.message-last-update > p {
+          color: $white;
+        }
+      }
+      a {
+        color: $blue;
+      }
+      div.message-title > h3 {
+        font-size: 24px;
+      }
+      div.message-delete > i {
+        font-size: 36px;
+      }
+      div.message-last-update > p {
+        font-size: 18px;
+        font-weight: $light;
+        color: $gray;
+      }
+    }
+  }
+}
+
+section.conversation-messsages {
+  // max-width: 600px;
+  min-width: 300px;
+  max-width: 1200px;
+  padding-bottom: 80px !important; /* Give the message some nice spacing before it hits message bar */
+  max-height: 50vh;
+  overflow-y: scroll;
+
+  div.message {
+    margin-bottom: 10px !important;
+    margin-right: 10px !important;
+
+    div.message_sender {
+      p {
+        font-size: 14px;
+        color: $blue;
+      }
+    }
+    div.message_content {
+      min-width: 100px;
+      padding: 10px !important;
+      background: $yellow;;
+      border-radius: 15px;
+      p {
+        font-size: 18px;
+        color: $blue;
+      }
+    }
+    div.message_by_current_user {
+      background: $blue;
+      p {
+        color: $yellow;;
+      }
+    }
+  }
+}
+
+section.message-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  background: $white;
+
+  form {
+    div.text_area_field {
+      width: 100%;
+
+      textarea {
+        width: 100%;
+        height: 50px;
+        resize: none;
+        border: 0;
+        background: $white;
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+
+    div.actions {
+      input[type=submit] {
+        height: 50px;
+        width: 87px;
+        background: $blue;
+        color: $white;
+      }
+    }
+  }
+}
+
+
+section.conversation-divider {
+  width: 100%;
+  margin-right: 10px !important;
+}
+
+@media (max-width: 768px) {
+  section.conversations-list-hidden {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  section.message-bar {
+    bottom: 50px;
+  }
+}
