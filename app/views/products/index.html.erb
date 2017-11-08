@@ -4,6 +4,9 @@
       <div class="carousel-item active" style="<%= style_for_backgound_image(asset_url('carousel1.jpg')) %>"></div>
       <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel2.jpg')) %>"></div>
       <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel3.jpg')) %>; background-position: top center;"></div>
+      <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel4.jpg')) %>; background-position: top center;"></div>
+      <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel5.jpg')) %>"></div>
+      <div class="carousel-item" style="<%= style_for_backgound_image(asset_url('carousel6.jpg')) %>; background-position: top center;"></div>
     </div>
     <a class="carousel-control-prev" href="#hero-carousel" role="button" data-slide="prev" onclick="$('#hero-carousel').carousel('prev'); return false;">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -20,19 +23,32 @@
   </div>
 </section>
 
+<% unless @latest_products.blank? %>
 <section class="products">
-  <h2 class="products-list-label">All Available Products</h2>
+  <h2 class="products-list-label">Latest Additions</h2>
   <div class="products-list row justify-content-center justify-content-md-start">
-    <%= render @available_products %>
+    <%= render @latest_products %>
   </div>
 </section>
+<% end %>
 
+<% unless @top_products.blank? %>
 <section class="products">
-  <h2 class="products-list-label">All Sold Products</h2>
+  <h2 class="products-list-label">Trending Items</h2>
+  <div class="products-list row justify-content-center justify-content-md-start">
+    <%= render @top_products %>
+  </div>
+</section>
+<% end %>
+
+<% unless @sold_products.blank? %>
+<section class="products">
+  <h2 class="products-list-label">Recently Sold Items</h2>
   <div class="products-list row justify-content-center justify-content-md-start">
     <%= render @sold_products %>
   </div>
 </section>
+<% end %>
 
 <script>
   $('.carousel').carousel({

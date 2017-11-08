@@ -6,21 +6,52 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    # redirect_to new_profile_path if user_signed_in? and current_user.profile.nil?
     # @products = Product.all
-    @available_products = Product.where(status: 'Available')
-    @sold_products = Product.where(status: 'Sold')
- 
+
+    # Latest additions
+    @latest_products = Product.where(status: 'Available').order(created_at: :desc)
+
+    # Recently sold
+    @sold_products = Product.where(status: 'Sold').order(updated_at: :desc)
+
     # Add to Cart buttons in product listing
     @shopping_cart = ShoppingCart.new
 
     # Add to Watchlist buttons
     @watchlist = Watchlist.new
-    
+
+    # Top viewed products
+    @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse
+
     # Carousel Images
     # @carousel = Photo.limit(5).order("RANDOM()")
   end
 
+  # Product category - Comic Books & Graphic Novels
+  def books
+    @products = Product.category('Comic Books & Graphic Novels')
+  end
+
+  # Product category - Toys & Collectibles
+  def toys
+    @products = Product.category('Toys & Collectibles')
+  end
+
+  # Product category - Costumes
+  def costumes
+    @products = Product.category('Costumes')
+  end
+
+  # Product category - Clothing & Apparel
+  def apparel
+    @products = Product.category('Clothing & Apparel')
+  end
+
+  # Top viewed producta
+  def top_products
+    @products = Product.all.sort_by(&:view_count).reverse
+  end
+  
   # GET /products/1
   # GET /products/1.json
   def show
@@ -50,7 +81,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.seller = current_user
-    
+
     respond_to do |format|
       if @product.save
         # Get photos directly from the params and save them to the database one by one

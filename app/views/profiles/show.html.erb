@@ -77,14 +77,14 @@
   <section class="application profile-products col col-md-6">
     <h2>
       <% if current_user.profile == @profile %>
-        You are selling
+        Products you are selling
       <% else %>
-        <%= @profile.full_name %> is selling
+        Products <%= @profile.first_name %> is selling
       <% end %>
     </h2>
     <div class="shopping-cart-list">
-      <% unless @profile.user.products.blank? %>
-        <% @profile.user.products.each do |store_item| %>
+      <% unless @profile.user.products_selling.blank? %>
+        <% @profile.user.products_selling.each do |store_item| %>
           <div class="cart-item row">
             <div class="cart-left col d-flex flex-wrap">
               <a href="<%= product_path(store_item) %>" class="p-2">

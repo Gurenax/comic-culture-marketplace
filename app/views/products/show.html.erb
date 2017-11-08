@@ -63,8 +63,10 @@
       <div class="spacer20"></div>
       <div class="product-buttons d-flex justify-content-center">
         <% if @product.seller == current_user %>
-          <%= link_to button_tag('Edit Product'), edit_product_path(@product) %>
-          <%= link_to button_tag('Delete Product'), edit_product_path(@product) %>    
+          <% if @product.status != 'Sold' %>
+            <%= link_to button_tag('Edit Product'), edit_product_path(@product) %>
+            <%= link_to button_tag('Delete Product'), edit_product_path(@product) %>    
+          <% end %>
         <% else %>
           <!-- Add to cart button -->
           <%= form_with model: @shopping_cart, method: :create, local: true, class: 'p-2' do |f| %>
@@ -106,8 +108,10 @@
 
   <div class="product-buttons d-flex justify-content-end product-mobile-only">
     <% if @product.seller == current_user %>
-      <%= link_to button_tag('Edit Product'), edit_product_path(@product) %>
-      <%= link_to button_tag('Delete Product'), edit_product_path(@product) %>    
+      <% if @product.status != 'Sold' %>
+        <%= link_to button_tag('Edit Product'), edit_product_path(@product) %>
+        <%= link_to button_tag('Delete Product'), edit_product_path(@product) %>    
+      <% end %>
     <% else %>
       <!-- Add to cart button -->
       <%= form_with model: @shopping_cart, method: :create, local: true, class: 'p-2' do |f| %>
@@ -137,6 +141,7 @@
     <h2>Product Details</h2>
     <p>
       <%= simple_format('Added on '+format_date_to_localtime(@product.created_at)) unless @product.created_at.blank? %>
+      <%= simple_format('Category: '+@product.category) unless @product.category.blank? %>
       <%= simple_format('Author: '+@product.author) unless @product.author.blank? %>
       <%= simple_format('Illustrator: '+@product.illustrator) unless @product.illustrator.blank? %>
       <%= simple_format('ISBN-10: '+@product.isbn_10) unless @product.isbn_10.blank? %>
@@ -146,6 +151,7 @@
       <%= simple_format('Published/Manufactured on '+@product.publish_date.to_formatted_s(:long_ordinal)) unless @product.publish_date.blank? %>
       <%= simple_format('Dimensions: '+@product.dimensions) unless @product.dimensions.blank? %>
       <%= simple_format('Weight: '+(pluralize format_grams_to_kg(@product.weight), 'kg')) unless @product.weight.blank? %>
+      <%= simple_format('Postage: '+@product.postage) unless @product.postage.blank? %>
     </p>
   </div>
   <div class="spacer10"></div>

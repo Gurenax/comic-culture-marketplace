@@ -19,7 +19,8 @@
                 <p>
                   <span class="cart-item-name"><%= link_to shopping_cart_item.name, product_path(shopping_cart_item) %></span><br>
                   <span class="cart-item-condition"><%= shopping_cart_item.condition %></span><br>
-                  <span class="cart-item-weight"><%= pluralize format_grams_to_kg(shopping_cart_item.weight), 'kg' %></span>
+                  <span class="cart-item-weight"><%= pluralize format_grams_to_kg(shopping_cart_item.weight), 'kg' %></span><br>
+                  <span class="cart-item-weight">Postage: <%= shopping_cart_item.postage %></span>
                 </p>
               </div>
             </div>

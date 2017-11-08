@@ -50,7 +50,7 @@
 </section>
 
 <section class="application search-results">
-  <% if @products.blank? && @search_acton.present? %>
+  <% if @products.blank? || @search_acton.blank? %>
     <h2>No Items Found</h2>
   <% elsif @search_acton.present? %>
   <% else %>

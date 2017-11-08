@@ -42,8 +42,6 @@ class Product < ApplicationRecord
     geoloc :latitude, :longitude
 
     # Filters
-    # attributesForFaceting ['status', 'category']
-    # attributesForFaceting [:company]
     attributesForFaceting [:status, :manufacturer, :publisher, :category, :seller_name]
     # tags [:keywords]
   end
@@ -124,4 +122,8 @@ class Product < ApplicationRecord
     ShoppingCart.destroy_all
     Product.update_all(status: 'Available')
   end
+
+  scope :category, ->(category) {
+    Product.where(category: category, status: 'Available').order(created_at: :desc)
+  }
 end

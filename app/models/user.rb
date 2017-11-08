@@ -58,4 +58,9 @@ class User < ApplicationRecord
   def orders_descending
     orders.order(created_at: :desc)
   end
+
+  # Products the user is selling
+  def products_selling
+    products.where(status: 'Available').order(created_at: :desc)
+  end
 end

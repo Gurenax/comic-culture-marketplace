@@ -1,0 +1,13 @@
+<section class="breadcrumbs">
+  <%= link_to 'Home', root_path %> / <%= link_to 'Products', products_path %> / <%= html_escape(category) %>
+</section>
+<section class="products">
+  <% if @products.blank? %>
+    <h2 class="products-list-label">No <%= html_escape(category) %> available at this time</h2>
+  <% else %>
+    <h2 class="products-list-label"><%= html_escape(category) %></h2>
+    <div class="products-list row justify-content-center justify-content-md-start">
+      <%= render @products %>
+    </div>
+  <% end %>
+</section>

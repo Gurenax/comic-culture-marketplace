@@ -42,10 +42,10 @@
             <li class="nav-item nav-item-category">
               <%= link_to 'Shop by Category', '#', class: 'nav-link category-dropdown d-flex align-items-center' %>
               <div class="category-dropdown-content">
-                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Comic Books & Graphic Novels') %></a>
-                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Toys & Collectibles') %></a>
-                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Costumes') %></a>
-                <a href="#" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Clothing & Apparel') %></a>
+                <a href="<%= product_books_path %>" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Comic Books & Graphic Novels') %></a>
+                <a href="<%= product_toys_path %>" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Toys & Collectibles') %></a>
+                <a href="<%= product_costumes_path %>" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Costumes') %></a>
+                <a href="<%= product_apparel_path %>" class="nav-link d-flex align-items-center justify-content-start"><%= html_escape('Clothing & Apparel') %></a>
               </div>
             </li>
             <li class="nav-item"><%= link_to 'Watchlist', watchlists_path, class: 'nav-link d-flex align-items-center' %></li>
@@ -105,16 +105,16 @@
               <%= link_to 'Home', root_path %>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
-              <a href="#">Comic Books X Graphic Novels</a>
+              <a href="<%= product_books_path %>"><%= html_escape('Comic Books & Graphic Novels') %></a>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
-              <a href="#">Toys X Collectibles</a>
+              <a href="<%= product_toys_path %>"><%= html_escape('Toys & Collectibles') %></a>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
-              <a href="#">Costumes</a>
+              <a href="<%= product_costumes_path %>">Costumes</a>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
-              <a href="#">Clothing X Apparel</a>
+              <a href="<%= product_apparel_path %>"><%= html_escape('Clothing & Apparel') %></a>
             </li>
             <li class="mobile-menu-item col-12 d-flex align-items-center">
               <%= link_to 'Watchlist', watchlists_path %>
@@ -130,8 +130,28 @@
       </section>
       
       <%= yield %>
-    </div>
 
+      <section class="footer">
+        <section class="application footer-text">
+          <h2>
+            ABOUT COMIC CULTURE
+          </h2>
+          <div class="spacer20"></div>
+          <p>
+            Comic Culture is a community-oriented two-sided marketplace for pop culture enthusasts. The main target market for this marketplace are comic book or graphic novel readers/hobbyist, toy collectors/makers, costume makers/cosplayers, and clothing/apparel collectors/enthusiasts.
+          </p>
+          <div class="spacer20"></div>
+          <p>
+            Comic Culture is currently growing in popularity as the movie and television industry has been using comic-based characters and stories for their shows. As such, there is also an increase in popularity among comic books, graphic novels, toys, collectables, costumes, clothing and other apparel. However, most online stores that sell these products only sell brand new items. As such the community has been relying on generic two-sided marketplaces such as eBay or gumtree which does not have the expertise or speciality of an online comic culture community who are much familiar with these products.
+          </p>
+          <div class="spacer20"></div>
+          <p>
+            A community-oriented two-sided marketplace creates an atmosphere of expertise and enthusiasm among comic culture buyers and hobbyists. It will not only provide ample feedback to sellers, but it will also incorporate better prices for buyers as they are guided by a specialised community.
+          </p>
+        </section>
+      </section>
+    </div>
+    
     <script>
       $( ".hamburger-link" ).click(function() {
         $( "#mobile-menu" ).toggleClass( "mobile-menu-show" );

@@ -483,6 +483,22 @@ section.messages {
     font-size: 16px;
   }
 }
+
+section.footer {
+  background: $blue;
+  padding-right: 10px !important;
+
+  section.footer-text {
+    h2, p {
+      color: $white;
+    }
+    p {
+      font-weight: $light;
+      font-size: 18px;
+    }
+  }
+}
+
 @import './products';
 @import './shopping_carts';
 @import './watchlists';
@@ -499,5 +515,8 @@ section.messages {
   }
   section.application {
     margin-left: 30px !important;
+  }
+  section.footer {
+    padding-right: 30px !important;
   }
 }

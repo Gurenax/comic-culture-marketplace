@@ -40,6 +40,6 @@ module ProductsHelper
 
   # Check if Add to Cart button is disabled
   def disable_add_to_cart?(product)
-    added_to_cart?(product) || sold?(product) || reserved?(product)
+    added_to_cart?(product) || sold?(product) || reserved?(product) || product.seller == current_user
   end
 end

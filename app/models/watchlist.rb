@@ -35,18 +35,4 @@ class Watchlist < ApplicationRecord
     products.include?(product)
   end
 
-  # Get Product data for Product id
-  # def product
-  #   Product.find(product_id)
-  # end
-
-  # # Get Product data for Product id
-  # def product_price
-  #   product.price
-  # end
-
-  # # Get Products status for Product id
-  # def product_status
-  #   product.status
-  # end
 end

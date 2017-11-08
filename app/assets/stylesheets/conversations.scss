@@ -9,8 +9,8 @@ section.conversations-list {
   div.messages {
     // max-width: 560px;
     overflow-y: scroll;
-    max-height: 50vh;
-    
+    max-height: 60vh;
+
     div.message {
       border-top: 1px dotted $blue;
       padding-right: 10px !important;
@@ -48,7 +48,7 @@ section.conversation-messsages {
   min-width: 300px;
   max-width: 1200px;
   padding-bottom: 80px !important; /* Give the message some nice spacing before it hits message bar */
-  max-height: 50vh;
+  max-height: 60vh;
   overflow-y: scroll;
 
   div.message {
