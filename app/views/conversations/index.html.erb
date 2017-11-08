@@ -15,7 +15,7 @@
       <tr>
         <td><%= link_to conversation.title, conversation %></td>
         <td><%= link_to 'Show', conversation %></td>
-        <td><%= link_to 'Edit', edit_conversation_path(conversation) %></td>
+        <td><%#= link_to 'Edit', edit_conversation_path(conversation) %></td>
         <td><%= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Conversation', new_conversation_path %>
+<%#= link_to 'New Conversation', new_conversation_path %>

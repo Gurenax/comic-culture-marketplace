@@ -31,7 +31,7 @@ section.hero {
       height: 80px;
       border: none;
       font-size: 30px;
-      font-weight: bold;
+      font-weight: $bold;
       // text-align: center;
       // line-height: 60px;
       color: $blue;
@@ -90,7 +90,7 @@ div.products-list {
       h4.card-title {
         height: 30px;
         font-size: 20px;
-        font-weight: bold;
+        font-weight: $bold;
         line-height: 30px;
       }
 
@@ -100,7 +100,7 @@ div.products-list {
         margin-bottom: 5px !important;
         height: 50px;
         font-size: 18px;
-        font-weight: normal;
+        font-weight: $normal;
       }
       p.view_count {
         margin-left: 3px !important;
@@ -118,7 +118,7 @@ div.products-list {
             height: 45px;
             border: none;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: $bold;
             color: $yellow;
             background: $blue;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -266,7 +266,7 @@ section.product-show {
     text-align: right;
     h3 {
       font-size: 36px;
-      font-weight: bold;
+      font-weight: $bold;
     }
   }
   div.product-price-align-left {
@@ -286,7 +286,7 @@ section.product-show {
         padding-right: 10px !important;
         border: none;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: $bold;
         color: $yellow;
         background: $blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -310,7 +310,7 @@ section.product-show {
       padding-right: 10px !important;
       border: none;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: $bold;
       color: $yellow;
       background: $blue;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -419,7 +419,7 @@ section.product-section-divider {
           padding-right: 10px !important;
           border: none;
           font-size: 18px;
-          font-weight: bold;
+          font-weight: $bold;
           color: $yellow;
           background: $blue;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -439,7 +439,7 @@ section.product-section-divider {
           padding-right: 10px !important;
           border: none;
           font-size: 18px;
-          font-weight: bold;
+          font-weight: $bold;
           color: $yellow;
           background: $blue;
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -617,7 +617,7 @@ section.form-product {
         height: 45px;
         border: none;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: $bold;
         color: $yellow;
         background: $blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

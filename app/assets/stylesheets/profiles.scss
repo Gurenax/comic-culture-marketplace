@@ -46,7 +46,7 @@ section.profile {
         padding-right: 10px !important;
         border: none;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: $bold;
         color: $yellow;
         background: $blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -67,7 +67,7 @@ section.profile {
         padding-right: 10px !important;
         border: none;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: $bold;
         color: $yellow;
         background: $blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -80,19 +80,6 @@ section.profile {
     }
   }
 }
-
-// @media (max-width: 560px) { /* Mobile */
-//   div.profile {
-//     div.profile-data1 {
-//       div.profile-image {
-//         max-height: 100px;
-//         min-height: 100px;
-//         max-width: 100px;
-//         min-width: 100px;
-//       }
-//     }
-//   }
-// }
 
 section.profile-products {
   max-width: 560px;
@@ -132,12 +119,12 @@ section.profile-products {
 
             span.cart-item-name {
               font-size: 18px;
-              font-weight: bold;
+              font-weight: $bold;
               color: $blue;
               a {
                 color: $blue;
                 font-size: 18px;
-                font-weight: bold;
+                font-weight: $bold;
               }
             }
             span.cart-item-condition {
@@ -155,7 +142,7 @@ section.profile-products {
         div.cart-price {
           h4 {
             font-size: 24px;
-            font-weight: bold;
+            font-weight: $bold;
           }
         }
         div.cart-remove {
@@ -203,12 +190,12 @@ section.profile-products {
 
             span.cart-item-name {
               font-size: 18px;
-              font-weight: bold;
+              font-weight: $bold;
               color: $blue;
               a {
                 color: $blue;
                 font-size: 18px;
-                font-weight: bold;
+                font-weight: $bold;
               }
             }
             span.cart-item-condition {
@@ -226,7 +213,7 @@ section.profile-products {
         div.cart-price {
           h4 {
             font-size: 24px;
-            font-weight: bold;
+            font-weight: $bold;
           }
         }
         div.cart-remove {
@@ -386,7 +373,7 @@ section.profile-form {
         height: 45px;
         border: none;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: $bold;
         color: $yellow;
         background: $blue;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   resources :watchlists, only: %i[index create destroy]
   resources :shopping_carts, only: %i[index create destroy]
   resources :orders, only: %i[index new create]
-  resources :messages
-  resources :conversations
-  resources :search, only: %i[index new]
+  resources :messages, only: %i[update]
+  resources :conversations, only: %i[index create show destroy]
+  resources :search, only: %i[index]
   resources :contact_support, only: %i[new create]
   get '/review-success', to: 'reviews#success', as: 'review_success'
   get '/order-success', to: 'orders#success', as: 'order_success'

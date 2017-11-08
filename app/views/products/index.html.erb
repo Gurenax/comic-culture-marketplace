@@ -14,8 +14,9 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-  <div class="new-product-button d-flex justify-content-center">
+  <div class="new-product-button d-flex flex-wrap justify-content-center">
     <%= link_to button_tag('Sell an Item'), new_product_path, class: 'p-2' %>
+    <%= link_to button_tag('Find an Item'), search_index_path, class: 'p-2' %>
   </div>
 </section>
 

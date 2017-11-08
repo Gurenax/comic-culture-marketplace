@@ -50,8 +50,9 @@
 </section>
 
 <section class="application search-results">
-  <% if @products.blank? %>
+  <% if @products.blank? && @search_acton.present? %>
     <h2>No Items Found</h2>
+  <% elsif @search_acton.present? %>
   <% else %>
     <h2><%= "Search Results (Found #{pluralize(@products.count,'item')})" unless @products.blank? %></h2>
     <div class="products-list row justify-content-center justify-content-md-start">
