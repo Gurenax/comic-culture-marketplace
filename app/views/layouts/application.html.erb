@@ -196,9 +196,11 @@
                   <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
                 </li>
               <% end %>
-              <li>
+              <% if !user_signed_in? %>
+                <li>
                   <%= link_to "Forgot your password?", new_user_password_path %>
-              </li>
+                </li>
+              <% end %>
               <li>
                 <%= link_to 'Shopping Cart', shopping_carts_path %>
               </li>
