@@ -42,12 +42,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :superpowers %>
+    <%= form.label :superpowers, 'If you had superpowers, they are...' %>
     <%= form.text_field :superpowers, id: :profile_superpowers %>
   </div>
 
   <div class="field">
-    <%= form.label :favourites %>
+    <%= form.label :favourites, 'Favourite comic characters' %>
     <%= form.text_field :favourites, id: :profile_favourites %>
   </div>
 
@@ -65,7 +65,7 @@
     </div>
 
     <div class="field">
-      <%= billing_address_form.label :town_suburb %>
+      <%= billing_address_form.label :town_suburb, 'Town/Suburb' %>
       <%= billing_address_form.text_field :town_suburb %>
     </div>
 
@@ -108,7 +108,7 @@
     </div>
 
     <div class="field field-shipping">
-      <%= shipping_address_form.label :town_suburb %>
+      <%= shipping_address_form.label :town_suburb, 'Town/Suburb' %>
       <%= shipping_address_form.text_field :town_suburb %>
     </div>
 
