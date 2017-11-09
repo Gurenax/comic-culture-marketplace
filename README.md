@@ -2,6 +2,7 @@
 
 Comic Culture is a community-oriented two-sided marketplace for pop culture enthusiasts. The main target markets for this marketplace are the comic book or graphic novel readers/hobbyist, toy collectors/makers, costume makers/cosplayers, and clothing/apparel collectors/enthusiasts.
 
+
 ## Contents
 - **[Problem](#Problem)**
 - **[Solution](#Solution)**
@@ -20,11 +21,14 @@ Comic Culture is a community-oriented two-sided marketplace for pop culture enth
 - **[Optimisations](#Optimisations)**
 - **[Final Product](#FinalProduct)**
 
+
 ## <a id="Problem"></a>Problem
 Comic Culture is currently growing in popularity as the movie and television industry has been using comic-based characters and stories for their shows. As such, there is also an increase in popularity among comic books, graphic novels, toys, collectibles, costumes, clothing and other apparel. However, most online stores that sell these products only sell brand new items. As such the community has been relying on generic two-sided marketplaces such as eBay or gumtree which does not have the expertise or speciality of an online comic culture community who are much familiar with these products.
 
+
 ## <a id="Solution"></a>Solution
 A community-oriented two-sided marketplace creates an atmosphere of expertise and enthusiasm among comic culture buyers and hobbyists. It will not only provide ample feedback to sellers, but it will also incorporate better prices for buyers as they are guided by a specialised community.
+
 
 ## <a id="TrelloBoard"></a>Trello Board
 [Comic Culture Marketplace Trello Board](https://trello.com/b/2oLVZAu0/comic-culture-marketplace)
@@ -35,6 +39,7 @@ A community-oriented two-sided marketplace creates an atmosphere of expertise an
 My trello board is the main driver of my project management. It allowed me to plan ahead with User Stories, Models, Controllers, ERD and Wireframes. I also used it to determine the potential APIs that I am going to use as well as the gems that I need to build my rails project.
 
 The trello board later turned into an Agile scrum board in which I managed my project to organise my Backlog, Active tasks, Tasks that are ready to be tested and the Tasks I already completed. Using Agile in this project is a very fruitful decision which leads to the proper timeboxing of my tasks.
+
 
 ## <a id="UserStories"></a>User Stories
 My user stories are composed of 3 target markets (Guests, Buyers and Sellers). Guests are the people who have not signed up for the app are potential customers for the two-sided marketplace. Buyers and Sellers are the registered users who can benefit from all the features of the site. Since it is a two-sided marketplace, a buyer can be a seller and a seller can be a buyer.
@@ -77,6 +82,7 @@ My user stories are composed of 3 target markets (Guests, Buyers and Sellers). G
 The ERD is the most critical part of my design and is essentially one of the biggest things I have done for my project. Planning my tables ahead gave me an idea of how I want to work with my Rails models. The join tables also allowed me to minimise my scope queries to just 2, namely, product categories and top viewed products.
 
 ![](/docs/images/erd.png)
+
 
 ## <a id="Models"></a>Models
 ```
@@ -174,6 +180,8 @@ User Conversation (Join Table)
 - user_id :User
 - conversation_id :Conversation
 ```
+
+
 ## <a id="Controllers"></a>Controllers
 ```
 Profiles Controller
@@ -237,11 +245,14 @@ Contact Support Controller
 - new
 - create
 ```
+
+
 ## <a id="Moodboard"></a>Mood Board
 My mood board is composed of comic book heroes, comic-related products and characters from superhero movies, tv-series and modern comic pop culture.
 [Mood Board - Comic Culture Marketplace](https://www.pinterest.com.au/Gurenax/comic-culture-marketplace)
 
 ![](/docs/images/moodboard.png)
+
 
 ## <a id="Inspiration"></a>Inspiration
 One of the inspirations behind creating this project is that none of the local marketplaces (PopCultcha and Minotaur) is two-sided. Comic Connect, on the other hand, is a two-sided marketplace but is based in New York City.
@@ -273,7 +284,9 @@ One of the inspirations behind creating this project is that none of the local m
 
 ### Colour Scheme
 My original idea for my design was to have a very colourful and psychedelic colour scheme. However, this was later changed when I found that the costume of Batgirl fits really great with my design. Something about the colour of her costume appealed to me.
+
 ![](/docs/images/batgirl.jpg)
+
 
 ## <a id="Features"></a>Features
 - Buy and Sell Products related to Comic Culture (i.e. Superheroes, Anime, Movie characters, Cosplay, anything you see from events like Comic Conventions or Toy Conventions)
@@ -362,10 +375,12 @@ Bootstrap saved me a lot of time by making use of its Grid and Flexbox features.
 ### Mobile First Approach
 To ensure that my web app will run correctly on mobile devices, I used the iPhone simulator from X-Code. I was also using Chrome developer tools to ensure that it works the same for Android devices. In the end, I was able to achieve a proper responsive design with the help of bootstrap grid and flexbox.
 
+
 ## <a id="Optimisations"></a>Optimisations
 
 ### Fonts and Font Sizes
 I had to make late adjustments to my fonts to ensure readability of the texts. My app's logo was changed from Bangers to Oswald as there was already too much of the Bangers font in my pages itself. I also had to change my the font of my main texts from Oswald to PT Sans as the Oswald font is not very readable below 16px. Lastly, I had to make sure that the font sizes fit with PT Sans so I had to change the font sizes in some areas.
+
 
 ### DRY (don't repeat yourself)
 Before: `Not so DRY`
@@ -428,6 +443,9 @@ After: `Run Time (1.5ms)`
 
 ## Deploying to Heroku
 I only had minor issues when I deployed to Heroku and was able to get the site completely running in just a few hours. In addition, I was able to customise my heroku app name using the command `heroku apps:create comic-culture-marketplace`.
+
+### Algolia Search
+One of the issues I had with Heroku was figuring out a way on how I can re-index my Products model with `Product.reindex`. I later figured out that I can do this in my seeds file which I can run on demand.
 
 
 ## <a id="FinalProduct"></a>Final Product
