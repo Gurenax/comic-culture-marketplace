@@ -8,18 +8,19 @@ $gray: #828282;
 $hover_blue: #284A6F;
 $hover_yellow: #ECB14A;
 
-$oswald: 'Oswald', sans-serif;
+// $main-font: 'Oswald', sans-serif;
 $bangers: 'Bangers', cursive;
+$main-font: 'PT Sans', sans-serif;
 $light: 300;
 $normal: 400;
-$bold: 600;
+$bold: 700;
 
 $button_transition: all 0.2s ease;
 
 * {
   padding: 0 !important;
   margin: 0 !important;
-  font-family: $oswald;
+  font-family: $main-font;
   font-size: 16px;
   font-weight: $normal;
   line-height: 17px;  

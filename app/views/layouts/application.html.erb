@@ -9,8 +9,9 @@
 
     <!-- Google Fonts -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Bangers|Oswald:400,700" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Bangers|Oswald:300,400,600" rel="stylesheet">
-
+    <!-- <link href="https://fonts.googleapis.com/css?family=Bangers|Oswald:300,400,700" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Bangers|PT+Sans:400,700" rel="stylesheet">    
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -21,7 +22,7 @@
         <!-- d-flex flex-wrap align-items-center -->
       <section class="header navbar justify-content-lg-between justify-content-center search-bar">  
         <a class="navbar-brand" href="<%= root_path %>">
-          <%= image_tag asset_path('logo2.svg'), height: 120 %>
+          <%= image_tag asset_path('logo.svg'), height: 120 %>
         </a>
         <%= form_with(url: search_index_path, method: 'get', local: true, class: 'form-inline') do |form| %>
           <%= form.text_field :keywords, id: :keywords, value: @keywords, placeholder: 'What are you looking for?' %>
