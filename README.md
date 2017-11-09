@@ -20,7 +20,7 @@ Comic Culture is a community-oriented two-sided marketplace for pop culture enth
 - **[Coding](#Coding)**
 - **[Optimisations](#Optimisations)**
 - **[Final Product](#FinalProduct)**
-
+- **[Presentation Slides](#PresentationSlides)**
 
 ## <a id="Problem"></a>Problem
 Comic Culture is currently growing in popularity as the movie and television industry has been using comic-based characters and stories for their shows. As such, there is also an increase in popularity among comic books, graphic novels, toys, collectibles, costumes, clothing and other apparel. However, most online stores that sell these products only sell brand new items. As such the community has been relying on generic two-sided marketplaces such as eBay or gumtree which does not have the expertise or speciality of an online comic culture community who are much familiar with these products.
@@ -31,7 +31,7 @@ A community-oriented two-sided marketplace creates an atmosphere of expertise an
 
 
 ## <a id="TrelloBoard"></a>Trello Board
-[Comic Culture Marketplace Trello Board](https://trello.com/b/2oLVZAu0/comic-culture-marketplace)
+[Trello Board - Comic Culture Marketplace](https://trello.com/b/2oLVZAu0/comic-culture-marketplace)
 
 ![](/docs/images/trello.png)
 ![](/docs/images/trello2.png)
@@ -268,7 +268,7 @@ One of the inspirations behind creating this project is that none of the local m
 
 
 ## <a id="Wireframes"></a>Wireframes
-[Comic Culture Marketplace Wireframes](https://www.figma.com/file/S3GhFLh0U5SPe2e2E5AXayhU/Comic-Culture-Marketplace)
+[Figma - Comic Culture Marketplace Wireframes](https://www.figma.com/file/S3GhFLh0U5SPe2e2E5AXayhU/Comic-Culture-Marketplace)
 
 ### Lo-fi
 ![](/docs/images/figma-lofi.png)
@@ -329,6 +329,8 @@ My original idea for my design was to have a very colourful and psychedelic colo
 
 - Time boxing my all tasks was such a big challenge even though I am using an agile scrum board.
 
+- Test-driven development ate a lot of my project time but it ensured the integrity of the most critical parts of my app.
+
 - Figuring out how to do the Shopping Cart properly (i.e. When a user adds a product to his/her shopping cart, does the product become unavailable for other users? ..Or will the product be available to all users and the item just automatically gets deleted from the person's shopping cart when someone else buys it? )
 
 - Figuring out the proper way of implementing join tables.
@@ -358,7 +360,6 @@ Person < ApplicationRecord
   belongs_to :mom
   belongs_to :dad
 ```
-- Test-driven development ate a lot of my project time but it ensured the integrity of the most critical parts of my app.
 
 
 ## <a id="Coding"></a>Coding
@@ -453,3 +454,6 @@ One of the issues I had with Heroku was figuring out a way on how I can re-index
 ![](/docs/images/iphonex.png)
 
 ![](/docs/images/desktop.png)
+
+## <a id="PresentationSlides"></a>Presentation Slides
+[Presentation Slides - Comic Culture Marketplace](https://docs.google.com/presentation/d/1o2QC7_ktOCDTBOqADcJkFlx4SGSO1Q2kvIk3gJa8xzs/edit?usp=sharing)
