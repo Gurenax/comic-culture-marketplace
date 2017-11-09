@@ -64,7 +64,7 @@
 
   <div class="field">
     <%= form.label :publish_date %><br>
-    <%= form.date_select :publish_date, id: :product_publish_date %>
+    <%= form.date_select :publish_date, id: :product_publish_date, start_year: 1933 %>
   </div>
 
   <div class="field">
@@ -78,12 +78,12 @@
   </div>
 
   <div class="field">
-    <%= form.label :isbn_10 %>
+    <%= form.label :isbn_13, 'ISBN-10' %>
     <%= form.text_field :isbn_10, id: :product_isbn_10 %>
   </div>
 
   <div class="field">
-    <%= form.label :isbn_13 %>
+    <%= form.label :isbn_13, 'ISBN-13' %>
     <%= form.text_field :isbn_13, id: :product_isbn_13 %>
   </div>
 
@@ -98,7 +98,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :keywords %>
+    <%= form.label :keywords, 'Keywords to help market your product' %>
     <%= form.text_field :keywords, id: :product_keywords %>
   </div>
 
