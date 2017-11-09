@@ -123,7 +123,17 @@ class Product < ApplicationRecord
     Product.update_all(status: 'Available')
   end
 
+  # Query product by Category and Available
   scope :category, ->(category) {
     Product.where(category: category, status: 'Available').order(created_at: :desc)
+  }
+
+  # Query list of top products
+  scope :top_products, ->(up_to_rank){
+    # Find an array of top viewed products sorted in descending order
+    array_of_products = Product.where(status: 'Available').left_joins(:product_views).group(:product_id).count(:buyer_id).sort_by{|k,v| v}.reverse.to_h.keys[0,up_to_rank]
+    
+    # Get these array of Products while preserving sort order of array
+    Product.where(id: array_of_products).index_by(&:id).slice(*array_of_products).values
   }
 end

@@ -8,42 +8,18 @@ class ProductsController < ApplicationController
   def index
     # @products = Product.all
 
-    # Latest additions
+    # Latest additions - Last 12 new products
     @latest_products = Product.where(status: 'Available').order(created_at: :desc).limit(12)
 
-    # Recently sold
+    # Rcently sold - Last 12 sold products
     @sold_products = Product.where(status: 'Sold').order(updated_at: :desc).limit(12)
 
-    # Top viewed products
-    @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse[0,12]
+    # Top 12 viewed products
+    # @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse[0,12]
+    @top_products = Product.top_products(12)
 
     # Carousel Images
     # @carousel = Photo.limit(5).order("RANDOM()")
-  end
-
-  # Product category - Comic Books & Graphic Novels
-  def books
-    @products = Product.category('Comic Books & Graphic Novels')
-  end
-
-  # Product category - Toys & Collectibles
-  def toys
-    @products = Product.category('Toys & Collectibles')
-  end
-
-  # Product category - Costumes
-  def costumes
-    @products = Product.category('Costumes')
-  end
-
-  # Product category - Clothing & Apparel
-  def apparel
-    @products = Product.category('Clothing & Apparel')
-  end
-
-  # Top viewed producta
-  def top_products
-    @products = Product.all.sort_by(&:view_count).reverse
   end
   
   # GET /products/1
@@ -126,6 +102,26 @@ class ProductsController < ApplicationController
     end
   end
 
+  # Product category - Comic Books & Graphic Novels
+  def books
+    @products = Product.category('Comic Books & Graphic Novels')
+  end
+
+  # Product category - Toys & Collectibles
+  def toys
+    @products = Product.category('Toys & Collectibles')
+  end
+
+  # Product category - Costumes
+  def costumes
+    @products = Product.category('Costumes')
+  end
+
+  # Product category - Clothing & Apparel
+  def apparel
+    @products = Product.category('Clothing & Apparel')
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
