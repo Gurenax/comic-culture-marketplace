@@ -418,8 +418,8 @@ section.unauthorized {
 
 section.devise {  
   margin-top: 30px !important;
-  margin-right: 30px !important;
-
+  margin-right: 10px !important;
+  
   h2 {
     text-align: center;
   }
@@ -427,10 +427,11 @@ section.devise {
   form {
     margin-left: auto !important;
     margin-right: auto !important;
-    min-width: 320px;
+    min-width: 300px;
     max-width: 460px;
     
     div.alert {
+      text-align: center;
       margin-bottom: 20px !important;
       ul {
         list-style: none;
@@ -497,9 +498,11 @@ section.devise {
 section.messages {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+
   p.alert {
-    height: 50px;
-    line-height: 50px;
+    // min-height: 50px;
+    // padding-top: 10px !important;
+    // line-height: 50px;
     text-align: center;
     font-size: 16px;
   }
@@ -575,9 +578,9 @@ section.footer-links {
   section.application {
     margin-left: 30px !important;
   }
-  // section.unauthorized {
-  //   margin-right: 30px !important
-  // }
+  section.devise {
+    margin-right: 30px !important
+  }
   section.footer {
     padding-left: 30px !important;
     padding-right: 30px !important;
