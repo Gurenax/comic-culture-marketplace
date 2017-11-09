@@ -11,9 +11,5 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe ShoppingCartsHelper, type: :helper do
-  context 'when converting amount from cents' do
-    it 'will convert 5000.00 to 50.00' do
-      expect(format_amount_from_cents(5000.00)).to eq(50.00)
-    end
-  end
+  
 end

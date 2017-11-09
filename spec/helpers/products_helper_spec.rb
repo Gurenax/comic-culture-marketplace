@@ -24,13 +24,13 @@ RSpec.describe ProductsHelper, type: :helper do
 
     it 'will show the topic correctly about the product' do
       topic = product_inquiry_topic_about(@product, @buyer)
-      expect(topic).to eq("Conversation about product #{@product.id} between user #{@seller.id} and user #{@buyer.id}")
+      expect(topic).to eq("Inquiry about product #{@product.id} between user #{@seller.id} and user #{@buyer.id}")
     end
 
     it 'will show the correct conversation title' do
       topic = product_inquiry_topic_about(@product, @buyer)
       title = conversation_title_about(@product, @buyer)
-      expect(title).to eq("Conversation about #{@product.name} between #{@seller.profile.first_name} and #{@buyer.profile.first_name}")
+      expect(title).to eq("Inquiry about #{@product.name} between #{@seller.profile.first_name} and #{@buyer.profile.first_name}")
     end
   end
 end

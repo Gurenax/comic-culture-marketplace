@@ -22,9 +22,9 @@ RSpec.describe ShoppingCart, type: :model do
       billing_address = Address.new(house_number: '7', street_name: 'Auburn')
       shipping_address = Address.new(house_number: '8', street_name: 'Auburn')
       Profile.create!(user: @user2, first_name: 'Sam', last_name: 'Blake', billing_address: billing_address, shipping_address: shipping_address)
-      @product1 = Product.create!(seller: @user2, name: 'Batman1', price: 100.24, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only', weight: 501)
-      @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200.13, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only', weight: 10)
-      @product3 = Product.create!(seller: @user, name: 'Batman3', price: 300.44, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'None/Pickup Only',  weight: 5)
+      @product1 = Product.create!(seller: @user2, name: 'Batman1', price: 100.24, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'By Weight', weight: 501)
+      @product2 = Product.create!(seller: @user, name: 'Batman2', price: 200.13, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'By Weight', weight: 10)
+      @product3 = Product.create!(seller: @user, name: 'Batman3', price: 300.44, description: 'Test Product', condition: 'Mint', category: 'Comic Books & Graphic Novels', status: 'Available', postage: 'By Weight', weight: 5)
       @price_sum_of_products = ((@product1.price + @product2.price + @product3.price) * 100).to_i
       @shopping_cart = ShoppingCart.create!(buyer: @user2)
 
