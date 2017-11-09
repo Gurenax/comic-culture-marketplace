@@ -15,8 +15,8 @@ class ProfilesController < ApplicationController
   def show
     # Order History
     @order_history = @profile.user.orders_descending
-    # Top Customer Review
-    @top_customer_reviews = @profile.user.top_customer_reviews
+    # Customer Reviews
+    @customer_reviews = @profile.user.customer_reviews
   end
 
   # GET /profiles/new

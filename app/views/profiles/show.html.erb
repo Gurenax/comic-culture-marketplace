@@ -112,8 +112,8 @@
 
 <section class="profile-divider row">
   <section class="application profile-customer-reviews col col-md-6">
-    <h2>Top Customer Reviews</h2>
-    <% @top_customer_reviews.each do |review| %>
+    <h2>Customer Reviews</h2>
+    <% @customer_reviews.each do |review| %>
     <div class="customer-review d-flex">
         <div class="customer-review-stars p-2">
           <%= star_rating(review.rating) %>

@@ -49,9 +49,14 @@ class User < ApplicationRecord
     reviews.average(:rating)
   end
 
-  # Top Customer Reviews (Limit to 10)
+  # Top Customer Reviews (Limit to 5)
   def top_customer_reviews
-    reviews.order(rating: :desc).limit(10)
+    reviews.order(rating: :desc).limit(5)
+  end
+
+  # All user reviews
+  def customer_reviews
+    reviews.order(rating: :desc)
   end
 
   # Orders in Descending order by Created At
