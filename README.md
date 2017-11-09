@@ -307,6 +307,7 @@ My original idea for my design was to have a very colourful and psychedelic colo
 - Font-awesome-rails
 - Pundit
 - Recaptcha
+- Possessive
 
 
 ## <a id="Challenges"></a>Challenges
