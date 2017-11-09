@@ -176,7 +176,7 @@
           <div class="myaccount col col-md-3">
             <h2>My Account</h2>
             <ul>
-              <% if user_signed_in? %>
+              <% if !user_signed_in? %>
                 <li>
                   <%= link_to 'Sign in', new_user_session_path %>
                 </li>
