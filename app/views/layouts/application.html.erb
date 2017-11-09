@@ -184,7 +184,7 @@
                   <%= link_to 'Create', new_user_registration_path %>
                 </li>
                 <li>
-                  <%= link_to 'Manage Profile', edit_profile_path %>
+                  <%= link_to 'Manage Profile', edit_profile_path(current_user.profile) %>
                 </li>
               <% else %>
                 <li>
