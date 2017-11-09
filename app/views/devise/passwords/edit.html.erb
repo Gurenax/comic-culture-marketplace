@@ -13,6 +13,11 @@
   </div>
 
   <div class="field">
+    <div class="recaptcha d-flex flex-column justify-content-center">
+      <span class="p-2"><%= flash[:recaptcha_error] %></span>
+      <span class="p-2 d-flex justify-content-center"><%= recaptcha_tags %></span>
+    </div>
+    
     <%= f.label :password_confirmation, "Confirm new password" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>

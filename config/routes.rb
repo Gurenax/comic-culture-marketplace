@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # Users
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'registrations', passwords: 'passwords' }
 
   # User Profiles
   resources :profiles, only: %i[show new create edit update destroy] do

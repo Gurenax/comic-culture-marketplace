@@ -9,6 +9,11 @@
     </div>
 
     <div class="actions">
+      <div class="recaptcha d-flex flex-column justify-content-center">
+        <span class="p-2"><%= flash[:recaptcha_error] %></span>
+        <span class="p-2 d-flex justify-content-center"><%= recaptcha_tags %></span>
+      </div>
+      
       <%= f.submit "Send me reset password instructions" %>
       <div class="links">
         <%= render "devise/shared/links" %>
