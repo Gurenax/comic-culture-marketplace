@@ -22,7 +22,7 @@
     
       <div class="profile-info">
         <% if @profile.date_of_birth == Time.now.localtime.to_date %>
-          <h3>It's <%= @profile.first_name %>'s' Birthday</h3>
+          <h3>It's <%= @profile.first_name.possessive %> Birthday</h3>
         <% else %>
           <h3>Birthday</h3>
         <% end %>
@@ -79,7 +79,7 @@
       <% if current_user.profile == @profile %>
         Products you are selling
       <% else %>
-        Products <%= @profile.first_name %> is selling
+        <%= @profile.first_name.possessive %> products
       <% end %>
     </h2>
     <div class="shopping-cart-list">

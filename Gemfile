@@ -74,6 +74,9 @@ gem 'pundit'
 # reCaptcha
 gem 'recaptcha', require: 'recaptcha/rails'
 
+# Possessive
+gem 'possessive'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'
