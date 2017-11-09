@@ -42,10 +42,10 @@
     <%= form.select :condition, Product.condition_types.keys.map{|condition| [condition.titleize, condition]}, id: :product_condition %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Product.status_types.keys.map{|status| [status.titleize, status]}, id: :product_status %>
-  </div>
+  <!-- <div class="field"> -->
+    <%#= form.label :status %>
+    <%#= form.select :status, Product.status_types.keys.map{|status| [status.titleize, status]}, id: :product_status %>
+  <!-- </div> -->
 
   <div class="field">
     <%= form.label :category %>

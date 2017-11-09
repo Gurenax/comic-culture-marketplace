@@ -81,7 +81,8 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.seller = current_user
-
+    @product.status = 'Available'
+    
     respond_to do |format|
       if @product.save
         # Get photos directly from the params and save them to the database one by one
