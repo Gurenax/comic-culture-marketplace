@@ -3,10 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 section.contact-support {
+  margin-right: 10px !important;
+
   form {
     margin-left: auto !important;
     margin-right: auto !important;
-    min-width: 320px;
+    min-width: 300px;
     max-width: 460px;
     
     div.alert {

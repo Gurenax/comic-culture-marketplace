@@ -3,10 +3,11 @@
 </section>
 <section class="application contact-support">
   <h2>Contact Support</h2>
-
-  <p>Please message our support team here:</p>
-
+  <div class="spacer20"></div>
   <%= form_with(url: contact_support_index_url, local:true) do |f| %>
+    <p>Please let us know how we can help</p>
+    <div class="spacer20"></div>
+
     <% unless @error_messages.empty? %>
     <div id="error_explanation" class="alert alert-danger">
       <% @error_messages.each do |message| %>
