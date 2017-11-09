@@ -429,6 +429,13 @@ section.devise {
     min-width: 320px;
     max-width: 460px;
     
+    div.alert {
+      margin-bottom: 20px !important;
+      ul {
+        list-style: none;
+      }
+    }
+
     div.field {
       padding-bottom: 20px !important;
       label {
@@ -477,6 +484,10 @@ section.devise {
         a:hover {
           color: $hover_blue;
         }
+      }
+      
+      div.recaptcha {
+        margin-bottom: 20px !important;
       }
     }
   }

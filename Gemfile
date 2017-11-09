@@ -71,6 +71,9 @@ gem 'font-awesome-rails'
 # Pundit
 gem 'pundit'
 
+# reCaptcha
+gem 'recaptcha', require: 'recaptcha/rails'
+
 group :development, :test do
   # DotEnv
   gem 'dotenv-rails'

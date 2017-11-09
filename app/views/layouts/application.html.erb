@@ -176,17 +176,22 @@
           <div class="myaccount col col-md-3">
             <h2>My Account</h2>
             <ul>
-              <% if user_signed_in? %>
+              <% if !user_signed_in? %>
                 <li>
                   <%= link_to 'Sign in', new_user_session_path %>
                 </li>
                 <li>
                   <%= link_to 'Create', new_user_registration_path %>
                 </li>
+              <% else %>
+                <li>
+                  <%= link_to 'Manage Account', edit_user_registration_path %>
+                </li>
+                <% if current_user.profile.present? %>
                 <li>
                   <%= link_to 'Manage Profile', edit_profile_path(current_user.profile) %>
                 </li>
-              <% else %>
+                <% end %>
                 <li>
                   <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
                 </li>
