@@ -30,7 +30,8 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.buyer_id = current_user.id
     @review.seller_id = @seller_profile.id
-
+    @review.save
+    
     render :success
   end
 
