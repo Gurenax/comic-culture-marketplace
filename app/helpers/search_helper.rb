@@ -1,5 +1,4 @@
 module SearchHelper
-
   def category_types
     category_types = { 'All' => '' }
     Product.category_types.keys.map { |k| category_types.merge!(k => k) }

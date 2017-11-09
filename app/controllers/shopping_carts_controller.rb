@@ -67,8 +67,4 @@ class ShoppingCartsController < ApplicationController
       @shopping_cart = ShoppingCart.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    # def shopping_cart_params
-    #   params.require(:shopping_cart).permit(:buyer_id)
-    # end
 end

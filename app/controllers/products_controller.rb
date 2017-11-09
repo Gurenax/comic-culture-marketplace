@@ -9,19 +9,13 @@ class ProductsController < ApplicationController
     # @products = Product.all
 
     # Latest additions
-    @latest_products = Product.where(status: 'Available').order(created_at: :desc)
+    @latest_products = Product.where(status: 'Available').order(created_at: :desc).limit(12)
 
     # Recently sold
-    @sold_products = Product.where(status: 'Sold').order(updated_at: :desc)
-
-    # # Add to Cart buttons in product listing
-    # @shopping_cart = ShoppingCart.new
-
-    # # Add to Watchlist buttons
-    # @watchlist = Watchlist.new
+    @sold_products = Product.where(status: 'Sold').order(updated_at: :desc).limit(12)
 
     # Top viewed products
-    @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse
+    @top_products = Product.where(status: 'Available').sort_by(&:view_count).reverse[0,12]
 
     # Carousel Images
     # @carousel = Photo.limit(5).order("RANDOM()")
@@ -82,7 +76,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.seller = current_user
     @product.status = 'Available'
-    
+
     respond_to do |format|
       if @product.save
         # Get photos directly from the params and save them to the database one by one
