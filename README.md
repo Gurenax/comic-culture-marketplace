@@ -42,7 +42,7 @@ The trello board later turned into an Agile scrum board in which I managed my pr
 
 
 ## <a id="UserStories"></a>User Stories
-My user stories are composed of 3 target markets (Guests, Buyers and Sellers). Guests are the people who have not signed up for the app are potential customers for the two-sided marketplace. Buyers and Sellers are the registered users who can benefit from all the features of the site. Since it is a two-sided marketplace, a buyer can be a seller and a seller can be a buyer.
+My user stories are composed of 3 target markets (Guests, Buyers and Sellers). Guests are the people who have not signed up for the app and are potential customers for the two-sided marketplace. Buyers and Sellers are the registered users who can benefit from all the features of the site. Also, since it is a two-sided marketplace, a buyer can be a seller and a seller can be a buyer.
   
 ### Guests
 - In order to see what the marketplace is all about, as a guest, I want to search products and view listings without having to log in.
