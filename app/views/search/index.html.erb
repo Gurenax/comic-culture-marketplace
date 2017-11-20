@@ -59,5 +59,8 @@
       <%= render @products unless @products.blank? %>
     </div>
   <% end %>
+  <div class="col-12 text-center">
+    <%= link_to image_tag('https://www.algolia.com/static_assets/images/press/downloads/search-by-algolia.svg', height:40), 'https://www.algolia.com/' %>
+  </div>
 </section>
 <%#= render 'products/product', product: @products %>
