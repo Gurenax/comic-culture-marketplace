@@ -22,6 +22,6 @@ class Conversation < ApplicationRecord
   # Add a user to the conversation
   def add_user(user)
     users << user
-    save
+    # save
   end
 end

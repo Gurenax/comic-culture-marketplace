@@ -16,13 +16,13 @@ class Watchlist < ApplicationRecord
   # Add product to watchlist
   def add_product(product)
     products << product
-    save
+    # save
   end
 
   # Remove product from watchlist
   def remove_product(product)
     products.delete(product)
-    save
+    # save
   end
 
   # Access a product from watchlist

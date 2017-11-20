@@ -16,13 +16,13 @@ class ShoppingCart < ApplicationRecord
   # Add product to shopping cart
   def add_product(product)
     products << product
-    save
+    # save
   end
 
   # Remove product from shopping cart
   def remove_product(product)
     products.delete(product)
-    save
+    # save
   end
 
   # Access a product from cart
